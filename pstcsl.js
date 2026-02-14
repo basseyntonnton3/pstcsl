@@ -1,11 +1,70 @@
 // ==============================================
 // PSTCSL - Private School Teachers Cooperative Society
-// JavaScript Functionality
+// JavaScript Functionality with Dark Mode
 // ==============================================
 
 // Utility Functions
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
+
+// ==============================================
+// THEME MANAGER
+// ==============================================
+class ThemeManager {
+  constructor() {
+    this.themeToggle = $("#themeToggle");
+    this.themeIcon = $(".theme-icon");
+    this.currentTheme = this.getStoredTheme();
+
+    this.init();
+  }
+
+  init() {
+    if (!this.themeToggle) return;
+
+    // Apply stored theme on load
+    this.applyTheme(this.currentTheme);
+
+    // Theme toggle click handler
+    this.themeToggle.addEventListener("click", () => this.toggleTheme());
+  }
+
+  getStoredTheme() {
+    return localStorage.getItem("pstcsl_theme") || "light";
+  }
+
+  storeTheme(theme) {
+    localStorage.setItem("pstcsl_theme", theme);
+  }
+
+  applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    this.updateIcon(theme);
+    this.currentTheme = theme;
+    this.storeTheme(theme);
+  }
+
+  updateIcon(theme) {
+    if (!this.themeIcon) return;
+
+    if (theme === "dark") {
+      this.themeIcon.textContent = "☀️";
+    } else {
+      this.themeIcon.textContent = "🌙";
+    }
+  }
+
+  toggleTheme() {
+    const newTheme = this.currentTheme === "light" ? "dark" : "light";
+    this.applyTheme(newTheme);
+
+    // Add animation
+    document.body.style.transition = "background-color 0.3s ease";
+    setTimeout(() => {
+      document.body.style.transition = "";
+    }, 300);
+  }
+}
 
 // ==============================================
 // NAVIGATION
@@ -82,9 +141,9 @@ class Navigation {
 
   handleScroll() {
     if (window.scrollY > 50) {
-      this.nav.style.boxShadow = "0 2px 30px rgba(26, 95, 58, 0.15)";
+      this.nav.style.boxShadow = "0 2px 30px rgba(71, 183, 111, 0.15)";
     } else {
-      this.nav.style.boxShadow = "0 2px 20px rgba(26, 95, 58, 0.1)";
+      this.nav.style.boxShadow = "0 2px 20px rgba(71, 183, 111, 0.1)";
     }
   }
 }
@@ -127,8 +186,10 @@ class HeroSlider {
   }
 }
 
+// Add this to the MembershipManager class in pstcsl.js
+
 // ==============================================
-// MEMBERSHIP REGISTRATION
+// ENHANCED MEMBERSHIP MANAGER WITH FILE UPLOADS
 // ==============================================
 class MembershipManager {
   constructor() {
@@ -137,6 +198,11 @@ class MembershipManager {
     this.memberCount = $("#memberCount");
     this.searchInput = $("#searchMembers");
     this.filterState = $("#filterState");
+
+    // File input elements
+    this.passportPhotoInput = $("#passportPhoto");
+    this.staffIdInput = $("#staffId");
+    this.idCardInput = $("#idCard");
 
     this.members = this.loadMembers();
 
@@ -153,6 +219,14 @@ class MembershipManager {
     this.searchInput?.addEventListener("input", () => this.filterMembers());
     this.filterState?.addEventListener("change", () => this.filterMembers());
 
+    // File upload handlers
+    this.setupFileUpload(this.passportPhotoInput, "passportPreview");
+    this.setupFileUpload(this.staffIdInput, "staffIdPreview");
+    this.setupFileUpload(this.idCardInput, "idCardPreview");
+
+    // Passport photo consent validation
+    this.setupPhotoConsentValidation();
+
     // Populate state filter
     this.populateStateFilter();
 
@@ -160,10 +234,82 @@ class MembershipManager {
     this.displayMembers();
   }
 
+  setupFileUpload(input, previewId) {
+    if (!input) return;
+
+    input.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      const preview = $(`#${previewId}`);
+
+      if (!preview) return;
+
+      if (file) {
+        // Validate file size (5MB max)
+        if (file.size > 5 * 1024 * 1024) {
+          this.showNotification("File size must be less than 5MB", "error");
+          input.value = "";
+          return;
+        }
+
+        // Update file label
+        const label = input.nextElementSibling;
+        const fileText = label.querySelector(".file-text");
+        if (fileText) {
+          fileText.textContent = file.name;
+        }
+
+        // Show preview for images
+        if (file.type.startsWith("image/")) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            preview.innerHTML = `
+              <div class="file-preview-info">
+                <span class="file-preview-name">📎 ${file.name}</span>
+                <span class="file-remove" onclick="this.closest('.file-upload-wrapper').querySelector('.file-input').value=''; this.closest('.file-preview').classList.remove('active'); this.closest('.file-preview').innerHTML='';">✕</span>
+              </div>
+              <img src="${e.target.result}" alt="Preview" />
+            `;
+            preview.classList.add("active");
+          };
+          reader.readAsDataURL(file);
+        } else {
+          preview.innerHTML = `
+            <div class="file-preview-info">
+              <span class="file-preview-name">📎 ${file.name}</span>
+              <span class="file-remove" onclick="this.closest('.file-upload-wrapper').querySelector('.file-input').value=''; this.closest('.file-preview').classList.remove('active'); this.closest('.file-preview').innerHTML='';">✕</span>
+            </div>
+          `;
+          preview.classList.add("active");
+        }
+      }
+    });
+  }
+
+  setupPhotoConsentValidation() {
+    const passportPhoto = $("#passportPhoto");
+    const photoConsent = $("#photoConsent");
+
+    if (!passportPhoto || !photoConsent) return;
+
+    // If photo is uploaded, consent must be checked
+    this.form.addEventListener("submit", (e) => {
+      if (passportPhoto.files.length > 0 && !photoConsent.checked) {
+        e.preventDefault();
+        this.showNotification(
+          "Please provide consent for using your passport photograph",
+          "error",
+        );
+        photoConsent.focus();
+      }
+    });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
     const formData = new FormData(this.form);
+
+    // Create member object with all data
     const member = {
       id: Date.now(),
       fullName: formData.get("fullName"),
@@ -175,16 +321,49 @@ class MembershipManager {
       school: formData.get("school"),
       yearsExperience: formData.get("yearsExperience"),
       qualification: formData.get("qualification"),
+      trcn: formData.get("trcn"),
+      idType: formData.get("idType"),
+      idNumber: formData.get("idNumber"),
+      photoConsent: formData.get("photoConsent") === "on",
+      hasPassportPhoto: $("#passportPhoto").files.length > 0,
+      hasStaffId: $("#staffId").files.length > 0,
+      hasIdCard: $("#idCard").files.length > 0,
       registrationDate: new Date().toISOString(),
     };
+
+    // In a real application, you would upload the files to a server here
+    // For now, we'll just store the metadata
 
     this.members.push(member);
     this.saveMembers();
     this.displayMembers();
     this.form.reset();
 
+    // Reset file previews
+    ["passportPreview", "staffIdPreview", "idCardPreview"].forEach((id) => {
+      const preview = $(`#${id}`);
+      if (preview) {
+        preview.innerHTML = "";
+        preview.classList.remove("active");
+      }
+    });
+
+    // Reset file labels
+    document.querySelectorAll(".file-text").forEach((el) => {
+      const inputId = el.closest("label").getAttribute("for");
+      if (inputId === "passportPhoto") {
+        el.textContent = "Choose passport photo";
+      } else if (inputId === "staffId") {
+        el.textContent = "Choose staff ID card";
+      } else if (inputId === "idCard") {
+        el.textContent = "Choose ID card";
+      }
+    });
+
     // Show success message
-    this.showNotification("Registration successful! Welcome to PSTCSL.");
+    this.showNotification(
+      "Registration successful! Welcome to PSTCSL. Your application is being processed.",
+    );
   }
 
   loadMembers() {
@@ -201,10 +380,10 @@ class MembershipManager {
 
     if (members.length === 0) {
       this.membersList.innerHTML = `
-                <div class="empty-state">
-                    <p>No members registered yet. Be the first to join!</p>
-                </div>
-            `;
+        <div class="empty-state">
+          <p>No members registered yet. Be the first to join!</p>
+        </div>
+      `;
       this.memberCount.textContent = "0";
       return;
     }
@@ -212,17 +391,19 @@ class MembershipManager {
     this.membersList.innerHTML = members
       .map(
         (member) => `
-            <div class="member-card">
-                <h4>${member.fullName}</h4>
-                <div class="member-info">
-                    <span>📍 ${member.state}</span>
-                    <span>🏫 ${member.school}</span>
-                    <span>📚 ${this.formatTeachingLevel(member.teachingLevel)}</span>
-                    <span>🎓 ${member.qualification}</span>
-                    <span>⏱️ ${member.yearsExperience} years</span>
-                </div>
-            </div>
-        `,
+        <div class="member-card">
+          <h4>${member.fullName}</h4>
+          <div class="member-info">
+            <span>📍 ${member.state}</span>
+            <span>🏫 ${member.school}</span>
+            <span>📚 ${this.formatTeachingLevel(member.teachingLevel)}</span>
+            <span>🎓 ${member.qualification}</span>
+            <span>⏱️ ${member.yearsExperience} years</span>
+            ${member.hasPassportPhoto ? "<span>📸 Photo</span>" : ""}
+            <span>✅ Verified</span>
+          </div>
+        </div>
+      `,
       )
       .join("");
 
@@ -269,20 +450,26 @@ class MembershipManager {
     return levels[level] || level;
   }
 
-  showNotification(message) {
+  showNotification(message, type = "success") {
     const notification = document.createElement("div");
+    const bgColor =
+      type === "error"
+        ? "linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)"
+        : "linear-gradient(135deg, #47b76f 0%, #6ed199 100%)";
+
     notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: linear-gradient(135deg, #1a5f3a 0%, #2d7a52 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(26, 95, 58, 0.3);
-            z-index: 10000;
-            animation: slideIn 0.3s ease-out;
-        `;
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: ${bgColor};
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(71, 183, 111, 0.3);
+      z-index: 10000;
+      animation: slideIn 0.3s ease-out;
+      max-width: 400px;
+    `;
     notification.textContent = message;
 
     document.body.appendChild(notification);
@@ -290,7 +477,7 @@ class MembershipManager {
     setTimeout(() => {
       notification.style.animation = "slideOut 0.3s ease-out";
       setTimeout(() => notification.remove(), 300);
-    }, 3000);
+    }, 5000);
   }
 }
 
@@ -653,11 +840,11 @@ class ContactForm {
             position: fixed;
             top: 100px;
             right: 20px;
-            background: linear-gradient(135deg, #1a5f3a 0%, #2d7a52 100%);
+            background: linear-gradient(135deg, #47b76f 0%, #6ed199 100%);
             color: white;
             padding: 1rem 2rem;
             border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(26, 95, 58, 0.3);
+            box-shadow: 0 4px 20px rgba(71, 183, 111, 0.3);
             z-index: 10000;
             animation: slideIn 0.3s ease-out;
         `;
@@ -751,7 +938,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Add animation styles
   addAnimationStyles();
 
-  // Initialize all components
+  // Initialize theme manager first
+  new ThemeManager();
+
+  // Initialize all other components
   new Navigation();
   new HeroSlider();
   new MembershipManager();
@@ -778,7 +968,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  console.log("PSTCSL Website Initialized Successfully");
+  console.log("PSTCSL Website Initialized Successfully with Dark Mode");
 });
 
 // ==============================================
@@ -786,6 +976,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==============================================
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
+    ThemeManager,
     Navigation,
     HeroSlider,
     MembershipManager,

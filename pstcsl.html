@@ -21,7 +21,12 @@
     <nav class="nav" id="mainNav">
       <div class="nav-container">
         <div class="nav-brand">
-          <div class="logo-mark">PSTCSL</div>
+          <img
+            src="images/pstcsl logo1.png"
+            alt="PSTCSL Logo"
+            width="100"
+            height="1000"
+          />
           <div class="brand-text">
             <div class="brand-title">Private School Teachers</div>
             <div class="brand-subtitle">Cooperative Society</div>
@@ -44,6 +49,15 @@
           <li><a href="#executives" class="nav-link">Executives</a></li>
           <li><a href="#news" class="nav-link">News</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
+          <li>
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              aria-label="Toggle theme"
+            >
+              <span class="Dark Mo">Light & Dark Mode</span>
+            </button>
+          </li>
         </ul>
       </div>
     </nav>
@@ -53,21 +67,18 @@
       <div class="hero-slider">
         <div class="slide active">
           <div class="slide-overlay"></div>
-          <img
-            src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&h=900&fit=crop"
-            alt="Teachers in classroom"
-          />
+          <img src="images/p1.jpg" alt="Teachers in classroom" />
           <div class="slide-content">
             <h1 class="slide-title">Empowering Educators</h1>
-            <p class="slide-text">Building a future where teachers thrive</p>
+            <p class="slide-text">
+              A Unified Voice for Private School Teachers in Nigeria Building a
+              future where teachers thrive
+            </p>
           </div>
         </div>
         <div class="slide">
           <div class="slide-overlay"></div>
-          <img
-            src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600&h=900&fit=crop"
-            alt="Students learning"
-          />
+          <img src="images/pstcsl logs2.png" alt="Students learning" />
           <div class="slide-content">
             <h1 class="slide-title">Advocacy & Rights</h1>
             <p class="slide-text">Championing teacher welfare across Nigeria</p>
@@ -86,10 +97,7 @@
         </div>
         <div class="slide">
           <div class="slide-overlay"></div>
-          <img
-            src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=1600&h=900&fit=crop"
-            alt="Teacher collaboration"
-          />
+          <img src="images/p4.jpg" alt="Teacher collaboration" />
           <div class="slide-content">
             <h1 class="slide-title">Unity & Solidarity</h1>
             <p class="slide-text">Strength through collective action</p>
@@ -97,10 +105,7 @@
         </div>
         <div class="slide">
           <div class="slide-overlay"></div>
-          <img
-            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&h=900&fit=crop"
-            alt="Community education"
-          />
+          <img src="images/p3.jpg" />
           <div class="slide-content">
             <h1 class="slide-title">Social Responsibility</h1>
             <p class="slide-text">Contributing to national development</p>
@@ -200,6 +205,46 @@
                 <li>Job security and labor rights protection</li>
               </ul>
             </div>
+
+            <div class="mission-card">
+              <div class="mission-icon"></div>
+              <h3>Our Mission</h3>
+              <p>
+                To advocate for and secure comprehensive welfare provisions,
+                fair treatment, and professional recognition for all private
+                school teachers in Nigeria, while promoting excellence in
+                private education and contributing to national development
+                through quality teaching and learning.
+              </p>
+            </div>
+
+            <div class="mission-card">
+              <div class="mission-icon"></div>
+              <h3>Our Vision</h3>
+              <p>
+                A Nigeria where every private school teacher enjoys dignified
+                working conditions, competitive compensation, professional
+                growth opportunities, and robust welfare support, thereby
+                enabling them to deliver world-class education and contribute
+                meaningfully to national development.
+              </p>
+            </div>
+            <div class="mission-card">
+              <div class="mission-icon"></div>
+              <h3>Our Values</h3>
+              <p>
+                <b>•Professional Excellence:</b> Commitment to the highest
+                standards of teaching practice
+                <b>•Dignity and Respect:</b> Upholding the fundamental rights
+                and dignity of teachers <b>•Unity and Solidarity:</b> Building
+                strength through collective action and mutual support
+                <b>•Transparency and Accountability:</b> Operating with
+                integrity in all our dealings <b>•Social Responsibility:</b>
+                Contributing to community development and national progress
+                <b>•Continuous Improvement:</b> Embracing lifelong learning and
+                professional development
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -217,112 +262,287 @@
         <div class="membership-content">
           <div class="registration-form-container">
             <div class="form-intro">
-              <h3>Become a Member</h3>
+              <h3>Become a Registers Member</h3>
               <p>
                 Join thousands of educators advocating for teacher welfare and
                 professional excellence
               </p>
             </div>
             <form id="membershipForm" class="membership-form">
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="fullName">Full Name *</label>
-                  <input type="text" id="fullName" name="fullName" required />
+              <!-- Personal Information -->
+              <div class="form-section">
+                <h4 class="form-section-title">Personal Information</h4>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required />
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="email">Email Address *</label>
-                  <input type="email" id="email" name="email" required />
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="teachingLevel">Teaching Level *</label>
+                    <select id="teachingLevel" name="teachingLevel" required>
+                      <option value="">Select Level</option>
+                      <option value="early-childhood">Early Childhood</option>
+                      <option value="primary">Primary</option>
+                      <option value="secondary">Secondary</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="phone">Phone Number *</label>
-                  <input type="tel" id="phone" name="phone" required />
+
+              <!-- Location Information -->
+              <div class="form-section">
+                <h4 class="form-section-title">Location & School Details</h4>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="state">State *</label>
+                    <select id="state" name="state" required>
+                      <option value="">Select State</option>
+                      <option value="Abia">Abia</option>
+                      <option value="Adamawa">Adamawa</option>
+                      <option value="Akwa Ibom">Akwa Ibom</option>
+                      <option value="Anambra">Anambra</option>
+                      <option value="Bauchi">Bauchi</option>
+                      <option value="Bayelsa">Bayelsa</option>
+                      <option value="Benue">Benue</option>
+                      <option value="Borno">Borno</option>
+                      <option value="Cross River">Cross River</option>
+                      <option value="Delta">Delta</option>
+                      <option value="Ebonyi">Ebonyi</option>
+                      <option value="Edo">Edo</option>
+                      <option value="Ekiti">Ekiti</option>
+                      <option value="Enugu">Enugu</option>
+                      <option value="FCT">FCT</option>
+                      <option value="Gombe">Gombe</option>
+                      <option value="Imo">Imo</option>
+                      <option value="Jigawa">Jigawa</option>
+                      <option value="Kaduna">Kaduna</option>
+                      <option value="Kano">Kano</option>
+                      <option value="Katsina">Katsina</option>
+                      <option value="Kebbi">Kebbi</option>
+                      <option value="Kogi">Kogi</option>
+                      <option value="Kwara">Kwara</option>
+                      <option value="Lagos">Lagos</option>
+                      <option value="Nasarawa">Nasarawa</option>
+                      <option value="Niger">Niger</option>
+                      <option value="Ogun">Ogun</option>
+                      <option value="Ondo">Ondo</option>
+                      <option value="Osun">Osun</option>
+                      <option value="Oyo">Oyo</option>
+                      <option value="Plateau">Plateau</option>
+                      <option value="Rivers">Rivers</option>
+                      <option value="Sokoto">Sokoto</option>
+                      <option value="Taraba">Taraba</option>
+                      <option value="Yobe">Yobe</option>
+                      <option value="Zamfara">Zamfara</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="lga">Local Government Area *</label>
+                    <input type="text" id="lga" name="lga" required />
+                  </div>
                 </div>
                 <div class="form-group">
-                  <label for="teachingLevel">Teaching Level *</label>
-                  <select id="teachingLevel" name="teachingLevel" required>
-                    <option value="">Select Level</option>
-                    <option value="early-childhood">Early Childhood</option>
-                    <option value="primary">Primary</option>
-                    <option value="secondary">Secondary</option>
+                  <label for="school">School Name *</label>
+                  <input type="text" id="school" name="school" required />
+                </div>
+              </div>
+
+              <!-- Professional Information -->
+              <div class="form-section">
+                <h4 class="form-section-title">Professional Credentials</h4>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="yearsExperience">Years of Experience *</label>
+                    <input
+                      type="number"
+                      id="yearsExperience"
+                      name="yearsExperience"
+                      min="0"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="qualification">Highest Qualification *</label>
+                    <select id="qualification" name="qualification" required>
+                      <option value="">Select Qualification</option>
+                      <option value="NCE">NCE</option>
+                      <option value="Bachelor">Bachelor's Degree</option>
+                      <option value="Master">Master's Degree</option>
+                      <option value="PhD">PhD</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="trcn"
+                    >Teachers Registration Council Number (TRCN) *</label
+                  >
+                  <input
+                    type="text"
+                    id="trcn"
+                    name="trcn"
+                    placeholder="Enter your TRCN number"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Identification Information -->
+              <div class="form-section">
+                <h4 class="form-section-title">Identification Details</h4>
+                <div class="form-group">
+                  <label for="idType">Select ID Type *</label>
+                  <select id="idType" name="idType" required>
+                    <option value="">Choose ID Type</option>
+                    <option value="nin">National Identity Number (NIN)</option>
+                    <option value="voters">Voter's Card</option>
+                    <option value="national-id">National ID Card</option>
                   </select>
                 </div>
-              </div>
-              <div class="form-row">
                 <div class="form-group">
-                  <label for="state">State *</label>
-                  <select id="state" name="state" required>
-                    <option value="">Select State</option>
-                    <option value="Abia">Abia</option>
-                    <option value="Adamawa">Adamawa</option>
-                    <option value="Akwa Ibom">Akwa Ibom</option>
-                    <option value="Anambra">Anambra</option>
-                    <option value="Bauchi">Bauchi</option>
-                    <option value="Bayelsa">Bayelsa</option>
-                    <option value="Benue">Benue</option>
-                    <option value="Borno">Borno</option>
-                    <option value="Cross River">Cross River</option>
-                    <option value="Delta">Delta</option>
-                    <option value="Ebonyi">Ebonyi</option>
-                    <option value="Edo">Edo</option>
-                    <option value="Ekiti">Ekiti</option>
-                    <option value="Enugu">Enugu</option>
-                    <option value="FCT">FCT</option>
-                    <option value="Gombe">Gombe</option>
-                    <option value="Imo">Imo</option>
-                    <option value="Jigawa">Jigawa</option>
-                    <option value="Kaduna">Kaduna</option>
-                    <option value="Kano">Kano</option>
-                    <option value="Katsina">Katsina</option>
-                    <option value="Kebbi">Kebbi</option>
-                    <option value="Kogi">Kogi</option>
-                    <option value="Kwara">Kwara</option>
-                    <option value="Lagos">Lagos</option>
-                    <option value="Nasarawa">Nasarawa</option>
-                    <option value="Niger">Niger</option>
-                    <option value="Ogun">Ogun</option>
-                    <option value="Ondo">Ondo</option>
-                    <option value="Osun">Osun</option>
-                    <option value="Oyo">Oyo</option>
-                    <option value="Plateau">Plateau</option>
-                    <option value="Rivers">Rivers</option>
-                    <option value="Sokoto">Sokoto</option>
-                    <option value="Taraba">Taraba</option>
-                    <option value="Yobe">Yobe</option>
-                    <option value="Zamfara">Zamfara</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="lga">Local Government Area *</label>
-                  <input type="text" id="lga" name="lga" required />
+                  <label for="idNumber">ID Number *</label>
+                  <input
+                    type="text"
+                    id="idNumber"
+                    name="idNumber"
+                    placeholder="Enter your ID number"
+                    required
+                  />
                 </div>
               </div>
-              <div class="form-group">
-                <label for="school">School Name *</label>
-                <input type="text" id="school" name="school" required />
+
+              <!-- Document Uploads -->
+              <div class="form-section">
+                <h4 class="form-section-title">Document Uploads</h4>
+
+                <!-- Passport Photograph -->
+                <div class="form-group">
+                  <label for="passportPhoto"
+                    >Passport Photograph (Optional)</label
+                  >
+                  <div class="upload-info">
+                    <small
+                      >Your passport photo will be used for your member ID
+                      card. Uploading is optional but recommended.</small
+                    >
+                  </div>
+                  <div class="file-upload-wrapper">
+                    <input
+                      type="file"
+                      id="passportPhoto"
+                      name="passportPhoto"
+                      accept="image/jpeg,image/jpg,image/png"
+                      class="file-input"
+                    />
+                    <label for="passportPhoto" class="file-label">
+                      <span class="file-icon"></span>
+                      <span class="file-text">Choose passport photo</span>
+                    </label>
+                    <div class="file-preview" id="passportPreview"></div>
+                  </div>
+                  <div class="consent-checkbox">
+                    <input
+                      type="checkbox"
+                      id="photoConsent"
+                      name="photoConsent"
+                    />
+                    <label for="photoConsent">
+                      I consent to the use of my passport photograph for
+                      membership identification purposes
+                    </label>
+                  </div>
+                </div>
+
+                <!-- School Staff ID Card -->
+                <div class="form-group">
+                  <label for="staffId">School Staff Identity Card *</label>
+                  <div class="upload-info">
+                    <small
+                      > Upload a clear photo or scan of your school staff ID
+                      card</small
+                    >
+                  </div>
+                  <div class="file-upload-wrapper">
+                    <input
+                      type="file"
+                      id="staffId"
+                      name="staffId"
+                      accept="image/jpeg,image/jpg,image/png,application/pdf"
+                      class="file-input"
+                      required
+                    />
+                    <label for="staffId" class="file-label">
+                      <span class="file-icon"></span>
+                      <span class="file-text">Choose staff ID card</span>
+                    </label>
+                    <div class="file-preview" id="staffIdPreview"></div>
+                  </div>
+                </div>
+
+                <!-- Selected ID Card -->
+                <div class="form-group">
+                  <label for="idCard">Upload Selected ID Card *</label>
+                  <div class="upload-info">
+                    <small
+                      > Upload the ID card type you selected above (NIN,
+                      Voter's Card, or National ID)</small
+                    >
+                  </div>
+                  <div class="file-upload-wrapper">
+                    <input
+                      type="file"
+                      id="idCard"
+                      name="idCard"
+                      accept="image/jpeg,image/jpg,image/png,application/pdf"
+                      class="file-input"
+                      required
+                    />
+                    <label for="idCard" class="file-label">
+                      <span class="file-icon"></span>
+                      <span class="file-text">Choose ID card</span>
+                    </label>
+                    <div class="file-preview" id="idCardPreview"></div>
+                  </div>
+                </div>
+
+                <div class="upload-guidelines">
+                  <h5> Upload Guidelines:</h5>
+                  <ul>
+                    <li>Accepted formats: JPG, JPEG, PNG, PDF</li>
+                    <li>Maximum file size: 5MB per document</li>
+                    <li>Ensure all documents are clear and readable</li>
+                    <li>Personal information on documents should be visible</li>
+                  </ul>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="yearsExperience">Years of Experience *</label>
-                <input
-                  type="number"
-                  id="yearsExperience"
-                  name="yearsExperience"
-                  min="0"
-                  required
-                />
+
+              <!-- Terms and Conditions -->
+              <div class="form-section">
+                <div class="terms-checkbox">
+                  <input
+                    type="checkbox"
+                    id="termsAccept"
+                    name="termsAccept"
+                    required
+                  />
+                  <label for="termsAccept">
+                    I agree to the
+                    <a href="#" class="terms-link">terms and conditions</a> and
+                    confirm that all information provided is accurate *
+                  </label>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="qualification">Highest Qualification *</label>
-                <select id="qualification" name="qualification" required>
-                  <option value="">Select Qualification</option>
-                  <option value="NCE">NCE</option>
-                  <option value="Bachelor">Bachelor's Degree</option>
-                  <option value="Master">Master's Degree</option>
-                  <option value="PhD">PhD</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
+
               <button type="submit" class="btn-primary">
                 Submit Registration
               </button>
@@ -376,21 +596,51 @@
         <div class="gallery-grid" id="galleryGrid">
           <div class="gallery-item" data-category="events">
             <div class="gallery-image">
-              <img
-                src="https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?w=600&h=400&fit=crop"
-                alt="Annual General Meeting"
-              />
+              <img src="images/g2.jpg" alt="Annual General Meeting" />
               <div class="gallery-overlay">
                 <div class="gallery-info">
-                  <h4>Annual General Meeting 2026</h4>
-                  <p>
-                    Members gathered to discuss welfare initiatives and
-                    strategic plans
-                  </p>
+                  <h4>Novermber 2023 Games Compitition</h4>
+                  <p>At CHRISTABEL PRIVATE SCHOOLS Abuja,</p>
                 </div>
               </div>
             </div>
           </div>
+          <div class="gallery-grid" id="galleryGrid">
+            <div class="gallery-item" data-category="events">
+              <div class="gallery-image">
+                <img src="images/g3.jpg" alt="Annual General Meeting" />
+                <div class="gallery-overlay">
+                  <div class="gallery-info">
+                    <h4>Novermber 2023 Games Compitition</h4>
+                    <p>At CHRISTABEL PRIVATE SCHOOLS Abuja,</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="gallery-grid" id="galleryGrid">
+              <div class="gallery-item" data-category="events">
+                <div class="gallery-image">
+                  <img src="images/g4.jpg" alt="Annual General Meeting" />
+                  <div class="gallery-overlay">
+                    <div class="gallery-info">
+                      <h4>Novermber 2023 Games Compitition</h4>
+                      <p>At CHRISTABEL PRIVATE SCHOOLS Abuja,</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item" data-category="events">
+                  <div class="gallery-image">
+                    <img src="images/g1.jpg" alt="Annual General Meeting" />
+                    <div class="gallery-overlay">
+                      <div class="gallery-info">
+                        <h4>Novermber 2023 Games Compitition</h4>
+                        <p>At CHRISTABEL PRIVATE SCHOOLS Abuja,</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
           <div class="gallery-item" data-category="training">
             <div class="gallery-image">
               <img
@@ -439,22 +689,7 @@
               </div>
             </div>
           </div>
-          <div class="gallery-item" data-category="events">
-            <div class="gallery-image">
-              <img
-                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=400&fit=crop"
-                alt="Teacher Recognition Day"
-              />
-              <div class="gallery-overlay">
-                <div class="gallery-info">
-                  <h4>Teacher Recognition Day</h4>
-                  <p>
-                    Celebrating outstanding educators and their contributions
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+         
           <div class="gallery-item" data-category="training">
             <div class="gallery-image">
               <img
@@ -474,7 +709,7 @@
           <div class="gallery-item" data-category="advocacy">
             <div class="gallery-image">
               <img
-                src="https://images.unsplash.com/photo-1560439513-74b037a25d84?w=600&h=400&fit=crop"
+                src="images/p1.jpg"
                 alt="Press Conference"
               />
               <div class="gallery-overlay">
@@ -490,7 +725,7 @@
           <div class="gallery-item" data-category="community">
             <div class="gallery-image">
               <img
-                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&h=400&fit=crop"
+                src="images/p5.jpg"
                 alt="Member Collaboration"
               />
               <div class="gallery-overlay">
