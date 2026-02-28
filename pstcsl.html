@@ -11,14 +11,64 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="pstcsl.css" />
   </head>
   <body>
+    <!-- ======== PRELOADER ======== -->
+    <div class="preloader" id="preloader">
+      <div class="preloader-inner">
+        <div class="preloader-logo">
+          <svg
+            viewBox="0 0 60 60"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="30" cy="30" r="28" stroke="#2d6a4f" stroke-width="2" />
+            <path
+              d="M18 42 L30 18 L42 42"
+              stroke="#2d6a4f"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+            />
+            <path
+              d="M22 35 H38"
+              stroke="#2d6a4f"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="30" cy="18" r="3" fill="#2d6a4f" />
+            <path
+              d="M24 42 H36"
+              stroke="#40916c"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <div class="preloader-bar"><div class="preloader-fill"></div></div>
+        <p class="preloader-text">PSTCSL</p>
+      </div>
+    </div>
+
     <!-- ======== NAVIGATION ======== -->
     <header class="site-header" id="siteHeader">
+      <div class="header-top-bar">
+        <div class="htb-inner">
+          <span
+            >📍 Nigeria — Nationwide Presence across all 36 States + FCT</span
+          >
+          <div class="htb-right">
+            <a href="tel:+2348036660387">📱 +234 803 666 0387</a>
+            <a href="mailto:contact@pstcsl.org">✉ contact@pstcsl.org</a>
+            <a href="http://pstcsl.org" target="_blank">🌐 pstcsl.org</a>
+          </div>
+        </div>
+      </div>
       <nav class="nav-inner">
         <a href="#home" class="brand">
           <div class="brand-emblem">
@@ -26,7 +76,6 @@
               src="images/pstcsl logo1.png"
               alt="PSTCSL Logo"
               class="brand-logo-img"
-              onerror="this.style.display = 'none'"
             />
           </div>
           <div class="brand-text">
@@ -38,11 +87,12 @@
         </a>
 
         <ul class="nav-links" id="navLinks">
-          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#home" class="nav-link active">Home</a></li>
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#membership" class="nav-link">Membership</a></li>
           <li><a href="#gallery" class="nav-link">Gallery</a></li>
           <li><a href="#executives" class="nav-link">Executives</a></li>
+          <li><a href="#partners" class="nav-link">Partners</a></li>
           <li><a href="#news" class="nav-link">News</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
@@ -62,65 +112,101 @@
 
     <!-- ======== HERO ======== -->
     <section id="home" class="hero">
-      <div class="hero-slider" id="heroSlider">
-        <div
-          class="hero-slide active"
-          style="
-            --bg: url(&quot;https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80&quot;);
-          "
-        >
-          <div class="hero-overlay"></div>
+      <div class="hero-slides" id="heroSlides">
+        <div class="hero-slide active" data-slide="0">
+          <div
+            class="slide-bg"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1920&q=85&quot;);
+            "
+          ></div>
+          <div class="slide-overlay"></div>
           <div class="hero-content">
-            <p class="hero-eyebrow">Uniting Educators Nationwide</p>
+            <div class="hero-eyebrow">
+              <span class="eyebrow-line"></span>
+              Uniting Educators Nationwide
+              <span class="eyebrow-line"></span>
+            </div>
             <h1 class="hero-title">Empowering<br /><em>Every Teacher</em></h1>
             <p class="hero-subtitle">
               A unified voice for private school educators across all 36 states
-              of Nigeria
+              of Nigeria — advocating, protecting, and elevating the profession.
             </p>
             <div class="hero-cta">
-              <a href="#membership" class="btn-primary">Join PSTCSL</a>
-              <a href="#about" class="btn-outline">Learn More</a>
+              <a href="#membership" class="btn-hero-primary"
+                >Join PSTCSL Today</a
+              >
+              <a href="#about" class="btn-hero-outline">
+                <span class="play-icon">▶</span> Our Mission
+              </a>
             </div>
           </div>
         </div>
-        <div class="hero-slide" style="--bg: url(images/p1.jpg)">
-          <div class="hero-overlay"></div>
+
+        <div class="hero-slide" data-slide="1">
+          <div
+            class="slide-bg"
+            style="background-image: url(images/p4.jpg)"
+          ></div>
+          <div class="slide-overlay"></div>
           <div class="hero-content">
-            <p class="hero-eyebrow">Advocacy & Rights</p>
+            <div class="hero-eyebrow">
+              <span class="eyebrow-line"></span>
+              Advocacy & Rights
+              <span class="eyebrow-line"></span>
+            </div>
             <h1 class="hero-title">Championing<br /><em>Fair Treatment</em></h1>
             <p class="hero-subtitle">
               Securing welfare, dignity, and professional recognition for every
-              private school teacher
+              private school teacher across Nigeria.
             </p>
             <div class="hero-cta">
-              <a href="#about" class="btn-primary">Our Mission</a>
-              <a href="#news" class="btn-outline">Latest News</a>
+              <a href="#about" class="btn-hero-primary">Our Mission</a>
+              <a href="#news" class="btn-hero-outline">
+                <span class="play-icon">▶</span> Latest News
+              </a>
             </div>
           </div>
         </div>
-        <div class="hero-slide" style="--bg: url(images/p5.jpg)">
-          <div class="hero-overlay"></div>
+
+        <div class="hero-slide" data-slide="2">
+          <div
+            class="slide-bg"
+            style="background-image: url(images/p1.jpg)"
+          ></div>
+          <div class="slide-overlay"></div>
           <div class="hero-content">
-            <p class="hero-eyebrow">Professional Excellence</p>
+            <div class="hero-eyebrow">
+              <span class="eyebrow-line"></span>
+              Professional Excellence
+              <span class="eyebrow-line"></span>
+            </div>
             <h1 class="hero-title">Raising the<br /><em>Standard</em></h1>
             <p class="hero-subtitle">
               Continuous development, training, and capacity building for
-              Nigeria's finest educators
+              Nigeria's most dedicated educators.
             </p>
             <div class="hero-cta">
-              <a href="#gallery" class="btn-primary">See Our Work</a>
-              <a href="#executives" class="btn-outline">Our Leaders</a>
+              <a href="#gallery" class="btn-hero-primary">See Our Work</a>
+              <a href="#executives" class="btn-hero-outline">
+                <span class="play-icon">▶</span> Our Leaders
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Slider Controls -->
-      <div class="slider-controls">
-        <button class="slider-prev" id="sliderPrev" aria-label="Previous slide">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <!-- Slide Progress Bar -->
+      <div class="slide-progress-track">
+        <div class="slide-progress-bar" id="slideProgressBar"></div>
+      </div>
+
+      <!-- Slide Controls -->
+      <div class="slide-nav">
+        <button class="slide-btn" id="slidePrev" aria-label="Previous">
+          <svg width="18" height="18" viewBox="0 0 18 18">
             <path
-              d="M13 4L7 10L13 16"
+              d="M11 4L6 9L11 14"
               stroke="currentColor"
               stroke-width="2"
               stroke-linecap="round"
@@ -128,15 +214,15 @@
             />
           </svg>
         </button>
-        <div class="slider-dots" id="sliderDots">
-          <button class="dot active" data-index="0"></button>
-          <button class="dot" data-index="1"></button>
-          <button class="dot" data-index="2"></button>
+        <div class="slide-indicators" id="slideIndicators">
+          <button class="si-dot active" data-idx="0"></button>
+          <button class="si-dot" data-idx="1"></button>
+          <button class="si-dot" data-idx="2"></button>
         </div>
-        <button class="slider-next" id="sliderNext" aria-label="Next slide">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <button class="slide-btn" id="slideNext" aria-label="Next">
+          <svg width="18" height="18" viewBox="0 0 18 18">
             <path
-              d="M7 4L13 10L7 16"
+              d="M7 4L12 9L7 14"
               stroke="currentColor"
               stroke-width="2"
               stroke-linecap="round"
@@ -147,41 +233,84 @@
       </div>
 
       <!-- Stats Bar -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-number">7,000+</span>
-          <span class="stat-label">Registered Members</span>
+      <div class="hero-stats-bar">
+        <div class="stat-chip">
+          <span class="sc-num" data-count="7000">0</span
+          ><span class="sc-plus">+</span>
+          <span class="sc-label">Members</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">36</span>
-          <span class="stat-label">States Covered</span>
+        <div class="sc-divider"></div>
+        <div class="stat-chip">
+          <span class="sc-num" data-count="36">0</span>
+          <span class="sc-label">States & FCT Nigeria</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">500+</span>
-          <span class="stat-label">Schools Represented</span>
+        <div class="sc-divider"></div>
+        <div class="stat-chip">
+          <span class="sc-num" data-count="500">0</span
+          ><span class="sc-plus">+</span>
+          <span class="sc-label">Schools</span>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">100%</span>
-          <span class="stat-label">Committed to Welfare</span>
+        <div class="sc-divider"></div>
+        <div class="stat-chip">
+          <span class="sc-num" data-count="15">0</span
+          ><span class="sc-plus">+</span>
+          <span class="sc-label">Partners</span>
         </div>
       </div>
     </section>
+
+    <!-- ======== MARQUEE RIBBON ======== -->
+    <div class="marquee-ribbon">
+      <div class="marquee-track">
+        <span>Teacher Welfare Reform</span>
+        <span class="mx">✦</span>
+        <span>Professional Development</span>
+        <span class="mx">✦</span>
+        <span>Advocacy & Rights</span>
+        <span class="mx">✦</span>
+        <span>Health Insurance Scheme</span>
+        <span class="mx">✦</span>
+        <span>Legal Aid Clinic</span>
+        <span class="mx">✦</span>
+        <span>UNESCO Partnership</span>
+        <span class="mx">✦</span>
+        <span>Minimum Wage Framework</span>
+        <span class="mx">✦</span>
+        <span>Community Outreach</span>
+        <span class="mx">✦</span>
+        <span>Teacher Welfare Reform</span>
+        <span class="mx">✦</span>
+        <span>Professional Development</span>
+        <span class="mx">✦</span>
+        <span>Advocacy & Rights</span>
+        <span class="mx">✦</span>
+        <span>Health Insurance Scheme</span>
+        <span class="mx">✦</span>
+        <span>Legal Aid Clinic</span>
+        <span class="mx">✦</span>
+        <span>UNESCO Partnership</span>
+        <span class="mx">✦</span>
+        <span>Minimum Wage Framework</span>
+        <span class="mx">✦</span>
+        <span>Community Outreach</span>
+        <span class="mx">✦</span>
+      </div>
+    </div>
 
     <!-- ======== ABOUT ======== -->
     <section id="about" class="section about-section">
       <div class="container">
         <div class="about-layout">
           <div class="about-left" data-reveal>
-            <span class="section-badge">Who We Are</span>
-            <h2 class="section-title">About PSTCSL</h2>
-            <p class="section-lead">
-              <b> EXECUTIVE SUMMARY</b>
+            <div class="section-tag">Who We Are</div>
+            <h2 class="section-title">About<br /><em>PSTCSL</em></h2>
+            <div class="decorative-line"></div>
+            <p class="about-lead">
+              The Private School Teachers Cooperative Society (PSTCSL)
+              represents a collective of dedicated, qualified, and professional
+              private school educators across Nigeria.
             </p>
-
-            <p class="text-justify">
+            <p class="about-body">
               The Private School Teachers Cooperative Society (PSTCSL)
               represents a collective of dedicated, qualified, and professional
               private school educators across Nigeria. We are united in our
@@ -205,32 +334,47 @@
               advocate for policies, interventions, and support mechanisms that
               will ensure teachers are motivated, secure, valued, and empowered
               to deliver excellence in education.
+            </p>
+            <p class="about-body">
+              This organisation presents a comprehensive platform for the
+              Federal Government, State Governments, Local Government
+              Authorities, development partners, and civil society to support
+              private school teachers nationwide.
+            </p>
 
-              <b>Our Identity</b>
+            <div class="about-identity">
+              <h3>Our Membership</h3>
               The Private School Teachers Cooperative Society is a registered
               and legally recognized professional body comprising private school
               teachers across all levels of education, from early childhood
               education to secondary schools, operating throughout Nigeria. Our
-              membership includes: • Qualified and certified teachers holding
-              recognized teaching credentials • Experienced educators with years
-              of service in private educational institutions • Subject
-              specialists across various academic disciplines • Early career
-              teachers committed to professional excellence • Educational
-              administrators and coordinators
-            </p>
+              membership includes:
+              <ul class="identity-list">
+                <li>
+                  Qualified and certified teachers with recognised credentials
+                </li>
+                <li>
+                  Experienced educators across all levels of private education
+                </li>
+                <li>Subject specialists across various academic disciplines</li>
+                <li>Early childhood, primary, and secondary level educators</li>
+                <li>Educational administrators and academic coordinators</li>
+              </ul>
+            </div>
+
             <div class="about-pillars">
               <div class="pillar">
-                <div class="pillar-icon"></div>
+                <div class="pillar-num">01</div>
                 <div>
                   <h4>Rights & Advocacy</h4>
                   <p>
-                    We fight for fair compensation, job security, and labor
+                    Fighting for fair compensation, job security, and labor
                     rights for every private school teacher.
                   </p>
                 </div>
               </div>
               <div class="pillar">
-                <div class="pillar-icon"></div>
+                <div class="pillar-num">02</div>
                 <div>
                   <h4>Professional Growth</h4>
                   <p>
@@ -240,12 +384,12 @@
                 </div>
               </div>
               <div class="pillar">
-                <div class="pillar-icon"></div>
+                <div class="pillar-num">03</div>
                 <div>
                   <h4>Unity & Solidarity</h4>
                   <p>
-                    Building strength through collective action, mutual support,
-                    and a strong community network.
+                    Building collective strength through mutual support and
+                    nationwide community networks.
                   </p>
                 </div>
               </div>
@@ -253,26 +397,10 @@
           </div>
 
           <div class="about-right" data-reveal>
-            <div class="about-cards">
-              <div class="about-card card-challenge">
-                <div class="card-num">01</div>
-                <h3>The Challenge</h3>
-                <p>
-                  Private school teachers face systemic challenges, inadequate
-                  pay, poor working conditions, limited healthcare access, job
-                  insecurity, and absence of professional development pathways.
-                </p>
-                <ul class="check-list">
-                  <li>Irregular & inadequate compensation</li>
-                  <li>Limited access to healthcare</li>
-                  <li>No pension or retirement benefits</li>
-                  <li>Unfair dismissal practices</li>
-                </ul>
-              </div>
-
-              <div class="about-card card-mission">
-                <div class="card-num">02</div>
-                <h3>Our Mission</h3>
+            <div class="mvv-cards">
+              <div class="mvv-card card-mission">
+                <div class="mvv-icon"></div>
+                <h3>Mission</h3>
                 <p>
                   To advocate for and secure comprehensive welfare provisions,
                   fair treatment, and professional recognition for all private
@@ -281,10 +409,9 @@
                   through quality teaching and learning.
                 </p>
               </div>
-
-              <div class="about-card card-vision">
-                <div class="card-num">03</div>
-                <h3>Our Vision</h3>
+              <div class="mvv-card card-vision">
+                <div class="mvv-icon"></div>
+                <h3>Vision</h3>
                 <p>
                   A Nigeria where every private school teacher enjoys dignified
                   working conditions, competitive compensation, professional
@@ -293,36 +420,62 @@
                   meaningfully to national development.
                 </p>
               </div>
-
-              <div class="about-card card-values">
-                <div class="card-num">04</div>
-                <h3>Our Values</h3>
+              <div class="mvv-card card-values">
+                <div class="mvv-icon"></div>
+                <h3>Values</h3>
                 <div class="values-grid">
-                  <span class="value-tag"
+                  <span class="val-chip"
                     >Professional Excellence: Commitment to the highest
                     standards of teaching practice</span
                   >
-                  <span class="value-tag"
+                  <span class="val-chip"
                     >Dignity and Respect: Upholding the fundamental rights and
                     dignity of teachers</span
                   >
-                  <span class="value-tag"
+                  <span class="val-chip"
                     >Unity and Solidarity: Building strength through collective
                     action and mutual support</span
                   >
-                  <span class="value-tag"
+                  <span class="val-chip"
                     >Transparency and Accountability: Operating with integrity
                     in all our dealings</span
                   >
-                  <span class="value-tag"
+                  <span class="val-chip"
                     >Social Responsibility: Contributing to community
                     development and national progress</span
                   >
-                  <span class="value-tag"
+                  <span class="val-chip"
                     >Continuous Improvement: Embracing lifelong learning and
                     professional development</span
                   >
                 </div>
+              </div>
+              <div class="mvv-card card-challenge">
+                <div class="mvv-icon"></div>
+                <h3>The Challenge</h3>
+                <ul class="challenge-list">
+                  <li>Irregular & inadequate compensation</li>
+                  <li>Limited access to healthcare</li>
+                  <li>No pension or retirement benefits</li>
+                  <li>Unfair dismissal practices</li>
+                  <li>Lack of professional development pathways</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Achievement Counter Strip -->
+            <div class="achievement-strip">
+              <div class="ach-item">
+                <span class="ach-num">10+</span>
+                <span class="ach-label">Years of Advocacy</span>
+              </div>
+              <div class="ach-item">
+                <span class="ach-num">3</span>
+                <span class="ach-label">Policy Wins</span>
+              </div>
+              <div class="ach-item">
+                <span class="ach-num">70+</span>
+                <span class="ach-label">Workshops Held</span>
               </div>
             </div>
           </div>
@@ -332,10 +485,11 @@
 
     <!-- ======== MEMBERSHIP ======== -->
     <section id="membership" class="section membership-section">
+      <div class="membership-bg-pattern"></div>
       <div class="container">
-        <div class="section-header center" data-reveal>
-          <span class="section-badge">Join Us</span>
-          <h2 class="section-title">Membership Registration</h2>
+        <div class="section-header-center" data-reveal>
+          <div class="section-tag">Join Us</div>
+          <h2 class="section-title">Membership <em>Registration</em></h2>
           <p class="section-desc">
             Join thousands of educators united in the mission for teacher
             welfare and professional excellence across Nigeria.
@@ -343,15 +497,17 @@
         </div>
 
         <div class="membership-layout">
-          <!-- Form -->
           <div class="form-panel" data-reveal>
             <div class="form-panel-header">
+              <div class="fph-badge">Official Registration Portal</div>
               <h3>Register as a Member</h3>
-              <p>Complete all fields to become a registered PSTCSL member</p>
+              <p>
+                Complete all required fields to become a registered PSTCSL
+                member
+              </p>
             </div>
 
             <form id="membershipForm" novalidate>
-              <!-- Personal Info -->
               <fieldset class="form-fieldset">
                 <legend class="fieldset-legend">
                   <span class="legend-num">01</span> Personal Information
@@ -411,7 +567,6 @@
                 </div>
               </fieldset>
 
-              <!-- Location -->
               <fieldset class="form-fieldset">
                 <legend class="fieldset-legend">
                   <span class="legend-num">02</span> Location & School Details
@@ -490,7 +645,6 @@
                 </div>
               </fieldset>
 
-              <!-- Professional -->
               <fieldset class="form-fieldset">
                 <legend class="fieldset-legend">
                   <span class="legend-num">03</span> Professional Credentials
@@ -542,10 +696,9 @@
                 </div>
               </fieldset>
 
-              <!-- Identification -->
               <fieldset class="form-fieldset">
                 <legend class="fieldset-legend">
-                  <span class="legend-num">04</span> Identification Details
+                  <span class="legend-num">04</span> Identification
                 </legend>
                 <div class="form-grid">
                   <div class="field">
@@ -578,17 +731,16 @@
                 </div>
               </fieldset>
 
-              <!-- Documents -->
               <fieldset class="form-fieldset">
                 <legend class="fieldset-legend">
                   <span class="legend-num">05</span> Document Uploads
                 </legend>
                 <div class="upload-group">
                   <div class="upload-field">
-                    <label class="upload-label">
-                      Passport Photograph
-                      <span class="optional-tag">Optional</span>
-                    </label>
+                    <label class="upload-label"
+                      >Passport Photograph
+                      <span class="optional-tag">Optional</span></label
+                    >
                     <p class="upload-hint">
                       Used for your member ID card. JPG/PNG, max 5MB.
                     </p>
@@ -603,8 +755,9 @@
                       <label for="passportPhoto" class="upload-trigger">
                         <div class="upload-icon">📸</div>
                         <div class="upload-text">
-                          <strong>Click to upload</strong> or drag & drop
-                          <span>JPG, PNG up to 5MB</span>
+                          <strong>Click to upload</strong> or drag & drop<span
+                            >JPG, PNG up to 5MB</span
+                          >
                         </div>
                       </label>
                       <div class="upload-preview" id="passportPreview"></div>
@@ -623,9 +776,9 @@
                   </div>
 
                   <div class="upload-field">
-                    <label class="upload-label">
-                      School Staff ID Card <span class="req">*</span>
-                    </label>
+                    <label class="upload-label"
+                      >School Staff ID Card <span class="req">*</span></label
+                    >
                     <p class="upload-hint">
                       Clear photo or scan of your school-issued staff ID.
                       JPG/PNG/PDF, max 5MB.
@@ -642,8 +795,9 @@
                       <label for="staffId" class="upload-trigger">
                         <div class="upload-icon">🪪</div>
                         <div class="upload-text">
-                          <strong>Click to upload</strong> or drag & drop
-                          <span>JPG, PNG, PDF up to 5MB</span>
+                          <strong>Click to upload</strong> or drag & drop<span
+                            >JPG, PNG, PDF up to 5MB</span
+                          >
                         </div>
                       </label>
                       <div class="upload-preview" id="staffIdPreview"></div>
@@ -651,12 +805,11 @@
                   </div>
 
                   <div class="upload-field">
-                    <label class="upload-label">
-                      Government-Issued ID <span class="req">*</span>
-                    </label>
+                    <label class="upload-label"
+                      >Government-Issued ID <span class="req">*</span></label
+                    >
                     <p class="upload-hint">
-                      Upload the ID type selected above (NIN slip, Voter's Card,
-                      or National ID). JPG/PNG/PDF, max 5MB.
+                      Upload the ID type selected above. JPG/PNG/PDF, max 5MB.
                     </p>
                     <div class="upload-zone" id="idCardZone">
                       <input
@@ -670,8 +823,9 @@
                       <label for="idCard" class="upload-trigger">
                         <div class="upload-icon">📄</div>
                         <div class="upload-text">
-                          <strong>Click to upload</strong> or drag & drop
-                          <span>JPG, PNG, PDF up to 5MB</span>
+                          <strong>Click to upload</strong> or drag & drop<span
+                            >JPG, PNG, PDF up to 5MB</span
+                          >
                         </div>
                       </label>
                       <div class="upload-preview" id="idCardPreview"></div>
@@ -680,7 +834,6 @@
                 </div>
               </fieldset>
 
-              <!-- Terms -->
               <div class="terms-row">
                 <input
                   type="checkbox"
@@ -703,7 +856,6 @@
             </form>
           </div>
 
-          <!-- Members List -->
           <aside class="members-panel" data-reveal>
             <div class="members-panel-header">
               <h3>Registered Members</h3>
@@ -713,7 +865,7 @@
               <input
                 type="text"
                 id="searchMembers"
-                placeholder="Search by name, state or school…"
+                placeholder="Search name, state or school…"
               />
               <select id="filterState">
                 <option value="">All States</option>
@@ -733,8 +885,8 @@
     <!-- ======== GALLERY ======== -->
     <section id="gallery" class="section gallery-section">
       <div class="container">
-        <div class="section-header center" data-reveal>
-          <span class="section-badge">Visual Stories</span>
+        <div class="section-header-center" data-reveal>
+          <div class="section-tag">Visual Stories</div>
           <h2 class="section-title">Gallery</h2>
           <p class="section-desc">
             Moments from our events, training sessions, advocacy campaigns, and
@@ -751,167 +903,115 @@
         </div>
 
         <div class="gallery-grid" id="galleryGrid" data-reveal>
-          <div class="gallery-item" data-cat="events">
-            <div class="gallery-img-wrap">
+          <div class="gallery-item gi-large" data-cat="events">
+            <div class="gi-wrap">
               <img
-                src="images/g2.jpg"
-                alt="Games Competition 2023"
-                loading="lazy"
-                onerror="
-                  this.src =
-                    'https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&q=80'
-                "
-              />
-              <div class="gallery-info">
-                <h4>November 2023 Games Competition</h4>
-                <p>At Christabel Private Schools, Abuja</p>
-                <span class="gallery-tag">Events</span>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-item" data-cat="events">
-            <div class="gallery-img-wrap">
-              <img
-                src="images/g3.jpg"
-                alt="Games Competition 2023"
-                loading="lazy"
-                onerror="
-                  this.src =
-                    'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80'
-                "
-              />
-              <div class="gallery-info">
-                <h4>Sports Day Activities</h4>
-                <p>At Christabel Private Schools, Abuja</p>
-                <span class="gallery-tag">Events</span>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-item" data-cat="events">
-            <div class="gallery-img-wrap">
-              <img
-                src="images/g4.jpg"
-                alt="Games Competition 2023"
-                loading="lazy"
-                onerror="
-                  this.src =
-                    'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80'
-                "
-              />
-              <div class="gallery-info">
-                <h4>Award Ceremony</h4>
-                <p>At Christabel Private Schools, Abuja</p>
-                <span class="gallery-tag">Events</span>
-              </div>
-            </div>
-          </div>
-          <div class="gallery-item" data-cat="events">
-            <div class="gallery-img-wrap">
-              <img
-                src="images/g1.jpg"
+                src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=800&q=80"
                 alt="Annual Meeting"
                 loading="lazy"
-                onerror="
-                  this.src =
-                    'https://images.unsplash.com/photo-1491975474562-1f4e30bc9468?w=600&q=80'
-                "
               />
-              <div class="gallery-info">
-                <h4>Annual General Meeting</h4>
-                <p>National executives and state delegates</p>
-                <span class="gallery-tag">Events</span>
+              <div class="gi-overlay">
+                <span class="gi-cat">Events</span>
+                <h4>Annual General Meeting 2024</h4>
+                <p>National executives and state delegates convene</p>
               </div>
             </div>
           </div>
           <div class="gallery-item" data-cat="training">
-            <div class="gallery-img-wrap">
+            <div class="gi-wrap">
               <img
                 src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80"
-                alt="Professional Development Workshop"
+                alt="Digital Pedagogy Workshop"
                 loading="lazy"
               />
-              <div class="gallery-info">
+              <div class="gi-overlay">
+                <span class="gi-cat">Training</span>
                 <h4>Digital Pedagogy Workshop</h4>
                 <p>Nationwide professional development training</p>
-                <span class="gallery-tag">Training</span>
               </div>
             </div>
           </div>
           <div class="gallery-item" data-cat="advocacy">
-            <div class="gallery-img-wrap">
+            <div class="gi-wrap">
               <img
                 src="https://images.unsplash.com/photo-1573164574511-73c773193279?w=600&q=80"
                 alt="Policy Advocacy"
                 loading="lazy"
               />
-              <div class="gallery-info">
+              <div class="gi-overlay">
+                <span class="gi-cat">Advocacy</span>
                 <h4>Policy Advocacy Meeting</h4>
                 <p>Dialogue on minimum wage implementation</p>
-                <span class="gallery-tag">Advocacy</span>
               </div>
             </div>
           </div>
           <div class="gallery-item" data-cat="community">
-            <div class="gallery-img-wrap">
+            <div class="gi-wrap">
               <img
                 src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80"
                 alt="Community Outreach"
                 loading="lazy"
               />
-              <div class="gallery-info">
+              <div class="gi-overlay">
+                <span class="gi-cat">Community</span>
                 <h4>Community Outreach Program</h4>
                 <p>Free educational support for rural communities</p>
-                <span class="gallery-tag">Community</span>
               </div>
             </div>
           </div>
           <div class="gallery-item" data-cat="training">
-            <div class="gallery-img-wrap">
+            <div class="gi-wrap">
               <img
                 src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80"
                 alt="Leadership Training"
                 loading="lazy"
               />
-              <div class="gallery-info">
+              <div class="gi-overlay">
+                <span class="gi-cat">Training</span>
                 <h4>Leadership Training Program</h4>
                 <p>Building capacity for educational leadership</p>
-                <span class="gallery-tag">Training</span>
               </div>
             </div>
           </div>
-          <div class="gallery-item" data-cat="advocacy">
-            <div class="gallery-img-wrap">
+          <div class="gallery-item gi-large" data-cat="advocacy">
+            <div class="gi-wrap">
               <img
-                src="images/p1.jpg"
+                src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80"
                 alt="Press Conference"
                 loading="lazy"
-                onerror="
-                  this.src =
-                    'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80'
-                "
               />
-              <div class="gallery-info">
+              <div class="gi-overlay">
+                <span class="gi-cat">Advocacy</span>
                 <h4>Press Conference on Teacher Rights</h4>
                 <p>Launching comprehensive welfare reform campaign</p>
-                <span class="gallery-tag">Advocacy</span>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-item" data-cat="events">
+            <div class="gi-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80"
+                alt="Sports Day"
+                loading="lazy"
+              />
+              <div class="gi-overlay">
+                <span class="gi-cat">Events</span>
+                <h4>Sports Day Activities</h4>
+                <p>At Christabel Private Schools, Abuja</p>
               </div>
             </div>
           </div>
           <div class="gallery-item" data-cat="community">
-            <div class="gallery-img-wrap">
+            <div class="gi-wrap">
               <img
-                src="images/p5.jpg"
-                alt="Member Collaboration"
+                src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=600&q=80"
+                alt="Collaboration"
                 loading="lazy"
-                onerror="
-                  this.src =
-                    'https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=600&q=80'
-                "
               />
-              <div class="gallery-info">
+              <div class="gi-overlay">
+                <span class="gi-cat">Community</span>
                 <h4>Member Collaboration Session</h4>
                 <p>Sharing best practices and teaching methodologies</p>
-                <span class="gallery-tag">Community</span>
               </div>
             </div>
           </div>
@@ -922,9 +1022,9 @@
     <!-- ======== EXECUTIVES ======== -->
     <section id="executives" class="section executives-section">
       <div class="container">
-        <div class="section-header center" data-reveal>
-          <span class="section-badge">Leadership</span>
-          <h2 class="section-title">Our Executives</h2>
+        <div class="section-header-center" data-reveal>
+          <div class="section-tag">Leadership</div>
+          <h2 class="section-title">Our <em>Executives</em></h2>
           <p class="section-desc">
             Dedicated leaders championing teacher welfare at the national,
             state, and local government levels.
@@ -939,62 +1039,59 @@
           <button class="exec-tab" data-tab="lga">LGA Executives</button>
         </div>
 
-        <!-- National -->
         <div class="tab-panel active" id="tab-national" data-reveal>
           <div class="exec-grid">
-            <div class="exec-card featured">
+            <div class="exec-card exec-featured">
               <div class="exec-photo">
-                <img
-                  src="images/ol.jpg"
-                  alt="Comrade Akhigbe Olumhense"
-                  onerror="this.parentElement.classList.add('no-photo')"
-                />
-                <div class="exec-photo-placeholder"><span>A</span></div>
+                <div class="exec-photo-placeholder ep-president">AO</div>
               </div>
               <div class="exec-info">
-                <div class="exec-badge">National President</div>
+                <div class="exec-role-badge">National President</div>
                 <h3>Comrade Akhigbe Olumhense</h3>
                 <p>
                   Leading the charge for comprehensive teacher welfare reform
                   across Nigeria with over 20 years of educational advocacy
-                  experience.
+                  experience. A champion for teacher dignity and professional
+                  excellence.
                 </p>
+                <div class="exec-socials">
+                  <a href="#" class="exec-social-link">in</a>
+                  <a href="#" class="exec-social-link">tw</a>
+                </div>
               </div>
             </div>
-
             <div class="exec-card">
-              <div class="exec-photo no-photo">
-                <div class="exec-photo-placeholder"><span>C</span></div>
+              <div class="exec-photo">
+                <div class="exec-photo-placeholder">CO</div>
               </div>
               <div class="exec-info">
-                <div class="exec-badge">National Vice President</div>
+                <div class="exec-role-badge">National Vice President</div>
                 <h3>Mrs. Chioma Okafor</h3>
                 <p>
                   Coordinating regional advocacy and professional development
-                  initiatives.
+                  initiatives across Nigeria.
                 </p>
               </div>
             </div>
-
             <div class="exec-card">
-              <div class="exec-photo no-photo">
-                <div class="exec-photo-placeholder"><span>I</span></div>
+              <div class="exec-photo">
+                <div class="exec-photo-placeholder">IM</div>
               </div>
               <div class="exec-info">
-                <div class="exec-badge">National Secretary</div>
+                <div class="exec-role-badge">National Secretary</div>
                 <h3>Mr. Ibrahim Musa</h3>
                 <p>
-                  Managing organizational affairs and member communications.
+                  Managing organisational affairs and member communications at
+                  the national level.
                 </p>
               </div>
             </div>
-
             <div class="exec-card">
-              <div class="exec-photo no-photo">
-                <div class="exec-photo-placeholder"><span>F</span></div>
+              <div class="exec-photo">
+                <div class="exec-photo-placeholder">FB</div>
               </div>
               <div class="exec-info">
-                <div class="exec-badge">National Treasurer</div>
+                <div class="exec-role-badge">National Treasurer</div>
                 <h3>Mrs. Fatima Bello</h3>
                 <p>
                   Overseeing financial management and welfare fund
@@ -1002,34 +1099,35 @@
                 </p>
               </div>
             </div>
-
             <div class="exec-card">
-              <div class="exec-photo no-photo">
-                <div class="exec-photo-placeholder"><span>E</span></div>
+              <div class="exec-photo">
+                <div class="exec-photo-placeholder">EN</div>
               </div>
               <div class="exec-info">
-                <div class="exec-badge">Publicity Secretary</div>
+                <div class="exec-role-badge">Publicity Secretary</div>
                 <h3>Mr. Emeka Nwosu</h3>
-                <p>Driving awareness campaigns and media relations.</p>
+                <p>
+                  Driving awareness campaigns and media relations for teacher
+                  rights.
+                </p>
               </div>
             </div>
-
             <div class="exec-card">
-              <div class="exec-photo no-photo">
-                <div class="exec-photo-placeholder"><span>B</span></div>
+              <div class="exec-photo">
+                <div class="exec-photo-placeholder">BE</div>
               </div>
               <div class="exec-info">
-                <div class="exec-badge">Legal Adviser</div>
+                <div class="exec-role-badge">Legal Adviser</div>
                 <h3>Mrs. Blessing Eze</h3>
                 <p>
-                  Providing legal guidance on labor rights and policy matters.
+                  Providing legal guidance on labour rights, policy matters, and
+                  member protection.
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- State -->
         <div class="tab-panel" id="tab-state">
           <div class="state-selector-row">
             <label for="stateSelect">Select State:</label>
@@ -1048,7 +1146,6 @@
           </div>
         </div>
 
-        <!-- LGA -->
         <div class="tab-panel" id="tab-lga">
           <div class="state-selector-row multi">
             <div class="selector-field">
@@ -1077,12 +1174,577 @@
       </div>
     </section>
 
+    <!-- ======== PARTNERS ======== -->
+    <section id="partners" class="section partners-section">
+      <div class="container">
+        <div class="section-header-center" data-reveal>
+          <div class="section-tag">Our Network</div>
+          <h2 class="section-title">Global <em>Partners</em></h2>
+          <p class="section-desc">
+            We collaborate with international and local organisations to advance
+            teacher welfare and educational excellence in Nigeria.
+          </p>
+        </div>
+
+        <div class="partners-tiers" data-reveal>
+          <!-- Tier 1: Strategic Partners -->
+          <div class="partner-tier">
+            <div class="tier-label">Strategic International Partners</div>
+            <div class="partner-logos tier-1">
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg pl-unesco">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <rect width="120" height="40" rx="4" fill="none" />
+                      <text
+                        x="4"
+                        y="27"
+                        font-family="Georgia,serif"
+                        font-size="22"
+                        font-weight="bold"
+                        fill="#1a6ca8"
+                      >
+                        UNESCO
+                      </text>
+                    </svg>
+                  </div>
+                  <span>UNESCO</span>
+                </div>
+              </div>
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg pl-ei">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <text
+                        x="4"
+                        y="27"
+                        font-family="Arial,sans-serif"
+                        font-size="18"
+                        font-weight="bold"
+                        fill="#d62027"
+                      >
+                        Education
+                      </text>
+                      <text
+                        x="4"
+                        y="40"
+                        font-family="Arial,sans-serif"
+                        font-size="12"
+                        fill="#d62027"
+                      >
+                        International
+                      </text>
+                    </svg>
+                  </div>
+                  <span>Education International</span>
+                </div>
+              </div>
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg pl-cet">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <circle
+                        cx="20"
+                        cy="20"
+                        r="16"
+                        stroke="#1d5d8a"
+                        stroke-width="2"
+                        fill="none"
+                      />
+                      <path
+                        d="M14 20h12M20 14v12"
+                        stroke="#1d5d8a"
+                        stroke-width="2"
+                      />
+                      <text
+                        x="42"
+                        y="23"
+                        font-family="Arial"
+                        font-size="11"
+                        fill="#1d5d8a"
+                        font-weight="600"
+                      >
+                        Commonwealth
+                      </text>
+                      <text
+                        x="42"
+                        y="36"
+                        font-family="Arial"
+                        font-size="10"
+                        fill="#1d5d8a"
+                      >
+                        Edu. Trust
+                      </text>
+                    </svg>
+                  </div>
+                  <span>Commonwealth Education Trust</span>
+                </div>
+              </div>
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg pl-ilo">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <text
+                        x="4"
+                        y="27"
+                        font-family="Arial,sans-serif"
+                        font-size="24"
+                        font-weight="900"
+                        fill="#003087"
+                      >
+                        ILO
+                      </text>
+                      <text
+                        x="46"
+                        y="27"
+                        font-family="Arial,sans-serif"
+                        font-size="9"
+                        fill="#003087"
+                      >
+                        International Labour
+                        <tspan x="46" dy="10">Organization</tspan>
+                      </text>
+                    </svg>
+                  </div>
+                  <span>ILO</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tier 2: Government & National Partners -->
+          <div class="partner-tier">
+            <div class="tier-label">Government & Regulatory Partners</div>
+            <div class="partner-logos tier-2">
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg pl-fme">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <rect
+                        x="2"
+                        y="2"
+                        width="36"
+                        height="36"
+                        rx="4"
+                        fill="#008751"
+                      />
+                      <text
+                        x="10"
+                        y="25"
+                        font-family="Arial"
+                        font-size="14"
+                        fill="white"
+                        font-weight="bold"
+                      >
+                        FME
+                      </text>
+                      <text
+                        x="44"
+                        y="18"
+                        font-family="Arial"
+                        font-size="9"
+                        fill="#008751"
+                        font-weight="600"
+                      >
+                        Federal Ministry
+                      </text>
+                      <text
+                        x="44"
+                        y="30"
+                        font-family="Arial"
+                        font-size="9"
+                        fill="#008751"
+                      >
+                        of Education
+                      </text>
+                    </svg>
+                  </div>
+                  <span>Federal Ministry of Education</span>
+                </div>
+              </div>
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg pl-trcn">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <rect
+                        x="2"
+                        y="2"
+                        width="36"
+                        height="36"
+                        rx="18"
+                        fill="#1a5f3a"
+                      />
+                      <text
+                        x="8"
+                        y="25"
+                        font-family="Arial"
+                        font-size="12"
+                        fill="white"
+                        font-weight="bold"
+                      >
+                        TRCN
+                      </text>
+                      <text
+                        x="44"
+                        y="18"
+                        font-family="Arial"
+                        font-size="8"
+                        fill="#1a5f3a"
+                        font-weight="600"
+                      >
+                        Teachers Registration
+                      </text>
+                      <text
+                        x="44"
+                        y="30"
+                        font-family="Arial"
+                        font-size="8"
+                        fill="#1a5f3a"
+                      >
+                        Council of Nigeria
+                      </text>
+                    </svg>
+                  </div>
+                  <span>TRCN</span>
+                </div>
+              </div>
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg pl-nerdc">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <path d="M4 20 L20 4 L36 20 L20 36Z" fill="#e47f00" />
+                      <text
+                        x="44"
+                        y="17"
+                        font-family="Arial"
+                        font-size="10"
+                        fill="#e47f00"
+                        font-weight="bold"
+                      >
+                        NERDC
+                      </text>
+                      <text
+                        x="44"
+                        y="30"
+                        font-family="Arial"
+                        font-size="8"
+                        fill="#555"
+                      >
+                        Edu. Res. & Dev.
+                      </text>
+                    </svg>
+                  </div>
+                  <span>NERDC</span>
+                </div>
+              </div>
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg pl-nuc">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <circle cx="20" cy="20" r="16" fill="#7b0d0d" />
+                      <text
+                        x="10"
+                        y="25"
+                        font-family="Arial"
+                        font-size="11"
+                        fill="white"
+                        font-weight="bold"
+                      >
+                        NUC
+                      </text>
+                      <text
+                        x="42"
+                        y="18"
+                        font-family="Arial"
+                        font-size="9"
+                        fill="#7b0d0d"
+                        font-weight="600"
+                      >
+                        National
+                      </text>
+                      <text
+                        x="42"
+                        y="29"
+                        font-family="Arial"
+                        font-size="9"
+                        fill="#7b0d0d"
+                      >
+                        Universities Comm.
+                      </text>
+                    </svg>
+                  </div>
+                  <span>NUC</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tier 3: NGO/Development Partners -->
+          <div class="partner-tier">
+            <div class="tier-label">Development & Civil Society Partners</div>
+            <div class="partner-logos tier-3">
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <text
+                        x="4"
+                        y="27"
+                        font-family="Georgia,serif"
+                        font-size="14"
+                        fill="#006b6b"
+                        font-weight="bold"
+                      >
+                        UNICEF
+                      </text>
+                      <text
+                        x="62"
+                        y="27"
+                        font-family="Arial"
+                        font-size="10"
+                        fill="#006b6b"
+                      >
+                        Nigeria
+                      </text>
+                    </svg>
+                  </div>
+                  <span>UNICEF Nigeria</span>
+                </div>
+              </div>
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <text
+                        x="4"
+                        y="27"
+                        font-family="Arial"
+                        font-size="16"
+                        fill="#E03A27"
+                        font-weight="900"
+                      >
+                        USAID
+                      </text>
+                      <text
+                        x="68"
+                        y="18"
+                        font-family="Arial"
+                        font-size="8"
+                        fill="#E03A27"
+                      >
+                        Education
+                      </text>
+                      <text
+                        x="68"
+                        y="29"
+                        font-family="Arial"
+                        font-size="8"
+                        fill="#E03A27"
+                      >
+                        Initiative
+                      </text>
+                    </svg>
+                  </div>
+                  <span>USAID Education</span>
+                </div>
+              </div>
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <path
+                        d="M8 32 Q20 8 32 32"
+                        stroke="#0072BB"
+                        stroke-width="2.5"
+                        fill="none"
+                      />
+                      <path
+                        d="M12 32 Q24 12 36 32"
+                        stroke="#0072BB"
+                        stroke-width="1.5"
+                        fill="none"
+                      />
+                      <text
+                        x="42"
+                        y="27"
+                        font-family="Arial"
+                        font-size="12"
+                        fill="#0072BB"
+                        font-weight="bold"
+                      >
+                        British Council
+                      </text>
+                    </svg>
+                  </div>
+                  <span>British Council</span>
+                </div>
+              </div>
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <rect
+                        x="2"
+                        y="8"
+                        width="24"
+                        height="24"
+                        rx="2"
+                        fill="#FF6B00"
+                      />
+                      <text
+                        x="6"
+                        y="24"
+                        font-family="Arial"
+                        font-size="11"
+                        fill="white"
+                        font-weight="bold"
+                      >
+                        NLC
+                      </text>
+                      <text
+                        x="32"
+                        y="18"
+                        font-family="Arial"
+                        font-size="8"
+                        fill="#FF6B00"
+                        font-weight="600"
+                      >
+                        Nigeria Labour
+                      </text>
+                      <text
+                        x="32"
+                        y="29"
+                        font-family="Arial"
+                        font-size="8"
+                        fill="#FF6B00"
+                      >
+                        Congress
+                      </text>
+                    </svg>
+                  </div>
+                  <span>Nigeria Labour Congress</span>
+                </div>
+              </div>
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <text
+                        x="4"
+                        y="27"
+                        font-family="Arial"
+                        font-size="14"
+                        fill="#2980b9"
+                        font-weight="bold"
+                      >
+                        DFID
+                      </text>
+                      <text
+                        x="50"
+                        y="18"
+                        font-family="Arial"
+                        font-size="8"
+                        fill="#2980b9"
+                      >
+                        Edu.
+                      </text>
+                      <text
+                        x="50"
+                        y="29"
+                        font-family="Arial"
+                        font-size="8"
+                        fill="#2980b9"
+                      >
+                        Partners
+                      </text>
+                    </svg>
+                  </div>
+                  <span>DFID Education</span>
+                </div>
+              </div>
+              <div class="partner-logo-card">
+                <div class="plc-inner">
+                  <div class="partner-logo-svg">
+                    <svg viewBox="0 0 120 40" fill="none">
+                      <circle
+                        cx="20"
+                        cy="20"
+                        r="15"
+                        stroke="#27ae60"
+                        stroke-width="2.5"
+                        fill="none"
+                      />
+                      <path
+                        d="M12 20h16M20 12v16"
+                        stroke="#27ae60"
+                        stroke-width="2"
+                      />
+                      <text
+                        x="42"
+                        y="17"
+                        font-family="Arial"
+                        font-size="9"
+                        fill="#27ae60"
+                        font-weight="600"
+                      >
+                        Global Teachers
+                      </text>
+                      <text
+                        x="42"
+                        y="29"
+                        font-family="Arial"
+                        font-size="9"
+                        fill="#27ae60"
+                      >
+                        Foundation
+                      </text>
+                    </svg>
+                  </div>
+                  <span>Global Teachers Foundation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Partnership CTA -->
+        <div class="partner-cta-block" data-reveal>
+          <div class="pcta-content">
+            <h3>Become a Partner</h3>
+            <p>
+              Join our growing network of organisations committed to
+              transforming teacher welfare and educational standards in Nigeria.
+              We welcome partnerships from international bodies, government
+              agencies, corporations, and NGOs.
+            </p>
+            <a href="#contact" class="btn-partner-cta"
+              >Explore Partnership Opportunities</a
+            >
+          </div>
+          <div class="pcta-stats">
+            <div class="pcta-stat">
+              <span class="pcta-num">15+</span>
+              <span class="pcta-label">Active Partners</span>
+            </div>
+            <div class="pcta-stat">
+              <span class="pcta-num">8</span>
+              <span class="pcta-label">Countries</span>
+            </div>
+            <div class="pcta-stat">
+              <span class="pcta-num">$2M+</span>
+              <span class="pcta-label">Resources Mobilised</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ======== NEWS ======== -->
     <section id="news" class="section news-section">
       <div class="container">
-        <div class="section-header center" data-reveal>
-          <span class="section-badge">Latest Updates</span>
-          <h2 class="section-title">News & Announcements</h2>
+        <div class="section-header-center" data-reveal>
+          <div class="section-tag">Latest Updates</div>
+          <h2 class="section-title">News & <em>Announcements</em></h2>
           <p class="section-desc">
             Stay informed on our advocacy wins, events, and important updates
             for PSTCSL members.
@@ -1090,7 +1752,7 @@
         </div>
 
         <div class="news-grid" data-reveal>
-          <article class="news-card news-featured">
+          <article class="news-card news-hero-card">
             <div class="news-img-wrap">
               <img
                 src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80"
@@ -1146,7 +1808,7 @@
               <h3>Health Insurance Scheme for Members in Progress</h3>
               <p>
                 Negotiations underway with major HMOs to provide comprehensive
-                health coverage for all registered members at subsidized rates.
+                health coverage for all registered members at subsidised rates.
               </p>
               <a href="#" class="news-read-more">Read More →</a>
             </div>
@@ -1156,7 +1818,7 @@
             <div class="news-img-wrap">
               <img
                 src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=600&q=80"
-                alt="Membership Milestone"
+                alt="Milestone"
                 loading="lazy"
               />
             </div>
@@ -1181,10 +1843,12 @@
             </div>
             <div class="news-body">
               <time class="news-date">January 28, 2026</time>
-              <h3>Partnership with International Education Bodies</h3>
+              <h3>
+                Partnership with International Education Bodies Formalised
+              </h3>
               <p>
                 PSTCSL signs MoU with UNESCO and Commonwealth Education Trust
-                for teacher exchange programs and capacity-building initiatives.
+                for teacher exchange programs and capacity-building.
               </p>
               <a href="#" class="news-read-more">Read More →</a>
             </div>
@@ -1203,7 +1867,7 @@
               <h3>Free Legal Aid Clinic Launched for Members</h3>
               <p>
                 New initiative provides legal consultation and representation
-                for teachers facing unfair labor practices and employment
+                for teachers facing unfair labour practices and employment
                 disputes.
               </p>
               <a href="#" class="news-read-more">Read More →</a>
@@ -1217,69 +1881,60 @@
     <section id="contact" class="section contact-section">
       <div class="container">
         <div class="contact-layout">
-          <div class="contact-info-panel" data-reveal>
-            <span class="section-badge">Get in Touch</span>
-            <h2 class="section-title">Contact Us</h2>
-            <p class="section-lead">
+          <div class="contact-info" data-reveal>
+            <div class="section-tag">Get in Touch</div>
+            <h2 class="section-title">Contact <em>Us</em></h2>
+            <div class="decorative-line"></div>
+            <p class="contact-lead">
               Have questions? Need support? Want to partner with PSTCSL? We're
               here and eager to hear from you.
             </p>
 
             <div class="contact-details">
-              <a href="mailto:contact@pstcsl.org" class="contact-detail-item">
-                <div class="contact-detail-icon">📧</div>
-                <div>
-                  <strong>Email</strong>
-                  <span>contact@pstcsl.org</span>
-                </div>
+              <a href="mailto:contact@pstcsl.org" class="contact-item">
+                <div class="ci-icon">📧</div>
+                <div><strong>Email</strong><span>contact@pstcsl.org</span></div>
               </a>
-              <a href="tel:+2348036660387" class="contact-detail-item">
-                <div class="contact-detail-icon">📱</div>
-                <div>
-                  <strong>Phone</strong>
-                  <span>+234 803 666 0387</span>
-                </div>
+              <a href="tel:+2348036660387" class="contact-item">
+                <div class="ci-icon">📱</div>
+                <div><strong>Phone</strong><span>+234 803 666 0387</span></div>
               </a>
               <a
                 href="https://wa.me/2348036660387"
                 target="_blank"
                 rel="noopener"
-                class="contact-detail-item"
+                class="contact-item"
               >
-                <div class="contact-detail-icon">💬</div>
+                <div class="ci-icon">💬</div>
                 <div>
-                  <strong>WhatsApp</strong>
-                  <span>Chat with us directly</span>
+                  <strong>WhatsApp</strong><span>Chat with us directly</span>
                 </div>
               </a>
               <a
                 href="http://pstcsl.org"
                 target="_blank"
                 rel="noopener"
-                class="contact-detail-item"
+                class="contact-item"
               >
-                <div class="contact-detail-icon">🌐</div>
-                <div>
-                  <strong>Website</strong>
-                  <span>pstcsl.org</span>
-                </div>
+                <div class="ci-icon">🌐</div>
+                <div><strong>Website</strong><span>pstcsl.org</span></div>
               </a>
-              <div class="contact-detail-item">
-                <div class="contact-detail-icon">📍</div>
+              <div class="contact-item">
+                <div class="ci-icon">📍</div>
                 <div>
-                  <strong>Location</strong>
-                  <span>Nigeria (Nationwide)</span>
+                  <strong>Location</strong
+                  ><span>Nigeria — Nationwide Presence</span>
                 </div>
               </div>
             </div>
 
-            <div class="social-row">
+            <div class="social-section">
               <h4>Follow Us</h4>
               <div class="social-links">
                 <a href="#" aria-label="Facebook" class="social-link">
                   <svg
-                    width="20"
-                    height="20"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
@@ -1290,8 +1945,8 @@
                 </a>
                 <a href="#" aria-label="Twitter/X" class="social-link">
                   <svg
-                    width="20"
-                    height="20"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
@@ -1302,8 +1957,8 @@
                 </a>
                 <a href="#" aria-label="LinkedIn" class="social-link">
                   <svg
-                    width="20"
-                    height="20"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
@@ -1314,8 +1969,8 @@
                 </a>
                 <a href="#" aria-label="Instagram" class="social-link">
                   <svg
-                    width="20"
-                    height="20"
+                    width="18"
+                    height="18"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
@@ -1328,7 +1983,7 @@
             </div>
           </div>
 
-          <div class="contact-form-panel" data-reveal>
+          <div class="contact-form-wrap" data-reveal>
             <form id="contactForm" novalidate>
               <div class="form-grid">
                 <div class="field">
@@ -1398,162 +2053,148 @@
 
     <!-- ======== FOOTER ======== -->
     <footer class="site-footer">
-      <div class="footer-inner container">
-        <div class="footer-grid">
-          <div class="footer-brand-col">
-            <div class="footer-logo">
-              <div class="footer-emblem">
-                <svg width="40" height="40" viewBox="0 0 36 36" fill="none">
-                  <circle
-                    cx="18"
-                    cy="18"
-                    r="18"
-                    fill="rgba(255,255,255,0.15)"
-                  />
-                  <path
-                    d="M9 26 L18 10 L27 26"
-                    stroke="white"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+      <div class="footer-wave">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+          <path
+            d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"
+            fill="#0a2e1a"
+          />
+        </svg>
+      </div>
+      <div class="footer-body">
+        <div class="container">
+          <div class="footer-grid">
+            <div class="footer-brand-col">
+              <div class="footer-brand">
+                <div class="footer-brand-logo">
+                  <svg
+                    viewBox="0 0 60 60"
                     fill="none"
-                  />
-                  <path
-                    d="M12 21 H24"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                  <circle cx="18" cy="10" r="2.5" fill="white" />
-                </svg>
-              </div>
-              <div>
-                <div class="footer-acronym">PSTCSL</div>
-                <div class="footer-fullname">
-                  Private School Teachers<br />Cooperative Society
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle
+                      cx="30"
+                      cy="30"
+                      r="28"
+                      stroke="#5fc68a"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M18 42 L30 18 L42 42"
+                      stroke="#5fc68a"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      fill="none"
+                    />
+                    <path
+                      d="M22 35 H38"
+                      stroke="#5fc68a"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="30" cy="18" r="3" fill="#5fc68a" />
+                    <path
+                      d="M24 42 H36"
+                      stroke="#40916c"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <div class="footer-acronym">PSTCSL</div>
+                  <div class="footer-fullname">
+                    Private School Teachers<br />Cooperative Society
+                  </div>
                 </div>
               </div>
+              <p class="footer-tagline">
+                A unified voice for private school teachers in Nigeria —
+                championing welfare, rights, and educational excellence
+                nationwide since 2004.
+              </p>
+              <div class="footer-certifications">
+                <span class="cert-badge">✓ CAC Registered</span>
+                <span class="cert-badge">✓ TRCN Affiliated</span>
+                <span class="cert-badge">✓ FME Recognised</span>
+              </div>
+              <div class="footer-socials">
+                <a href="#" class="fsoc">f</a>
+                <a href="#" class="fsoc">𝕏</a>
+                <a href="#" class="fsoc">in</a>
+                <a href="#" class="fsoc">ig</a>
+              </div>
             </div>
-            <p class="footer-tagline">
-              A unified voice for private school teachers in Nigeria —
-              championing welfare, rights, and educational excellence.
+
+            <div class="footer-col">
+              <h4>Quick Links</h4>
+              <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#membership">Membership</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#executives">Executives</a></li>
+                <li><a href="#partners">Partners</a></li>
+                <li><a href="#news">News</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-col">
+              <h4>Resources</h4>
+              <ul>
+                <li><a href="#">Advocacy Documents</a></li>
+                <li><a href="#">Teacher Rights Guide</a></li>
+                <li><a href="#">Training Calendar</a></li>
+                <li><a href="#">Member Benefits</a></li>
+                <li><a href="#">Media Kit</a></li>
+                <li><a href="#">Annual Reports</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-col">
+              <h4>Contact</h4>
+              <ul class="footer-contact-list">
+                <li>
+                  <a href="mailto:contact@pstcsl.org">📧 contact@pstcsl.org</a>
+                </li>
+                <li><a href="tel:+2348036660387">📱 +234 803 666 0387</a></li>
+                <li>
+                  <a href="https://wa.me/2348036660387" target="_blank"
+                    >💬 WhatsApp</a
+                  >
+                </li>
+                <li>
+                  <a href="http://pstcsl.org" target="_blank">🌐 pstcsl.org</a>
+                </li>
+                <li><span>📍 Nigeria (Nationwide)</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p>
+              © 2026
+              <strong
+                >Private School Teachers Cooperative Society (PSTCSL)</strong
+              >. All rights reserved.
             </p>
-            <div class="footer-social">
-              <a href="#" aria-label="Facebook" class="fsocial">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                  />
-                </svg>
-              </a>
-              <a href="#" aria-label="Twitter" class="fsocial">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-                  />
-                </svg>
-              </a>
-              <a href="#" aria-label="LinkedIn" class="fsocial">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-                  />
-                </svg>
-              </a>
-              <a href="#" aria-label="Instagram" class="fsocial">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
-                  />
-                </svg>
-              </a>
-            </div>
+            <p class="footer-dev">
+              Designed & Built by
+              <a
+                href="https://wa.me/message/YCDKLO3GMEKEI1"
+                target="_blank"
+                rel="noopener"
+                >Ntonarch Acumen Network</a
+              >
+            </p>
           </div>
-
-          <div class="footer-col">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><a href="#home">Home</a></li>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#membership">Membership</a></li>
-              <li><a href="#gallery">Gallery</a></li>
-              <li><a href="#executives">Executives</a></li>
-              <li><a href="#news">News</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h4>Resources</h4>
-            <ul>
-              <li><a href="#">Advocacy Documents</a></li>
-              <li><a href="#">Teacher Rights Guide</a></li>
-              <li><a href="#">Training Calendar</a></li>
-              <li><a href="#">Member Benefits</a></li>
-              <li><a href="#">Media Kit</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h4>Contact</h4>
-            <ul class="footer-contact-list">
-              <li>
-                <a href="mailto:contact@pstcsl.org">📧 contact@pstcsl.org</a>
-              </li>
-              <li><a href="tel:+2348036660387">📱 +234 803 666 0387</a></li>
-              <li>
-                <a href="https://wa.me/2348036660387" target="_blank"
-                  >💬 WhatsApp</a
-                >
-              </li>
-              <li>
-                <a href="http://pstcsl.org" target="_blank">🌐 pstcsl.org</a>
-              </li>
-              <li><span>📍 Nigeria (Nationwide)</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <p>
-            © 2026
-            <strong>Private School Teachers Cooperative Society (PSTCSL)</strong
-            >. All rights reserved.
-          </p>
-          <p class="footer-dev">
-            Designed & Built by
-            <a
-              href="https://wa.me/message/YCDKLO3GMEKEI1"
-              target="_blank"
-              rel="noopener"
-              >Ntonarch Acumen Network</a
-            >
-          </p>
         </div>
       </div>
     </footer>
 
-    <!-- Toast Notification -->
+    <!-- Toast -->
     <div class="toast" id="toast" role="alert" aria-live="polite"></div>
 
     <!-- Back to Top -->

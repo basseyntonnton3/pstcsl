@@ -1,28 +1,40 @@
-/**
- * PSTCSL — JavaScript v3.0
- * Fixes: Hero slider animation, theme toggle, all interactions
- */
-
+/* PSTCSL v4.0 — JavaScript */
 "use strict";
 
 const $ = (s, ctx = document) => ctx.querySelector(s);
 const $$ = (s, ctx = document) => [...ctx.querySelectorAll(s)];
+const esc = (str) => {
+  const d = document.createElement("div");
+  d.appendChild(document.createTextNode(str));
+  return d.innerHTML;
+};
 
-/* ============================================================
-   TOAST
-   ============================================================ */
-function showToast(message, type = "success", duration = 4500) {
-  const toast = $("#toast");
-  if (!toast) return;
-  toast.textContent = (type === "success" ? "✓  " : "✕  ") + message;
-  toast.className = `toast show ${type}`;
-  clearTimeout(showToast._t);
-  showToast._t = setTimeout(() => toast.classList.remove("show"), duration);
+/* ================================================================
+   PRELOADER
+   ================================================================ */
+function initPreloader() {
+  const pl = $("#preloader");
+  if (!pl) return;
+  window.addEventListener("load", () => {
+    setTimeout(() => pl.classList.add("done"), 1800);
+  });
 }
 
-/* ============================================================
-   THEME MANAGER
-   ============================================================ */
+/* ================================================================
+   TOAST
+   ================================================================ */
+function showToast(msg, type = "success", dur = 4500) {
+  const t = $("#toast");
+  if (!t) return;
+  t.textContent = (type === "success" ? "✓  " : "✕  ") + msg;
+  t.className = `toast show ${type}`;
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => t.classList.remove("show"), dur);
+}
+
+/* ================================================================
+   THEME
+   ================================================================ */
 class ThemeManager {
   constructor() {
     this.btn = $("#themeBtn");
@@ -30,26 +42,28 @@ class ThemeManager {
     this.apply(this.current);
     this.btn?.addEventListener("click", () => this.toggle());
   }
-  apply(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    this.current = theme;
-    localStorage.setItem("pstcsl_theme", theme);
+  apply(t) {
+    document.documentElement.setAttribute("data-theme", t);
+    this.current = t;
+    localStorage.setItem("pstcsl_theme", t);
   }
   toggle() {
     this.apply(this.current === "light" ? "dark" : "light");
   }
 }
 
-/* ============================================================
+/* ================================================================
    NAVIGATION
-   ============================================================ */
+   ================================================================ */
 class Navigation {
   constructor() {
     this.header = $("#siteHeader");
+    this.topBar = $(".header-top-bar");
     this.navLinks = $("#navLinks");
     this.hamburger = $("#hamburger");
     this.links = $$(".nav-link");
     this.backTop = $("#backTop");
+    this.lastY = 0;
     this.init();
   }
   init() {
@@ -57,15 +71,12 @@ class Navigation {
       const open = this.navLinks.classList.toggle("open");
       this.hamburger.classList.toggle("open", open);
     });
-
-    this.links.forEach((link) => {
-      link.addEventListener("click", () => {
+    this.links.forEach((l) =>
+      l.addEventListener("click", () => {
         this.navLinks.classList.remove("open");
         this.hamburger?.classList.remove("open");
-      });
-    });
-
-    // Close menu clicking outside
+      }),
+    );
     document.addEventListener("click", (e) => {
       if (
         this.navLinks.classList.contains("open") &&
@@ -76,8 +87,6 @@ class Navigation {
         this.hamburger?.classList.remove("open");
       }
     });
-
-    // Smooth scroll for ALL anchor links
     $$('a[href^="#"]').forEach((a) => {
       a.addEventListener("click", (e) => {
         const id = a.getAttribute("href");
@@ -85,11 +94,14 @@ class Navigation {
         const target = $(id);
         if (!target) return;
         e.preventDefault();
-        const top = target.getBoundingClientRect().top + window.scrollY - 72;
+        const navH = this.header?.offsetHeight || 72;
+        const topH =
+          window.innerWidth > 768 ? this.topBar?.offsetHeight || 36 : 0;
+        const top =
+          target.getBoundingClientRect().top + window.scrollY - navH - topH;
         window.scrollTo({ top, behavior: "smooth" });
       });
     });
-
     this.backTop?.addEventListener("click", () =>
       window.scrollTo({ top: 0, behavior: "smooth" }),
     );
@@ -98,44 +110,51 @@ class Navigation {
   }
   onScroll() {
     const y = window.scrollY;
-    this.header?.classList.toggle("scrolled", y > 40);
+    this.header?.classList.toggle("scrolled", y > 50);
     this.backTop?.classList.toggle("visible", y > 300);
-
-    // Active nav link
+    // Hide top bar when scrolling down
+    if (this.topBar) {
+      this.topBar.classList.toggle("hidden", y > 100);
+      this.header?.classList.toggle("top-hidden", y > 100);
+    }
+    // Active link
     let current = "";
     $$("section[id]").forEach((s) => {
-      if (s.offsetTop - 100 <= y) current = s.id;
+      if (s.offsetTop - 120 <= y) current = s.id;
     });
-    this.links.forEach((l) => {
-      l.classList.toggle("active", l.getAttribute("href") === `#${current}`);
-    });
+    this.links.forEach((l) =>
+      l.classList.toggle("active", l.getAttribute("href") === `#${current}`),
+    );
+    this.lastY = y;
   }
 }
 
-/* ============================================================
-   HERO SLIDER  —  FIXED
-   Key fix: remove 'active' from old slide FIRST so CSS opacity
-   transition plays, then add to new slide. Also reset the
-   inner text animations by toggling a class trick.
-   ============================================================ */
+/* ================================================================
+   HERO SLIDER — COMPLETE REWRITE
+   Key: background images applied directly to .slide-bg elements
+   using inline style from HTML. We just toggle .active class.
+   ================================================================ */
 class HeroSlider {
   constructor() {
     this.slides = $$(".hero-slide");
-    this.dots = $$(".dot");
-    this.prevBtn = $("#sliderPrev");
-    this.nextBtn = $("#sliderNext");
+    this.dots = $$(".si-dot");
+    this.prevBtn = $("#slidePrev");
+    this.nextBtn = $("#slideNext");
+    this.progressBar = $("#slideProgressBar");
     this.current = 0;
+    this.DURATION = 2000;
     this.timer = null;
-    this.INTERVAL = 5500;
-    this.busy = false;
-
+    this.progressTimer = null;
+    this.progressStart = null;
     if (!this.slides.length) return;
     this.init();
   }
 
   init() {
-    // Make sure first slide is active and visible
-    this.slides.forEach((s, i) => s.classList.toggle("active", i === 0));
+    // Ensure first slide is properly active
+    this.slides.forEach((s, i) => {
+      s.classList.toggle("active", i === 0);
+    });
     this.dots.forEach((d, i) => d.classList.toggle("active", i === 0));
 
     this.prevBtn?.addEventListener("click", () => {
@@ -148,92 +167,134 @@ class HeroSlider {
       this.go(this.current + 1);
       this.start();
     });
-    this.dots.forEach((d, i) => {
+    this.dots.forEach((d, i) =>
       d.addEventListener("click", () => {
         this.clear();
         this.go(i);
         this.start();
-      });
-    });
+      }),
+    );
 
     // Pause on hover
-    const wrapper = $(".hero-slider");
+    const wrapper = $(".hero-slides");
     wrapper?.addEventListener("mouseenter", () => this.clear());
     wrapper?.addEventListener("mouseleave", () => this.start());
+
+    // Touch/swipe support
+    let touchX = 0;
+    wrapper?.addEventListener(
+      "touchstart",
+      (e) => {
+        touchX = e.changedTouches[0].clientX;
+      },
+      { passive: true },
+    );
+    wrapper?.addEventListener(
+      "touchend",
+      (e) => {
+        const diff = touchX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+          this.clear();
+          this.go(this.current + (diff > 0 ? 1 : -1));
+          this.start();
+        }
+      },
+      { passive: true },
+    );
 
     this.start();
   }
 
   go(index) {
-    if (this.busy) return;
-    this.busy = true;
-
     const total = this.slides.length;
     const next = ((index % total) + total) % total;
+    if (next === this.current) return;
 
-    if (next === this.current) {
-      this.busy = false;
-      return;
-    }
+    // Remove active from current
+    this.slides[this.current].classList.remove("active");
+    this.dots[this.current]?.classList.remove("active");
 
-    // Deactivate current
-    const prevSlide = this.slides[this.current];
-    const prevDot = this.dots[this.current];
-
-    // Step 1: remove active from old (fades out)
-    prevSlide.classList.remove("active");
-    prevDot?.classList.remove("active");
-
-    // Step 2: update index
     this.current = next;
 
-    // Step 3: activate new (fades in, triggers CSS text animations)
-    const newSlide = this.slides[this.current];
-    const newDot = this.dots[this.current];
+    // Add active to new slide
+    this.slides[this.current].classList.add("active");
+    this.dots[this.current]?.classList.add("active");
 
-    // Force reflow so text animations re-trigger on same slide if revisited
-    // We briefly remove 'active' then restore it
-    const innerEls = $$(
-      ".hero-eyebrow, .hero-title, .hero-subtitle, .hero-cta",
-      newSlide,
-    );
-    innerEls.forEach((el) => {
-      el.style.transition = "none";
-      el.style.opacity = "0";
-      el.style.transform = "translateY(18px)";
-    });
+    // Reset progress
+    this.resetProgress();
+  }
 
-    // Small delay lets the old slide fade out before new appears
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        newSlide.classList.add("active");
-        newDot?.classList.add("active");
-
-        // Restore CSS-driven transitions after forcing reflow
-        setTimeout(() => {
-          innerEls.forEach((el) => {
-            el.style.transition = "";
-            el.style.opacity = "";
-            el.style.transform = "";
-          });
-          this.busy = false;
-        }, 80);
-      });
-    });
+  resetProgress() {
+    if (!this.progressBar) return;
+    this.progressBar.style.width = "0%";
+    this.progressBar.style.transition = "none";
+    // Force reflow
+    this.progressBar.getBoundingClientRect();
+    this.progressBar.style.transition = `width ${this.DURATION}ms linear`;
+    this.progressBar.style.width = "100%";
   }
 
   start() {
     this.clear();
-    this.timer = setInterval(() => this.go(this.current + 1), this.INTERVAL);
+    this.resetProgress();
+    this.timer = setInterval(() => this.go(this.current + 1), this.DURATION);
   }
+
   clear() {
     clearInterval(this.timer);
+    if (this.progressBar) {
+      this.progressBar.style.transition = "none";
+      this.progressBar.style.width = "0%";
+    }
   }
 }
 
-/* ============================================================
+/* ================================================================
+   COUNTER ANIMATION
+   ================================================================ */
+class CounterAnimation {
+  constructor() {
+    this.els = $$(".sc-num[data-count]");
+    this.animated = false;
+    this.observe();
+  }
+  observe() {
+    const bar = $(".hero-stats-bar");
+    if (!bar || !("IntersectionObserver" in window)) {
+      this.run();
+      return;
+    }
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !this.animated) {
+          this.animated = true;
+          this.run();
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.5 },
+    );
+    obs.observe(bar);
+  }
+  run() {
+    this.els.forEach((el) => {
+      const target = parseInt(el.dataset.count, 10);
+      const dur = 1800;
+      const start = performance.now();
+      const update = (now) => {
+        const prog = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - prog, 3);
+        el.textContent = Math.round(ease * target).toLocaleString();
+        if (prog < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    });
+  }
+}
+
+/* ================================================================
    SCROLL REVEAL
-   ============================================================ */
+   ================================================================ */
 class ScrollReveal {
   constructor() {
     const els = $$("[data-reveal]");
@@ -250,15 +311,15 @@ class ScrollReveal {
           }
         });
       },
-      { threshold: 0.07, rootMargin: "0px 0px -30px 0px" },
+      { threshold: 0.06, rootMargin: "0px 0px -40px 0px" },
     );
     els.forEach((el) => obs.observe(el));
   }
 }
 
-/* ============================================================
+/* ================================================================
    GALLERY FILTER
-   ============================================================ */
+   ================================================================ */
 class GalleryFilter {
   constructor() {
     this.btns = $$(".gfilter");
@@ -271,18 +332,18 @@ class GalleryFilter {
     const cat = btn.dataset.filter;
     this.btns.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
-    this.items.forEach((item) => {
+    this.items.forEach((item) =>
       item.classList.toggle(
         "hidden",
         cat !== "all" && item.dataset.cat !== cat,
-      );
-    });
+      ),
+    );
   }
 }
 
-/* ============================================================
+/* ================================================================
    EXECUTIVES TABS
-   ============================================================ */
+   ================================================================ */
 class ExecutivesTabs {
   constructor() {
     this.tabs = $$(".exec-tab");
@@ -361,9 +422,13 @@ class ExecutivesTabs {
   }
   cardHTML(e) {
     return `<div class="exec-card">
-      <div class="exec-photo no-photo"><div class="exec-photo-placeholder"><span>${e.name[0]}</span></div></div>
+      <div class="exec-photo"><div class="exec-photo-placeholder">${e.name
+        .split(" ")
+        .map((w) => w[0])
+        .slice(0, 2)
+        .join("")}</div></div>
       <div class="exec-info">
-        <div class="exec-badge">${e.position}</div>
+        <div class="exec-role-badge">${e.position}</div>
         <h3>${e.name}</h3>
         <p>${e.description}</p>
       </div>
@@ -377,7 +442,7 @@ class ExecutivesTabs {
             name: "Mrs. Olufunke Akinlade",
             position: "Lagos State President",
             description:
-              "Leading teacher advocacy across Lagos State with focus on welfare reform.",
+              "Leading teacher advocacy across Lagos State with focus on welfare reform and professional development.",
           },
           {
             name: "Mr. Tunde Bakare",
@@ -492,9 +557,9 @@ class ExecutivesTabs {
   }
 }
 
-/* ============================================================
+/* ================================================================
    MEMBERSHIP MANAGER
-   ============================================================ */
+   ================================================================ */
 class MembershipManager {
   constructor() {
     this.form = $("#membershipForm");
@@ -507,14 +572,11 @@ class MembershipManager {
     this.init();
   }
   init() {
-    // File upload handlers
     [
       ["passportPhoto", "passportPreview"],
       ["staffId", "staffIdPreview"],
       ["idCard", "idCardPreview"],
     ].forEach(([id, pid]) => this.setupUpload(id, pid));
-
-    // Drag & drop
     $$(".upload-zone").forEach((zone) => {
       zone.addEventListener("dragover", (e) => {
         e.preventDefault();
@@ -534,14 +596,12 @@ class MembershipManager {
         input.dispatchEvent(new Event("change", { bubbles: true }));
       });
     });
-
     this.form.addEventListener("submit", (e) => this.handleSubmit(e));
     this.searchInput?.addEventListener("input", () => this.render());
     this.filterState?.addEventListener("change", () => this.render());
     this.populateStateFilter();
     this.render();
   }
-
   setupUpload(inputId, previewId) {
     const input = $(`#${inputId}`);
     const preview = $(`#${previewId}`);
@@ -551,18 +611,13 @@ class MembershipManager {
       preview.innerHTML = "";
       if (!file) return;
       if (file.size > 5 * 1024 * 1024) {
-        showToast("File too large — maximum size is 5MB.", "error");
+        showToast("File too large — maximum 5MB.", "error");
         input.value = "";
         return;
       }
-      const renderPreview = (src) => {
+      const render = (src) => {
         const isImg = file.type.startsWith("image/");
-        preview.innerHTML = `
-          <div class="preview-item">
-            ${isImg ? `<img src="${src}" alt="Preview" />` : ""}
-            <span>${esc(file.name.length > 26 ? file.name.slice(0, 26) + "…" : file.name)}</span>
-            <button type="button" class="preview-remove" aria-label="Remove file">✕</button>
-          </div>`;
+        preview.innerHTML = `<div class="preview-item">${isImg ? `<img src="${src}" alt="Preview"/>` : ""}<span>${esc(file.name.length > 26 ? file.name.slice(0, 26) + "…" : file.name)}</span><button type="button" class="preview-remove" aria-label="Remove">✕</button></div>`;
         preview
           .querySelector(".preview-remove")
           ?.addEventListener("click", () => {
@@ -571,26 +626,18 @@ class MembershipManager {
           });
       };
       if (file.type.startsWith("image/")) {
-        const reader = new FileReader();
-        reader.onload = (e) => renderPreview(e.target.result);
-        reader.readAsDataURL(file);
-      } else {
-        renderPreview("");
-      }
+        const r = new FileReader();
+        r.onload = (e) => render(e.target.result);
+        r.readAsDataURL(file);
+      } else render("");
     });
   }
-
   validate() {
     let valid = true;
-    // Clear previous errors
     $$(".field-error", this.form).forEach((e) => (e.textContent = ""));
     $$(".error", this.form).forEach((e) => e.classList.remove("error"));
-
     this.form.querySelectorAll("[required]").forEach((field) => {
-      if (field.type === "checkbox") {
-        if (!field.checked) valid = false; // handled separately
-        return;
-      }
+      if (field.type === "checkbox") return;
       if (!field.value.trim()) {
         valid = false;
         field.classList.add("error");
@@ -598,7 +645,6 @@ class MembershipManager {
         if (err) err.textContent = "This field is required.";
       }
     });
-
     const email = $("#email");
     if (email?.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
       valid = false;
@@ -606,32 +652,23 @@ class MembershipManager {
       const err = email.closest(".field")?.querySelector(".field-error");
       if (err) err.textContent = "Please enter a valid email address.";
     }
-
-    const passport = $("#passportPhoto");
-    const consent = $("#photoConsent");
-    if (passport?.files.length && !consent?.checked) {
-      showToast("Please give consent to use your passport photo.", "error");
+    if ($("#passportPhoto")?.files.length && !$("#photoConsent")?.checked) {
+      showToast("Please give consent for your passport photo.", "error");
       valid = false;
     }
-
-    const terms = $("#termsAccept");
-    if (!terms?.checked) {
-      showToast("Please accept the Terms and Conditions to proceed.", "error");
+    if (!$("#termsAccept")?.checked) {
+      showToast("Please accept the Terms and Conditions.", "error");
       valid = false;
     }
-
-    if (!valid && !$(".field.error")) {
-      // scroll to first error
-      const firstError = this.form.querySelector(".error");
-      firstError?.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    if (!valid)
+      this.form
+        .querySelector(".error")
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
     return valid;
   }
-
   handleSubmit(e) {
     e.preventDefault();
     if (!this.validate()) return;
-
     const fd = new FormData(this.form);
     const member = {
       id: Date.now(),
@@ -649,28 +686,21 @@ class MembershipManager {
       idNumber: fd.get("idNumber"),
       registeredAt: new Date().toISOString(),
     };
-
     this.members.push(member);
     this.save();
     this.render();
     this.populateStateFilter();
-
     this.form.reset();
     $$(".upload-preview", this.form).forEach((p) => (p.innerHTML = ""));
     $$(".field-error", this.form).forEach((e) => (e.textContent = ""));
-
     showToast(
       `Welcome, ${member.fullName.split(" ")[0]}! Registration successful 🎉`,
     );
-
-    const panel = $(".members-panel");
-    panel?.scrollIntoView({ behavior: "smooth", block: "start" });
+    $(".members-panel")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
-
   render() {
     const search = (this.searchInput?.value || "").toLowerCase().trim();
     const state = this.filterState?.value || "";
-
     const filtered = this.members.filter(
       (m) =>
         (!search ||
@@ -679,18 +709,11 @@ class MembershipManager {
           m.state.toLowerCase().includes(search)) &&
         (!state || m.state === state),
     );
-
     if (this.countBadge) this.countBadge.textContent = this.members.length;
-
     if (!filtered.length) {
-      this.membersList.innerHTML = `
-        <div class="empty-members">
-          <div class="empty-icon">${this.members.length ? "🔍" : "🏫"}</div>
-          <p>${this.members.length ? "No members match your search." : "No members yet — be the first to join!"}</p>
-        </div>`;
+      this.membersList.innerHTML = `<div class="empty-members"><div class="empty-icon">${this.members.length ? "🔍" : "🏫"}</div><p>${this.members.length ? "No members match your search." : "No members yet — be the first to join!"}</p></div>`;
       return;
     }
-
     this.membersList.innerHTML = filtered
       .map(
         (m) => `
@@ -699,7 +722,7 @@ class MembershipManager {
         <div class="member-tags">
           <span class="member-tag">📍 ${esc(m.state)}</span>
           <span class="member-tag">🏫 ${esc(m.school)}</span>
-          <span class="member-tag">📚 ${this.levelLabel(m.teachingLevel)}</span>
+          <span class="member-tag">📚 ${this.lvl(m.teachingLevel)}</span>
           <span class="member-tag">🎓 ${esc(m.qualification)}</span>
           <span class="member-tag">✅ Verified</span>
         </div>
@@ -707,7 +730,6 @@ class MembershipManager {
       )
       .join("");
   }
-
   populateStateFilter() {
     if (!this.filterState) return;
     const cur = this.filterState.value;
@@ -721,8 +743,7 @@ class MembershipManager {
         )
         .join("");
   }
-
-  levelLabel(v) {
+  lvl(v) {
     return (
       {
         "early-childhood": "Early Childhood",
@@ -745,9 +766,9 @@ class MembershipManager {
   }
 }
 
-/* ============================================================
+/* ================================================================
    CONTACT FORM
-   ============================================================ */
+   ================================================================ */
 class ContactForm {
   constructor() {
     this.form = $("#contactForm");
@@ -771,30 +792,37 @@ class ContactForm {
   }
 }
 
-/* ============================================================
-   HELPERS
-   ============================================================ */
-function esc(str = "") {
-  const d = document.createElement("div");
-  d.appendChild(document.createTextNode(str));
-  return d.innerHTML;
+/* ================================================================
+   PARTNER LOGOS HOVER EFFECT
+   ================================================================ */
+function initPartnerHover() {
+  $$(".partner-logo-card").forEach((card) => {
+    card.addEventListener("mouseenter", () =>
+      card.style.setProperty("--hover", "1"),
+    );
+    card.addEventListener("mouseleave", () =>
+      card.style.setProperty("--hover", "0"),
+    );
+  });
 }
 
-/* ============================================================
+/* ================================================================
    INIT
-   ============================================================ */
+   ================================================================ */
 document.addEventListener("DOMContentLoaded", () => {
+  initPreloader();
   new ThemeManager();
   new Navigation();
   new HeroSlider();
+  new CounterAnimation();
   new ScrollReveal();
   new GalleryFilter();
   new ExecutivesTabs();
   new MembershipManager();
   new ContactForm();
-
+  initPartnerHover();
   console.log(
-    "%cPSTCSL v3.0 — loaded ✓",
-    "color:#2d8a57;font-weight:bold;font-size:13px",
+    "%cPSTCSL v4.0 — International Standard ✓",
+    "color:#2d6a4f;font-weight:bold;font-size:13px;",
   );
 });
