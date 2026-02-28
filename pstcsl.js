@@ -1,987 +1,800 @@
-// ==============================================
-// PSTCSL - Private School Teachers Cooperative Society
-// JavaScript Functionality with Dark Mode
-// ==============================================
+/**
+ * PSTCSL — JavaScript v3.0
+ * Fixes: Hero slider animation, theme toggle, all interactions
+ */
 
-// Utility Functions
-const $ = (selector) => document.querySelector(selector);
-const $$ = (selector) => document.querySelectorAll(selector);
+"use strict";
 
-// ==============================================
-// THEME MANAGER
-// ==============================================
+const $ = (s, ctx = document) => ctx.querySelector(s);
+const $$ = (s, ctx = document) => [...ctx.querySelectorAll(s)];
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+function showToast(message, type = "success", duration = 4500) {
+  const toast = $("#toast");
+  if (!toast) return;
+  toast.textContent = (type === "success" ? "✓  " : "✕  ") + message;
+  toast.className = `toast show ${type}`;
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => toast.classList.remove("show"), duration);
+}
+
+/* ============================================================
+   THEME MANAGER
+   ============================================================ */
 class ThemeManager {
   constructor() {
-    this.themeToggle = $("#themeToggle");
-    this.themeIcon = $(".theme-icon");
-    this.currentTheme = this.getStoredTheme();
-
-    this.init();
+    this.btn = $("#themeBtn");
+    this.current = localStorage.getItem("pstcsl_theme") || "light";
+    this.apply(this.current);
+    this.btn?.addEventListener("click", () => this.toggle());
   }
-
-  init() {
-    if (!this.themeToggle) return;
-
-    // Apply stored theme on load
-    this.applyTheme(this.currentTheme);
-
-    // Theme toggle click handler
-    this.themeToggle.addEventListener("click", () => this.toggleTheme());
-  }
-
-  getStoredTheme() {
-    return localStorage.getItem("pstcsl_theme") || "light";
-  }
-
-  storeTheme(theme) {
+  apply(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    this.current = theme;
     localStorage.setItem("pstcsl_theme", theme);
   }
-
-  applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    this.updateIcon(theme);
-    this.currentTheme = theme;
-    this.storeTheme(theme);
-  }
-
-  updateIcon(theme) {
-    if (!this.themeIcon) return;
-
-    if (theme === "dark") {
-      this.themeIcon.textContent = "☀️";
-    } else {
-      this.themeIcon.textContent = "🌙";
-    }
-  }
-
-  toggleTheme() {
-    const newTheme = this.currentTheme === "light" ? "dark" : "light";
-    this.applyTheme(newTheme);
-
-    // Add animation
-    document.body.style.transition = "background-color 0.3s ease";
-    setTimeout(() => {
-      document.body.style.transition = "";
-    }, 300);
+  toggle() {
+    this.apply(this.current === "light" ? "dark" : "light");
   }
 }
 
-// ==============================================
-// NAVIGATION
-// ==============================================
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
 class Navigation {
   constructor() {
-    this.nav = $("#mainNav");
-    this.navToggle = $("#navToggle");
-    this.navMenu = $("#navMenu");
-    this.navLinks = $$(".nav-link");
-
+    this.header = $("#siteHeader");
+    this.navLinks = $("#navLinks");
+    this.hamburger = $("#hamburger");
+    this.links = $$(".nav-link");
+    this.backTop = $("#backTop");
     this.init();
   }
-
   init() {
-    // Mobile menu toggle
-    this.navToggle?.addEventListener("click", () => this.toggleMenu());
-
-    // Smooth scrolling for navigation links
-    this.navLinks.forEach((link) => {
-      link.addEventListener("click", (e) => this.handleLinkClick(e));
+    this.hamburger?.addEventListener("click", () => {
+      const open = this.navLinks.classList.toggle("open");
+      this.hamburger.classList.toggle("open", open);
     });
 
-    // Highlight active section on scroll
-    window.addEventListener("scroll", () => this.highlightActiveSection());
+    this.links.forEach((link) => {
+      link.addEventListener("click", () => {
+        this.navLinks.classList.remove("open");
+        this.hamburger?.classList.remove("open");
+      });
+    });
 
-    // Add shadow on scroll
-    window.addEventListener("scroll", () => this.handleScroll());
-  }
-
-  toggleMenu() {
-    this.navMenu.classList.toggle("active");
-    this.navToggle.classList.toggle("active");
-  }
-
-  handleLinkClick(e) {
-    const href = e.target.getAttribute("href");
-    if (href.startsWith("#")) {
-      e.preventDefault();
-      const target = $(href);
-      if (target) {
-        const offset = 80;
-        const targetPosition = target.offsetTop - offset;
-        window.scrollTo({
-          top: targetPosition,
-          behavior: "smooth",
-        });
-
-        // Close mobile menu if open
-        this.navMenu.classList.remove("active");
-      }
-    }
-  }
-
-  highlightActiveSection() {
-    const sections = $$("section[id]");
-    const scrollPos = window.scrollY + 100;
-
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      const sectionId = section.getAttribute("id");
-
-      if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-        this.navLinks.forEach((link) => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === `#${sectionId}`) {
-            link.classList.add("active");
-          }
-        });
+    // Close menu clicking outside
+    document.addEventListener("click", (e) => {
+      if (
+        this.navLinks.classList.contains("open") &&
+        !e.target.closest(".nav-links") &&
+        !e.target.closest(".hamburger")
+      ) {
+        this.navLinks.classList.remove("open");
+        this.hamburger?.classList.remove("open");
       }
     });
-  }
 
-  handleScroll() {
-    if (window.scrollY > 50) {
-      this.nav.style.boxShadow = "0 2px 30px rgba(71, 183, 111, 0.15)";
-    } else {
-      this.nav.style.boxShadow = "0 2px 20px rgba(71, 183, 111, 0.1)";
-    }
+    // Smooth scroll for ALL anchor links
+    $$('a[href^="#"]').forEach((a) => {
+      a.addEventListener("click", (e) => {
+        const id = a.getAttribute("href");
+        if (id === "#") return;
+        const target = $(id);
+        if (!target) return;
+        e.preventDefault();
+        const top = target.getBoundingClientRect().top + window.scrollY - 72;
+        window.scrollTo({ top, behavior: "smooth" });
+      });
+    });
+
+    this.backTop?.addEventListener("click", () =>
+      window.scrollTo({ top: 0, behavior: "smooth" }),
+    );
+    window.addEventListener("scroll", () => this.onScroll(), { passive: true });
+    this.onScroll();
+  }
+  onScroll() {
+    const y = window.scrollY;
+    this.header?.classList.toggle("scrolled", y > 40);
+    this.backTop?.classList.toggle("visible", y > 300);
+
+    // Active nav link
+    let current = "";
+    $$("section[id]").forEach((s) => {
+      if (s.offsetTop - 100 <= y) current = s.id;
+    });
+    this.links.forEach((l) => {
+      l.classList.toggle("active", l.getAttribute("href") === `#${current}`);
+    });
   }
 }
 
-// ==============================================
-// HERO SLIDER
-// ==============================================
+/* ============================================================
+   HERO SLIDER  —  FIXED
+   Key fix: remove 'active' from old slide FIRST so CSS opacity
+   transition plays, then add to new slide. Also reset the
+   inner text animations by toggling a class trick.
+   ============================================================ */
 class HeroSlider {
   constructor() {
-    this.slides = $$(".slide");
-    this.currentSlide = 0;
-    this.slideInterval = null;
-    this.slideDuration = 5000; // 5 seconds per slide
+    this.slides = $$(".hero-slide");
+    this.dots = $$(".dot");
+    this.prevBtn = $("#sliderPrev");
+    this.nextBtn = $("#sliderNext");
+    this.current = 0;
+    this.timer = null;
+    this.INTERVAL = 5500;
+    this.busy = false;
 
+    if (!this.slides.length) return;
     this.init();
   }
 
   init() {
-    if (this.slides.length === 0) return;
+    // Make sure first slide is active and visible
+    this.slides.forEach((s, i) => s.classList.toggle("active", i === 0));
+    this.dots.forEach((d, i) => d.classList.toggle("active", i === 0));
 
-    this.startSlider();
+    this.prevBtn?.addEventListener("click", () => {
+      this.clear();
+      this.go(this.current - 1);
+      this.start();
+    });
+    this.nextBtn?.addEventListener("click", () => {
+      this.clear();
+      this.go(this.current + 1);
+      this.start();
+    });
+    this.dots.forEach((d, i) => {
+      d.addEventListener("click", () => {
+        this.clear();
+        this.go(i);
+        this.start();
+      });
+    });
+
+    // Pause on hover
+    const wrapper = $(".hero-slider");
+    wrapper?.addEventListener("mouseenter", () => this.clear());
+    wrapper?.addEventListener("mouseleave", () => this.start());
+
+    this.start();
   }
 
-  startSlider() {
-    this.slideInterval = setInterval(() => {
-      this.nextSlide();
-    }, this.slideDuration);
+  go(index) {
+    if (this.busy) return;
+    this.busy = true;
+
+    const total = this.slides.length;
+    const next = ((index % total) + total) % total;
+
+    if (next === this.current) {
+      this.busy = false;
+      return;
+    }
+
+    // Deactivate current
+    const prevSlide = this.slides[this.current];
+    const prevDot = this.dots[this.current];
+
+    // Step 1: remove active from old (fades out)
+    prevSlide.classList.remove("active");
+    prevDot?.classList.remove("active");
+
+    // Step 2: update index
+    this.current = next;
+
+    // Step 3: activate new (fades in, triggers CSS text animations)
+    const newSlide = this.slides[this.current];
+    const newDot = this.dots[this.current];
+
+    // Force reflow so text animations re-trigger on same slide if revisited
+    // We briefly remove 'active' then restore it
+    const innerEls = $$(
+      ".hero-eyebrow, .hero-title, .hero-subtitle, .hero-cta",
+      newSlide,
+    );
+    innerEls.forEach((el) => {
+      el.style.transition = "none";
+      el.style.opacity = "0";
+      el.style.transform = "translateY(18px)";
+    });
+
+    // Small delay lets the old slide fade out before new appears
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        newSlide.classList.add("active");
+        newDot?.classList.add("active");
+
+        // Restore CSS-driven transitions after forcing reflow
+        setTimeout(() => {
+          innerEls.forEach((el) => {
+            el.style.transition = "";
+            el.style.opacity = "";
+            el.style.transform = "";
+          });
+          this.busy = false;
+        }, 80);
+      });
+    });
   }
 
-  nextSlide() {
-    this.slides[this.currentSlide].classList.remove("active");
-    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-    this.slides[this.currentSlide].classList.add("active");
+  start() {
+    this.clear();
+    this.timer = setInterval(() => this.go(this.current + 1), this.INTERVAL);
   }
-
-  goToSlide(index) {
-    this.slides[this.currentSlide].classList.remove("active");
-    this.currentSlide = index;
-    this.slides[this.currentSlide].classList.add("active");
+  clear() {
+    clearInterval(this.timer);
   }
 }
 
-// Add this to the MembershipManager class in pstcsl.js
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+class ScrollReveal {
+  constructor() {
+    const els = $$("[data-reveal]");
+    if (!("IntersectionObserver" in window)) {
+      els.forEach((el) => el.classList.add("revealed"));
+      return;
+    }
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("revealed");
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.07, rootMargin: "0px 0px -30px 0px" },
+    );
+    els.forEach((el) => obs.observe(el));
+  }
+}
 
-// ==============================================
-// ENHANCED MEMBERSHIP MANAGER WITH FILE UPLOADS
-// ==============================================
+/* ============================================================
+   GALLERY FILTER
+   ============================================================ */
+class GalleryFilter {
+  constructor() {
+    this.btns = $$(".gfilter");
+    this.items = $$(".gallery-item");
+    this.btns.forEach((btn) =>
+      btn.addEventListener("click", () => this.filter(btn)),
+    );
+  }
+  filter(btn) {
+    const cat = btn.dataset.filter;
+    this.btns.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    this.items.forEach((item) => {
+      item.classList.toggle(
+        "hidden",
+        cat !== "all" && item.dataset.cat !== cat,
+      );
+    });
+  }
+}
+
+/* ============================================================
+   EXECUTIVES TABS
+   ============================================================ */
+class ExecutivesTabs {
+  constructor() {
+    this.tabs = $$(".exec-tab");
+    this.panels = $$(".tab-panel");
+    this.stateEl = $("#stateSelect");
+    this.lgaState = $("#lgaStateSelect");
+    this.lgaEl = $("#lgaSelect");
+    this.data = this.getData();
+    this.init();
+  }
+  init() {
+    this.tabs.forEach((t) =>
+      t.addEventListener("click", () => this.switchTab(t)),
+    );
+    this.stateEl?.addEventListener("change", (e) =>
+      this.renderState(e.target.value),
+    );
+    this.lgaState?.addEventListener("change", (e) => {
+      this.populateLGAs(e.target.value);
+      this.renderLGA(e.target.value, "");
+    });
+    this.lgaEl?.addEventListener("change", (e) =>
+      this.renderLGA(this.lgaState.value, e.target.value),
+    );
+  }
+  switchTab(tab) {
+    const id = tab.dataset.tab;
+    this.tabs.forEach((t) => t.classList.remove("active"));
+    this.panels.forEach((p) => p.classList.remove("active"));
+    tab.classList.add("active");
+    $(`#tab-${id}`)?.classList.add("active");
+  }
+  renderState(state) {
+    const c = $("#stateExecutives");
+    if (!c) return;
+    if (!state) {
+      c.innerHTML =
+        '<div class="exec-placeholder"><p>Select a state to view its executives.</p></div>';
+      return;
+    }
+    const execs = this.data.state[state];
+    if (!execs?.length) {
+      c.innerHTML =
+        '<div class="exec-placeholder"><p>No executives registered for this state yet.</p></div>';
+      return;
+    }
+    c.innerHTML = execs.map((e) => this.cardHTML(e)).join("");
+  }
+  populateLGAs(state) {
+    if (!this.lgaEl) return;
+    const lgas = this.data.lgas[state] || [];
+    this.lgaEl.innerHTML =
+      '<option value="">Choose an LGA…</option>' +
+      lgas.map((l) => `<option value="${l}">${l}</option>`).join("");
+  }
+  renderLGA(state, lga) {
+    const c = $("#lgaExecutives");
+    if (!c) return;
+    if (!state) {
+      c.innerHTML =
+        '<div class="exec-placeholder"><p>Select a state and LGA.</p></div>';
+      return;
+    }
+    if (!lga) {
+      c.innerHTML =
+        '<div class="exec-placeholder"><p>Select an LGA to view executives.</p></div>';
+      return;
+    }
+    const execs = this.data.lga[`${state}::${lga}`];
+    if (!execs?.length) {
+      c.innerHTML =
+        '<div class="exec-placeholder"><p>No executives registered for this LGA yet.</p></div>';
+      return;
+    }
+    c.innerHTML = execs.map((e) => this.cardHTML(e)).join("");
+  }
+  cardHTML(e) {
+    return `<div class="exec-card">
+      <div class="exec-photo no-photo"><div class="exec-photo-placeholder"><span>${e.name[0]}</span></div></div>
+      <div class="exec-info">
+        <div class="exec-badge">${e.position}</div>
+        <h3>${e.name}</h3>
+        <p>${e.description}</p>
+      </div>
+    </div>`;
+  }
+  getData() {
+    return {
+      state: {
+        lagos: [
+          {
+            name: "Mrs. Olufunke Akinlade",
+            position: "Lagos State President",
+            description:
+              "Leading teacher advocacy across Lagos State with focus on welfare reform.",
+          },
+          {
+            name: "Mr. Tunde Bakare",
+            position: "State Secretary",
+            description:
+              "Coordinating state-level operations and member communications.",
+          },
+          {
+            name: "Mrs. Ngozi Okonkwo",
+            position: "State Treasurer",
+            description: "Managing financial operations for the Lagos chapter.",
+          },
+        ],
+        rivers: [
+          {
+            name: "Dr. Chidi Amadi",
+            position: "Rivers State President",
+            description:
+              "Championing teacher rights and professional development in Rivers State.",
+          },
+          {
+            name: "Mrs. Blessing Wike",
+            position: "State Secretary",
+            description:
+              "Organising advocacy programs and member engagement activities.",
+          },
+        ],
+        kano: [
+          {
+            name: "Malam Yusuf Ibrahim",
+            position: "Kano State President",
+            description:
+              "Promoting educational excellence and teacher welfare in Kano.",
+          },
+          {
+            name: "Mrs. Hauwa Abdullahi",
+            position: "State Secretary",
+            description:
+              "Managing state operations and policy advocacy initiatives.",
+          },
+        ],
+        abuja: [
+          {
+            name: "Dr. Sarah Okafor",
+            position: "FCT President",
+            description:
+              "Leading teacher welfare initiatives in the Federal Capital Territory.",
+          },
+          {
+            name: "Mr. Daniel Ezekiel",
+            position: "FCT Secretary",
+            description:
+              "Coordinating with federal authorities on education policy.",
+          },
+        ],
+      },
+      lgas: {
+        lagos: [
+          "Ikeja",
+          "Surulere",
+          "Alimosho",
+          "Eti-Osa",
+          "Ikorodu",
+          "Lagos Island",
+        ],
+        rivers: ["Port Harcourt", "Obio-Akpor", "Eleme", "Khana", "Bonny"],
+        kano: ["Kano Municipal", "Gwale", "Fagge", "Dala", "Nassarawa"],
+        abuja: [
+          "Municipal Area Council",
+          "Gwagwalada",
+          "Kuje",
+          "Abaji",
+          "Bwari",
+          "Kwali",
+        ],
+      },
+      lga: {
+        "lagos::Ikeja": [
+          {
+            name: "Mr. Ademola Johnson",
+            position: "Ikeja LGA Chairman",
+            description: "Local coordination of teacher welfare programs.",
+          },
+          {
+            name: "Mrs. Funmi Adeyemi",
+            position: "LGA Secretary",
+            description:
+              "Managing local chapter activities and member support.",
+          },
+        ],
+        "lagos::Surulere": [
+          {
+            name: "Mrs. Adeola Bello",
+            position: "Surulere LGA Chairman",
+            description: "Grassroots advocacy for teacher rights and fair pay.",
+          },
+        ],
+        "rivers::Port Harcourt": [
+          {
+            name: "Chief Emmanuel George",
+            position: "Port Harcourt LGA Chairman",
+            description: "Community-level teacher support and advocacy.",
+          },
+          {
+            name: "Mrs. Joy Okoro",
+            position: "LGA Secretary",
+            description: "Local operations and member engagement.",
+          },
+        ],
+      },
+    };
+  }
+}
+
+/* ============================================================
+   MEMBERSHIP MANAGER
+   ============================================================ */
 class MembershipManager {
   constructor() {
     this.form = $("#membershipForm");
     this.membersList = $("#membersList");
-    this.memberCount = $("#memberCount");
+    this.countBadge = $("#memberCount");
     this.searchInput = $("#searchMembers");
     this.filterState = $("#filterState");
-
-    // File input elements
-    this.passportPhotoInput = $("#passportPhoto");
-    this.staffIdInput = $("#staffId");
-    this.idCardInput = $("#idCard");
-
-    this.members = this.loadMembers();
-
+    this.members = this.load();
+    if (!this.form) return;
     this.init();
   }
-
   init() {
-    if (!this.form) return;
-
-    // Form submission
-    this.form.addEventListener("submit", (e) => this.handleSubmit(e));
-
-    // Search and filter
-    this.searchInput?.addEventListener("input", () => this.filterMembers());
-    this.filterState?.addEventListener("change", () => this.filterMembers());
-
     // File upload handlers
-    this.setupFileUpload(this.passportPhotoInput, "passportPreview");
-    this.setupFileUpload(this.staffIdInput, "staffIdPreview");
-    this.setupFileUpload(this.idCardInput, "idCardPreview");
+    [
+      ["passportPhoto", "passportPreview"],
+      ["staffId", "staffIdPreview"],
+      ["idCard", "idCardPreview"],
+    ].forEach(([id, pid]) => this.setupUpload(id, pid));
 
-    // Passport photo consent validation
-    this.setupPhotoConsentValidation();
-
-    // Populate state filter
-    this.populateStateFilter();
-
-    // Display members
-    this.displayMembers();
-  }
-
-  setupFileUpload(input, previewId) {
-    if (!input) return;
-
-    input.addEventListener("change", (e) => {
-      const file = e.target.files[0];
-      const preview = $(`#${previewId}`);
-
-      if (!preview) return;
-
-      if (file) {
-        // Validate file size (5MB max)
-        if (file.size > 5 * 1024 * 1024) {
-          this.showNotification("File size must be less than 5MB", "error");
-          input.value = "";
-          return;
-        }
-
-        // Update file label
-        const label = input.nextElementSibling;
-        const fileText = label.querySelector(".file-text");
-        if (fileText) {
-          fileText.textContent = file.name;
-        }
-
-        // Show preview for images
-        if (file.type.startsWith("image/")) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            preview.innerHTML = `
-              <div class="file-preview-info">
-                <span class="file-preview-name">📎 ${file.name}</span>
-                <span class="file-remove" onclick="this.closest('.file-upload-wrapper').querySelector('.file-input').value=''; this.closest('.file-preview').classList.remove('active'); this.closest('.file-preview').innerHTML='';">✕</span>
-              </div>
-              <img src="${e.target.result}" alt="Preview" />
-            `;
-            preview.classList.add("active");
-          };
-          reader.readAsDataURL(file);
-        } else {
-          preview.innerHTML = `
-            <div class="file-preview-info">
-              <span class="file-preview-name">📎 ${file.name}</span>
-              <span class="file-remove" onclick="this.closest('.file-upload-wrapper').querySelector('.file-input').value=''; this.closest('.file-preview').classList.remove('active'); this.closest('.file-preview').innerHTML='';">✕</span>
-            </div>
-          `;
-          preview.classList.add("active");
-        }
-      }
-    });
-  }
-
-  setupPhotoConsentValidation() {
-    const passportPhoto = $("#passportPhoto");
-    const photoConsent = $("#photoConsent");
-
-    if (!passportPhoto || !photoConsent) return;
-
-    // If photo is uploaded, consent must be checked
-    this.form.addEventListener("submit", (e) => {
-      if (passportPhoto.files.length > 0 && !photoConsent.checked) {
+    // Drag & drop
+    $$(".upload-zone").forEach((zone) => {
+      zone.addEventListener("dragover", (e) => {
         e.preventDefault();
-        this.showNotification(
-          "Please provide consent for using your passport photograph",
-          "error",
-        );
-        photoConsent.focus();
+        zone.classList.add("drag-over");
+      });
+      zone.addEventListener("dragleave", () =>
+        zone.classList.remove("drag-over"),
+      );
+      zone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        zone.classList.remove("drag-over");
+        const input = zone.querySelector(".upload-input");
+        if (!input || !e.dataTransfer.files.length) return;
+        const dt = new DataTransfer();
+        dt.items.add(e.dataTransfer.files[0]);
+        input.files = dt.files;
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+    });
+
+    this.form.addEventListener("submit", (e) => this.handleSubmit(e));
+    this.searchInput?.addEventListener("input", () => this.render());
+    this.filterState?.addEventListener("change", () => this.render());
+    this.populateStateFilter();
+    this.render();
+  }
+
+  setupUpload(inputId, previewId) {
+    const input = $(`#${inputId}`);
+    const preview = $(`#${previewId}`);
+    if (!input || !preview) return;
+    input.addEventListener("change", () => {
+      const file = input.files[0];
+      preview.innerHTML = "";
+      if (!file) return;
+      if (file.size > 5 * 1024 * 1024) {
+        showToast("File too large — maximum size is 5MB.", "error");
+        input.value = "";
+        return;
+      }
+      const renderPreview = (src) => {
+        const isImg = file.type.startsWith("image/");
+        preview.innerHTML = `
+          <div class="preview-item">
+            ${isImg ? `<img src="${src}" alt="Preview" />` : ""}
+            <span>${esc(file.name.length > 26 ? file.name.slice(0, 26) + "…" : file.name)}</span>
+            <button type="button" class="preview-remove" aria-label="Remove file">✕</button>
+          </div>`;
+        preview
+          .querySelector(".preview-remove")
+          ?.addEventListener("click", () => {
+            input.value = "";
+            preview.innerHTML = "";
+          });
+      };
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = (e) => renderPreview(e.target.result);
+        reader.readAsDataURL(file);
+      } else {
+        renderPreview("");
       }
     });
+  }
+
+  validate() {
+    let valid = true;
+    // Clear previous errors
+    $$(".field-error", this.form).forEach((e) => (e.textContent = ""));
+    $$(".error", this.form).forEach((e) => e.classList.remove("error"));
+
+    this.form.querySelectorAll("[required]").forEach((field) => {
+      if (field.type === "checkbox") {
+        if (!field.checked) valid = false; // handled separately
+        return;
+      }
+      if (!field.value.trim()) {
+        valid = false;
+        field.classList.add("error");
+        const err = field.closest(".field")?.querySelector(".field-error");
+        if (err) err.textContent = "This field is required.";
+      }
+    });
+
+    const email = $("#email");
+    if (email?.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+      valid = false;
+      email.classList.add("error");
+      const err = email.closest(".field")?.querySelector(".field-error");
+      if (err) err.textContent = "Please enter a valid email address.";
+    }
+
+    const passport = $("#passportPhoto");
+    const consent = $("#photoConsent");
+    if (passport?.files.length && !consent?.checked) {
+      showToast("Please give consent to use your passport photo.", "error");
+      valid = false;
+    }
+
+    const terms = $("#termsAccept");
+    if (!terms?.checked) {
+      showToast("Please accept the Terms and Conditions to proceed.", "error");
+      valid = false;
+    }
+
+    if (!valid && !$(".field.error")) {
+      // scroll to first error
+      const firstError = this.form.querySelector(".error");
+      firstError?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    return valid;
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    if (!this.validate()) return;
 
-    const formData = new FormData(this.form);
-
-    // Create member object with all data
+    const fd = new FormData(this.form);
     const member = {
       id: Date.now(),
-      fullName: formData.get("fullName"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      teachingLevel: formData.get("teachingLevel"),
-      state: formData.get("state"),
-      lga: formData.get("lga"),
-      school: formData.get("school"),
-      yearsExperience: formData.get("yearsExperience"),
-      qualification: formData.get("qualification"),
-      trcn: formData.get("trcn"),
-      idType: formData.get("idType"),
-      idNumber: formData.get("idNumber"),
-      photoConsent: formData.get("photoConsent") === "on",
-      hasPassportPhoto: $("#passportPhoto").files.length > 0,
-      hasStaffId: $("#staffId").files.length > 0,
-      hasIdCard: $("#idCard").files.length > 0,
-      registrationDate: new Date().toISOString(),
+      fullName: fd.get("fullName"),
+      email: fd.get("email"),
+      phone: fd.get("phone"),
+      teachingLevel: fd.get("teachingLevel"),
+      state: fd.get("state"),
+      lga: fd.get("lga"),
+      school: fd.get("school"),
+      yearsExperience: fd.get("yearsExperience"),
+      qualification: fd.get("qualification"),
+      trcn: fd.get("trcn"),
+      idType: fd.get("idType"),
+      idNumber: fd.get("idNumber"),
+      registeredAt: new Date().toISOString(),
     };
 
-    // In a real application, you would upload the files to a server here
-    // For now, we'll just store the metadata
-
     this.members.push(member);
-    this.saveMembers();
-    this.displayMembers();
+    this.save();
+    this.render();
+    this.populateStateFilter();
+
     this.form.reset();
+    $$(".upload-preview", this.form).forEach((p) => (p.innerHTML = ""));
+    $$(".field-error", this.form).forEach((e) => (e.textContent = ""));
 
-    // Reset file previews
-    ["passportPreview", "staffIdPreview", "idCardPreview"].forEach((id) => {
-      const preview = $(`#${id}`);
-      if (preview) {
-        preview.innerHTML = "";
-        preview.classList.remove("active");
-      }
-    });
-
-    // Reset file labels
-    document.querySelectorAll(".file-text").forEach((el) => {
-      const inputId = el.closest("label").getAttribute("for");
-      if (inputId === "passportPhoto") {
-        el.textContent = "Choose passport photo";
-      } else if (inputId === "staffId") {
-        el.textContent = "Choose staff ID card";
-      } else if (inputId === "idCard") {
-        el.textContent = "Choose ID card";
-      }
-    });
-
-    // Show success message
-    this.showNotification(
-      "Registration successful! Welcome to PSTCSL. Your application is being processed.",
+    showToast(
+      `Welcome, ${member.fullName.split(" ")[0]}! Registration successful 🎉`,
     );
+
+    const panel = $(".members-panel");
+    panel?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  loadMembers() {
-    const stored = localStorage.getItem("pstcsl_members");
-    return stored ? JSON.parse(stored) : [];
-  }
+  render() {
+    const search = (this.searchInput?.value || "").toLowerCase().trim();
+    const state = this.filterState?.value || "";
 
-  saveMembers() {
-    localStorage.setItem("pstcsl_members", JSON.stringify(this.members));
-  }
+    const filtered = this.members.filter(
+      (m) =>
+        (!search ||
+          m.fullName.toLowerCase().includes(search) ||
+          m.school.toLowerCase().includes(search) ||
+          m.state.toLowerCase().includes(search)) &&
+        (!state || m.state === state),
+    );
 
-  displayMembers(membersToShow = null) {
-    const members = membersToShow || this.members;
+    if (this.countBadge) this.countBadge.textContent = this.members.length;
 
-    if (members.length === 0) {
+    if (!filtered.length) {
       this.membersList.innerHTML = `
-        <div class="empty-state">
-          <p>No members registered yet. Be the first to join!</p>
-        </div>
-      `;
-      this.memberCount.textContent = "0";
+        <div class="empty-members">
+          <div class="empty-icon">${this.members.length ? "🔍" : "🏫"}</div>
+          <p>${this.members.length ? "No members match your search." : "No members yet — be the first to join!"}</p>
+        </div>`;
       return;
     }
 
-    this.membersList.innerHTML = members
+    this.membersList.innerHTML = filtered
       .map(
-        (member) => `
-        <div class="member-card">
-          <h4>${member.fullName}</h4>
-          <div class="member-info">
-            <span>📍 ${member.state}</span>
-            <span>🏫 ${member.school}</span>
-            <span>📚 ${this.formatTeachingLevel(member.teachingLevel)}</span>
-            <span>🎓 ${member.qualification}</span>
-            <span>⏱️ ${member.yearsExperience} years</span>
-            ${member.hasPassportPhoto ? "<span>📸 Photo</span>" : ""}
-            <span>✅ Verified</span>
-          </div>
+        (m) => `
+      <div class="member-card">
+        <h4>${esc(m.fullName)}</h4>
+        <div class="member-tags">
+          <span class="member-tag">📍 ${esc(m.state)}</span>
+          <span class="member-tag">🏫 ${esc(m.school)}</span>
+          <span class="member-tag">📚 ${this.levelLabel(m.teachingLevel)}</span>
+          <span class="member-tag">🎓 ${esc(m.qualification)}</span>
+          <span class="member-tag">✅ Verified</span>
         </div>
-      `,
+      </div>`,
       )
       .join("");
-
-    this.memberCount.textContent = members.length;
-  }
-
-  filterMembers() {
-    const searchTerm = this.searchInput.value.toLowerCase();
-    const stateFilter = this.filterState.value;
-
-    const filtered = this.members.filter((member) => {
-      const matchesSearch =
-        member.fullName.toLowerCase().includes(searchTerm) ||
-        member.school.toLowerCase().includes(searchTerm) ||
-        member.state.toLowerCase().includes(searchTerm);
-
-      const matchesState = !stateFilter || member.state === stateFilter;
-
-      return matchesSearch && matchesState;
-    });
-
-    this.displayMembers(filtered);
   }
 
   populateStateFilter() {
     if (!this.filterState) return;
-
+    const cur = this.filterState.value;
     const states = [...new Set(this.members.map((m) => m.state))].sort();
-
-    states.forEach((state) => {
-      const option = document.createElement("option");
-      option.value = state;
-      option.textContent = state;
-      this.filterState.appendChild(option);
-    });
+    this.filterState.innerHTML =
+      '<option value="">All States</option>' +
+      states
+        .map(
+          (s) =>
+            `<option value="${s}"${s === cur ? " selected" : ""}>${s}</option>`,
+        )
+        .join("");
   }
 
-  formatTeachingLevel(level) {
-    const levels = {
-      "early-childhood": "Early Childhood",
-      primary: "Primary",
-      secondary: "Secondary",
-    };
-    return levels[level] || level;
-  }
-
-  showNotification(message, type = "success") {
-    const notification = document.createElement("div");
-    const bgColor =
-      type === "error"
-        ? "linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)"
-        : "linear-gradient(135deg, #47b76f 0%, #6ed199 100%)";
-
-    notification.style.cssText = `
-      position: fixed;
-      top: 100px;
-      right: 20px;
-      background: ${bgColor};
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(71, 183, 111, 0.3);
-      z-index: 10000;
-      animation: slideIn 0.3s ease-out;
-      max-width: 400px;
-    `;
-    notification.textContent = message;
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-      notification.style.animation = "slideOut 0.3s ease-out";
-      setTimeout(() => notification.remove(), 300);
-    }, 5000);
-  }
-}
-
-// ==============================================
-// GALLERY
-// ==============================================
-class Gallery {
-  constructor() {
-    this.filterBtns = $$(".filter-btn");
-    this.galleryItems = $$(".gallery-item");
-
-    this.init();
-  }
-
-  init() {
-    if (this.filterBtns.length === 0) return;
-
-    this.filterBtns.forEach((btn) => {
-      btn.addEventListener("click", () => this.filterGallery(btn));
-    });
-  }
-
-  filterGallery(btn) {
-    const filter = btn.getAttribute("data-filter");
-
-    // Update active button
-    this.filterBtns.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    // Filter items
-    this.galleryItems.forEach((item) => {
-      const category = item.getAttribute("data-category");
-
-      if (filter === "all" || category === filter) {
-        item.classList.remove("hidden");
-        item.style.animation = "fadeIn 0.5s ease-in";
-      } else {
-        item.classList.add("hidden");
-      }
-    });
-  }
-}
-
-// ==============================================
-// EXECUTIVES TABS
-// ==============================================
-class ExecutivesTabs {
-  constructor() {
-    this.tabBtns = $$(".tab-btn");
-    this.tabContents = $$(".tab-content");
-    this.stateSelect = $("#stateSelect");
-    this.lgaStateSelect = $("#lgaStateSelect");
-    this.lgaSelect = $("#lgaSelect");
-
-    this.stateExecutives = this.getStateExecutives();
-    this.lgaExecutives = this.getLGAExecutives();
-    this.lgasByState = this.getLGAsByState();
-
-    this.init();
-  }
-
-  init() {
-    if (this.tabBtns.length === 0) return;
-
-    // Tab switching
-    this.tabBtns.forEach((btn) => {
-      btn.addEventListener("click", () => this.switchTab(btn));
-    });
-
-    // State executive selector
-    this.stateSelect?.addEventListener("change", (e) =>
-      this.displayStateExecutives(e.target.value),
+  levelLabel(v) {
+    return (
+      {
+        "early-childhood": "Early Childhood",
+        primary: "Primary",
+        secondary: "Secondary",
+      }[v] ||
+      v ||
+      "—"
     );
-
-    // LGA executive selectors
-    this.lgaStateSelect?.addEventListener("change", (e) => {
-      this.populateLGADropdown(e.target.value);
-      this.displayLGAExecutives(e.target.value, "");
-    });
-
-    this.lgaSelect?.addEventListener("change", (e) => {
-      const state = this.lgaStateSelect.value;
-      this.displayLGAExecutives(state, e.target.value);
-    });
   }
-
-  switchTab(btn) {
-    const tabId = btn.getAttribute("data-tab");
-
-    // Update active tab button
-    this.tabBtns.forEach((b) => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    // Show corresponding content
-    this.tabContents.forEach((content) => {
-      content.classList.remove("active");
-      if (content.id === tabId) {
-        content.classList.add("active");
-      }
-    });
-  }
-
-  displayStateExecutives(state) {
-    const container = $("#stateExecutives");
-    if (!container || !state) {
-      container.innerHTML =
-        '<div class="empty-state"><p>Select a state to view executive members</p></div>';
-      return;
+  load() {
+    try {
+      return JSON.parse(localStorage.getItem("pstcsl_members") || "[]");
+    } catch {
+      return [];
     }
-
-    const executives = this.stateExecutives[state] || [];
-
-    if (executives.length === 0) {
-      container.innerHTML =
-        '<div class="empty-state"><p>No executives registered for this state yet.</p></div>';
-      return;
-    }
-
-    container.innerHTML = executives
-      .map(
-        (exec) => `
-            <div class="executive-card">
-                <div class="executive-image">
-                    <div class="image-placeholder">
-                        <span>👤</span>
-                    </div>
-                </div>
-                <div class="executive-info">
-                    <h3>${exec.name}</h3>
-                    <p class="position">${exec.position}</p>
-                    <p class="description">${exec.description}</p>
-                </div>
-            </div>
-        `,
-      )
-      .join("");
   }
-
-  populateLGADropdown(state) {
-    if (!this.lgaSelect || !state) {
-      this.lgaSelect.innerHTML = '<option value="">Choose an LGA...</option>';
-      return;
-    }
-
-    const lgas = this.lgasByState[state] || [];
-
-    this.lgaSelect.innerHTML =
-      '<option value="">Choose an LGA...</option>' +
-      lgas.map((lga) => `<option value="${lga}">${lga}</option>`).join("");
-  }
-
-  displayLGAExecutives(state, lga) {
-    const container = $("#lgaExecutives");
-    if (!container || !state) {
-      container.innerHTML =
-        '<div class="empty-state"><p>Select a state and LGA to view executive members</p></div>';
-      return;
-    }
-
-    if (!lga) {
-      container.innerHTML =
-        '<div class="empty-state"><p>Select an LGA to view executive members</p></div>';
-      return;
-    }
-
-    const key = `${state}-${lga}`;
-    const executives = this.lgaExecutives[key] || [];
-
-    if (executives.length === 0) {
-      container.innerHTML =
-        '<div class="empty-state"><p>No executives registered for this LGA yet.</p></div>';
-      return;
-    }
-
-    container.innerHTML = executives
-      .map(
-        (exec) => `
-            <div class="executive-card">
-                <div class="executive-image">
-                    <div class="image-placeholder">
-                        <span>👤</span>
-                    </div>
-                </div>
-                <div class="executive-info">
-                    <h3>${exec.name}</h3>
-                    <p class="position">${exec.position}</p>
-                    <p class="description">${exec.description}</p>
-                </div>
-            </div>
-        `,
-      )
-      .join("");
-  }
-
-  getStateExecutives() {
-    // Sample data - replace with actual data
-    return {
-      lagos: [
-        {
-          name: "Mrs. Olufunke Akinlade",
-          position: "Lagos State President",
-          description:
-            "Leading teacher advocacy initiatives across Lagos State with focus on welfare reform.",
-        },
-        {
-          name: "Mr. Tunde Bakare",
-          position: "State Secretary",
-          description:
-            "Coordinating state-level operations and member communications.",
-        },
-        {
-          name: "Mrs. Ngozi Okonkwo",
-          position: "State Treasurer",
-          description: "Managing financial operations for Lagos State chapter.",
-        },
-      ],
-      rivers: [
-        {
-          name: "Dr. Chidi Amadi",
-          position: "Rivers State President",
-          description:
-            "Championing teacher rights and professional development in Rivers State.",
-        },
-        {
-          name: "Mrs. Blessing Wike",
-          position: "State Secretary",
-          description:
-            "Organizing advocacy programs and member engagement activities.",
-        },
-      ],
-      kano: [
-        {
-          name: "Malam Yusuf Ibrahim",
-          position: "Kano State President",
-          description:
-            "Promoting educational excellence and teacher welfare in Kano State.",
-        },
-        {
-          name: "Mrs. Hauwa Abdullahi",
-          position: "State Secretary",
-          description:
-            "Managing state operations and policy advocacy initiatives.",
-        },
-      ],
-      abuja: [
-        {
-          name: "Dr. Sarah Okafor",
-          position: "FCT President",
-          description:
-            "Leading teacher welfare initiatives in the Federal Capital Territory.",
-        },
-        {
-          name: "Mr. Daniel Ezekiel",
-          position: "FCT Secretary",
-          description:
-            "Coordinating with federal authorities on policy matters.",
-        },
-      ],
-    };
-  }
-
-  getLGAExecutives() {
-    // Sample data - replace with actual data
-    return {
-      "lagos-Ikeja": [
-        {
-          name: "Mr. Ademola Johnson",
-          position: "Ikeja LGA Chairman",
-          description: "Local coordination of teacher welfare programs.",
-        },
-        {
-          name: "Mrs. Funmi Adeyemi",
-          position: "LGA Secretary",
-          description: "Managing local chapter activities and member support.",
-        },
-      ],
-      "lagos-Surulere": [
-        {
-          name: "Dr. Bola Tinubu",
-          position: "Surulere LGA Chairman",
-          description: "Leading grassroots advocacy for teacher rights.",
-        },
-      ],
-      "rivers-Port Harcourt": [
-        {
-          name: "Chief Emmanuel George",
-          position: "Port Harcourt LGA Chairman",
-          description: "Community-level teacher support and advocacy.",
-        },
-        {
-          name: "Mrs. Joy Okoro",
-          position: "LGA Secretary",
-          description: "Local operations and member engagement.",
-        },
-      ],
-    };
-  }
-
-  getLGAsByState() {
-    // Sample data - replace with actual data
-    return {
-      lagos: ["Ikeja", "Surulere", "Alimosho", "Eti-Osa", "Ikorodu"],
-      rivers: ["Port Harcourt", "Obio-Akpor", "Eleme", "Khana", "Bonny"],
-      kano: ["Kano Municipal", "Gwale", "Fagge", "Dala", "Nassarawa"],
-      abuja: [
-        "Municipal Area Council",
-        "Gwagwalada",
-        "Kuje",
-        "Abaji",
-        "Bwari",
-        "Kwali",
-      ],
-    };
+  save() {
+    localStorage.setItem("pstcsl_members", JSON.stringify(this.members));
   }
 }
 
-// ==============================================
-// CONTACT FORM
-// ==============================================
+/* ============================================================
+   CONTACT FORM
+   ============================================================ */
 class ContactForm {
   constructor() {
     this.form = $("#contactForm");
-    this.init();
+    this.form?.addEventListener("submit", (e) => this.handleSubmit(e));
   }
-
-  init() {
-    if (!this.form) return;
-
-    this.form.addEventListener("submit", (e) => this.handleSubmit(e));
-  }
-
   handleSubmit(e) {
     e.preventDefault();
-
-    const formData = new FormData(this.form);
-    const message = {
-      name: formData.get("contactName"),
-      email: formData.get("contactEmail"),
-      phone: formData.get("contactPhone"),
-      subject: formData.get("contactSubject"),
-      message: formData.get("contactMessage"),
-      timestamp: new Date().toISOString(),
-    };
-
-    // Here you would typically send this to a server
-    console.log("Contact form submission:", message);
-
-    // Show success message
-    this.showNotification(
-      "Thank you for your message! We will respond shortly.",
-    );
-
-    // Reset form
-    this.form.reset();
-  }
-
-  showNotification(message) {
-    const notification = document.createElement("div");
-    notification.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: linear-gradient(135deg, #47b76f 0%, #6ed199 100%);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(71, 183, 111, 0.3);
-            z-index: 10000;
-            animation: slideIn 0.3s ease-out;
-        `;
-    notification.textContent = message;
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-      notification.style.animation = "slideOut 0.3s ease-out";
-      setTimeout(() => notification.remove(), 300);
-    }, 3000);
-  }
-}
-
-// ==============================================
-// ANIMATIONS ON SCROLL
-// ==============================================
-class ScrollAnimations {
-  constructor() {
-    this.animatedElements = $$("[data-animate]");
-    this.init();
-  }
-
-  init() {
-    if ("IntersectionObserver" in window) {
-      this.observer = new IntersectionObserver(
-        (entries) => this.handleIntersection(entries),
-        { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
-      );
-
-      this.animatedElements.forEach((el) => this.observer.observe(el));
+    const btn = $('button[type="submit"]', this.form);
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Sending…";
     }
-  }
-
-  handleIntersection(entries) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("animated");
-        this.observer.unobserve(entry.target);
+    setTimeout(() => {
+      this.form.reset();
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = "Send Message";
       }
-    });
+      showToast("Thank you! We'll get back to you shortly.");
+    }, 1200);
   }
 }
 
-// ==============================================
-// ADD CSS ANIMATIONS
-// ==============================================
-const addAnimationStyles = () => {
-  const style = document.createElement("style");
-  style.textContent = `
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-    `;
-  document.head.appendChild(style);
-};
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function esc(str = "") {
+  const d = document.createElement("div");
+  d.appendChild(document.createTextNode(str));
+  return d.innerHTML;
+}
 
-// ==============================================
-// INITIALIZE ALL COMPONENTS
-// ==============================================
+/* ============================================================
+   INIT
+   ============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
-  // Add animation styles
-  addAnimationStyles();
-
-  // Initialize theme manager first
   new ThemeManager();
-
-  // Initialize all other components
   new Navigation();
   new HeroSlider();
-  new MembershipManager();
-  new Gallery();
+  new ScrollReveal();
+  new GalleryFilter();
   new ExecutivesTabs();
+  new MembershipManager();
   new ContactForm();
-  new ScrollAnimations();
 
-  // Smooth scroll for all anchor links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      const href = this.getAttribute("href");
-      if (href !== "#" && document.querySelector(href)) {
-        e.preventDefault();
-        const target = document.querySelector(href);
-        const offset = 80;
-        const targetPosition = target.offsetTop - offset;
-
-        window.scrollTo({
-          top: targetPosition,
-          behavior: "smooth",
-        });
-      }
-    });
-  });
-
-  console.log("PSTCSL Website Initialized Successfully with Dark Mode");
+  console.log(
+    "%cPSTCSL v3.0 — loaded ✓",
+    "color:#2d8a57;font-weight:bold;font-size:13px",
+  );
 });
-
-// ==============================================
-// EXPORT FOR TESTING (optional)
-// ==============================================
-if (typeof module !== "undefined" && module.exports) {
-  module.exports = {
-    ThemeManager,
-    Navigation,
-    HeroSlider,
-    MembershipManager,
-    Gallery,
-    ExecutivesTabs,
-    ContactForm,
-  };
-}

@@ -1,714 +1,917 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Private School Teachers Cooperative Society - Championing Teacher Welfare, Rights, and Educational Excellence in Nigeria"
+      content="Private School Teachers Cooperative Society — Championing Teacher Welfare, Rights, and Educational Excellence in Nigeria."
     />
-    <title>PSTCSL - Private School Teachers Cooperative Society</title>
-    <link rel="stylesheet" href="pstcsl.css" />
+    <title>PSTCSL — Private School Teachers Cooperative Society</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="pstcsl.css" />
   </head>
   <body>
-    <!-- Navigation -->
-    <nav class="nav" id="mainNav">
-      <div class="nav-container">
-        <div class="nav-brand">
-          <img
-            src="images/pstcsl logo1.png"
-            alt="PSTCSL Logo"
-            width="100"
-            height="1000"
-          />
-          <div class="brand-text">
-            <div class="brand-title">Private School Teachers</div>
-            <div class="brand-subtitle">Cooperative Society</div>
+    <!-- ======== NAVIGATION ======== -->
+    <header class="site-header" id="siteHeader">
+      <nav class="nav-inner">
+        <a href="#home" class="brand">
+          <div class="brand-emblem">
+            <img
+              src="images/pstcsl logo1.png"
+              alt="PSTCSL Logo"
+              class="brand-logo-img"
+              onerror="this.style.display = 'none'"
+            />
           </div>
-        </div>
-        <button
-          class="nav-toggle"
-          id="navToggle"
-          aria-label="Toggle navigation"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <ul class="nav-menu" id="navMenu">
-          <li><a href="#home" class="nav-link active">Home</a></li>
-          <li><a href="#about" class="nav-link">About Us</a></li>
+          <div class="brand-text">
+            <span class="brand-acronym">PSTCSL</span>
+            <span class="brand-full"
+              >Private School Teachers Cooperative Society</span
+            >
+          </div>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#membership" class="nav-link">Membership</a></li>
           <li><a href="#gallery" class="nav-link">Gallery</a></li>
           <li><a href="#executives" class="nav-link">Executives</a></li>
           <li><a href="#news" class="nav-link">News</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
-          <li>
-            <button
-              class="theme-toggle"
-              id="themeToggle"
-              aria-label="Toggle theme"
-            >
-              <span class="Dark Mo">Light & Dark Mode</span>
-            </button>
-          </li>
         </ul>
-      </div>
-    </nav>
 
-    <!-- Home Section -->
-    <section id="home" class="section hero-section">
-      <div class="hero-slider">
-        <div class="slide active">
-          <div class="slide-overlay"></div>
-          <img src="images/p1.jpg" alt="Teachers in classroom" />
-          <div class="slide-content">
-            <h1 class="slide-title">Empowering Educators</h1>
-            <p class="slide-text">
-              A Unified Voice for Private School Teachers in Nigeria Building a
-              future where teachers thrive
+        <div class="nav-actions">
+          <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">
+            <span class="theme-icon-light">☀️</span>
+            <span class="theme-icon-dark">🌙</span>
+          </button>
+          <a href="#membership" class="cta-btn">Join Now</a>
+          <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ======== HERO ======== -->
+    <section id="home" class="hero">
+      <div class="hero-slider" id="heroSlider">
+        <div
+          class="hero-slide active"
+          style="
+            --bg: url(&quot;https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80&quot;);
+          "
+        >
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <p class="hero-eyebrow">Uniting Educators Nationwide</p>
+            <h1 class="hero-title">Empowering<br /><em>Every Teacher</em></h1>
+            <p class="hero-subtitle">
+              A unified voice for private school educators across all 36 states
+              of Nigeria
             </p>
+            <div class="hero-cta">
+              <a href="#membership" class="btn-primary">Join PSTCSL</a>
+              <a href="#about" class="btn-outline">Learn More</a>
+            </div>
           </div>
         </div>
-        <div class="slide">
-          <div class="slide-overlay"></div>
-          <img src="images/pstcsl logs2.png" alt="Students learning" />
-          <div class="slide-content">
-            <h1 class="slide-title">Advocacy & Rights</h1>
-            <p class="slide-text">Championing teacher welfare across Nigeria</p>
+        <div class="hero-slide" style="--bg: url(images/p1.jpg)">
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <p class="hero-eyebrow">Advocacy & Rights</p>
+            <h1 class="hero-title">Championing<br /><em>Fair Treatment</em></h1>
+            <p class="hero-subtitle">
+              Securing welfare, dignity, and professional recognition for every
+              private school teacher
+            </p>
+            <div class="hero-cta">
+              <a href="#about" class="btn-primary">Our Mission</a>
+              <a href="#news" class="btn-outline">Latest News</a>
+            </div>
           </div>
         </div>
-        <div class="slide">
-          <div class="slide-overlay"></div>
-          <img
-            src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&h=900&fit=crop"
-            alt="Professional development"
-          />
-          <div class="slide-content">
-            <h1 class="slide-title">Professional Excellence</h1>
-            <p class="slide-text">Committed to educational quality</p>
-          </div>
-        </div>
-        <div class="slide">
-          <div class="slide-overlay"></div>
-          <img src="images/p4.jpg" alt="Teacher collaboration" />
-          <div class="slide-content">
-            <h1 class="slide-title">Unity & Solidarity</h1>
-            <p class="slide-text">Strength through collective action</p>
-          </div>
-        </div>
-        <div class="slide">
-          <div class="slide-overlay"></div>
-          <img src="images/p3.jpg" />
-          <div class="slide-content">
-            <h1 class="slide-title">Social Responsibility</h1>
-            <p class="slide-text">Contributing to national development</p>
+        <div class="hero-slide" style="--bg: url(images/p5.jpg)">
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <p class="hero-eyebrow">Professional Excellence</p>
+            <h1 class="hero-title">Raising the<br /><em>Standard</em></h1>
+            <p class="hero-subtitle">
+              Continuous development, training, and capacity building for
+              Nigeria's finest educators
+            </p>
+            <div class="hero-cta">
+              <a href="#gallery" class="btn-primary">See Our Work</a>
+              <a href="#executives" class="btn-outline">Our Leaders</a>
+            </div>
           </div>
         </div>
       </div>
-      
-          </div>
+
+      <!-- Slider Controls -->
+      <div class="slider-controls">
+        <button class="slider-prev" id="sliderPrev" aria-label="Previous slide">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path
+              d="M13 4L7 10L13 16"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <div class="slider-dots" id="sliderDots">
+          <button class="dot active" data-index="0"></button>
+          <button class="dot" data-index="1"></button>
+          <button class="dot" data-index="2"></button>
+        </div>
+        <button class="slider-next" id="sliderNext" aria-label="Next slide">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path
+              d="M7 4L13 10L7 16"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">7,000+</span>
+          <span class="stat-label">Registered Members</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">36</span>
+          <span class="stat-label">States Covered</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">500+</span>
+          <span class="stat-label">Schools Represented</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Committed to Welfare</span>
         </div>
       </div>
     </section>
 
-    <!-- About Us Section -->
+    <!-- ======== ABOUT ======== -->
     <section id="about" class="section about-section">
       <div class="container">
-        <div class="section-header">
-          <span class="section-label">Who We Are</span>
-          <h2 class="section-title">About PSTCSL</h2>
-          <div class="section-line"></div>
-        </div>
-        <div class="about-content">
-          <div class="about-intro">
-            <p class="lead-text">
+        <div class="about-layout">
+          <div class="about-left" data-reveal>
+            <span class="section-badge">Who We Are</span>
+            <h2 class="section-title">About PSTCSL</h2>
+            <p class="section-lead">
+              <b> EXECUTIVE SUMMARY</b>
+            </p>
+
+            <p class="text-justify">
               The Private School Teachers Cooperative Society (PSTCSL)
               represents a collective of dedicated, qualified, and professional
               private school educators across Nigeria. We are united in our
               commitment to advancing the quality of private education while
-              ensuring that teachers are treated with dignity, fairness, and
-              respect.
+              ensuring that teachers, the cornerstone of any educational system
+              are treated with dignity, fairness, and respect. Private school
+              teachers play a critical role in shaping the future of Nigeria by
+              educating the next generation of leaders, innovators, and
+              citizens. Despite this vital contribution, many private school
+              teachers face systemic challenges including inadequate
+              compensation, poor working conditions, lack of job security,
+              limited access to professional development, and insufficient
+              welfare support. These challenges not only affect teachers'
+              well-being but also compromise the quality of education delivered
+              to our children. This document presents a comprehensive appeal to
+              the Federal Government, State Governments, Local Government
+              Authorities, development partners, educational stakeholders, and
+              civil society organizations to support the establishment of a
+              robust welfare system that addresses the financial, physical,
+              emotional, and professional needs of private school teachers. We
+              advocate for policies, interventions, and support mechanisms that
+              will ensure teachers are motivated, secure, valued, and empowered
+              to deliver excellence in education.
+
+              <b>Our Identity</b>
+              The Private School Teachers Cooperative Society is a registered
+              and legally recognized professional body comprising private school
+              teachers across all levels of education, from early childhood
+              education to secondary schools, operating throughout Nigeria. Our
+              membership includes: •Qualified and certified teachers holding
+              recognized teaching credentials •Experienced educators with years
+              of service in private educational institutions •Subject
+              specialists across various academic disciplines •Early career
+              teachers committed to professional excellence •Educational
+              administrators and coordinators
             </p>
+            <div class="about-pillars">
+              <div class="pillar">
+                <div class="pillar-icon"></div>
+                <div>
+                  <h4>Rights & Advocacy</h4>
+                  <p>
+                    We fight for fair compensation, job security, and labor
+                    rights for every private school teacher.
+                  </p>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-icon"></div>
+                <div>
+                  <h4>Professional Growth</h4>
+                  <p>
+                    Continuous training, certification support, and development
+                    programs for career advancement.
+                  </p>
+                </div>
+              </div>
+              <div class="pillar">
+                <div class="pillar-icon"></div>
+                <div>
+                  <h4>Unity & Solidarity</h4>
+                  <p>
+                    Building strength through collective action, mutual support,
+                    and a strong community network.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="about-grid">
-            <div class="about-card">
-              <div class="card-number">01</div>
-              <h3>Our Identity</h3>
-              <p>
-                A registered and legally recognized professional body comprising
-                private school teachers across all levels of education, from
-                early childhood to secondary schools, operating throughout
-                Nigeria.
-              </p>
-              <ul class="feature-list">
-                <li>Qualified and certified teachers</li>
-                <li>Experienced educators across disciplines</li>
-                <li>Educational administrators and coordinators</li>
-                <li>Early career teachers committed to excellence</li>
-              </ul>
-            </div>
-            <div class="about-card">
-              <div class="card-number">02</div>
-              <h3>The Challenge</h3>
-              <p>Private school teachers face numerous systemic challenges:</p>
-              <ul class="feature-list">
-                <li>Inadequate and irregular compensation</li>
-                <li>Poor working conditions</li>
-                <li>Limited access to healthcare</li>
-                <li>Job insecurity and unfair practices</li>
-                <li>Absence of professional development</li>
-              </ul>
-            </div>
-            <div class="about-card">
-              <div class="card-number">03</div>
-              <h3>Our Advocacy</h3>
-              <p>We champion comprehensive welfare that includes:</p>
-              <ul class="feature-list">
-                <li>Financial security and fair compensation</li>
-                <li>Health insurance and medical support</li>
-                <li>Pension and retirement benefits</li>
-                <li>Professional development opportunities</li>
-                <li>Job security and labor rights protection</li>
-              </ul>
-            </div>
 
-            <div class="mission-card">
-              <div class="mission-icon"></div>
-              <h3>Our Mission</h3>
-              <p>
-                To advocate for and secure comprehensive welfare provisions,
-                fair treatment, and professional recognition for all private
-                school teachers in Nigeria, while promoting excellence in
-                private education and contributing to national development
-                through quality teaching and learning.
-              </p>
-            </div>
+          <div class="about-right" data-reveal>
+            <div class="about-cards">
+              <div class="about-card card-challenge">
+                <div class="card-num">01</div>
+                <h3>The Challenge</h3>
+                <p>
+                  Private school teachers face systemic challenges, inadequate
+                  pay, poor working conditions, limited healthcare access, job
+                  insecurity, and absence of professional development pathways.
+                </p>
+                <ul class="check-list">
+                  <li>Irregular & inadequate compensation</li>
+                  <li>Limited access to healthcare</li>
+                  <li>No pension or retirement benefits</li>
+                  <li>Unfair dismissal practices</li>
+                </ul>
+              </div>
 
-            <div class="mission-card">
-              <div class="mission-icon"></div>
-              <h3>Our Vision</h3>
-              <p>
-                A Nigeria where every private school teacher enjoys dignified
-                working conditions, competitive compensation, professional
-                growth opportunities, and robust welfare support, thereby
-                enabling them to deliver world-class education and contribute
-                meaningfully to national development.
-              </p>
-            </div>
-            <div class="mission-card">
-              <div class="mission-icon"></div>
-              <h3>Our Values</h3>
-              <p>
-                <b>•Professional Excellence:</b> Commitment to the highest
-                standards of teaching practice
-                <b>•Dignity and Respect:</b> Upholding the fundamental rights
-                and dignity of teachers <b>•Unity and Solidarity:</b> Building
-                strength through collective action and mutual support
-                <b>•Transparency and Accountability:</b> Operating with
-                integrity in all our dealings <b>•Social Responsibility:</b>
-                Contributing to community development and national progress
-                <b>•Continuous Improvement:</b> Embracing lifelong learning and
-                professional development
-              </p>
+              <div class="about-card card-mission">
+                <div class="card-num">02</div>
+                <h3>Our Mission</h3>
+                <p>
+                  To advocate for and secure comprehensive welfare provisions,
+                  fair treatment, and professional recognition for all private
+                  school teachers in Nigeria, while promoting excellence in
+                  private education and contributing to national development
+                  through quality teaching and learning.
+                </p>
+              </div>
+
+              <div class="about-card card-vision">
+                <div class="card-num">03</div>
+                <h3>Our Vision</h3>
+                <p>
+                  A Nigeria where every private school teacher enjoys dignified
+                  working conditions, competitive compensation, professional
+                  growth opportunities, and robust welfare support, thereby
+                  enabling them to deliver world-class education and contribute
+                  meaningfully to national development.
+                </p>
+              </div>
+
+              <div class="about-card card-values">
+                <div class="card-num">04</div>
+                <h3>Our Values</h3>
+                <div class="values-grid">
+                  <span class="value-tag"
+                    >Professional Excellence: Commitment to the highest
+                    standards of teaching practice</span
+                  >
+                  <span class="value-tag"
+                    >Dignity and Respect: Upholding the fundamental rights and
+                    dignity of teachers</span
+                  >
+                  <span class="value-tag"
+                    >Unity and Solidarity: Building strength through collective
+                    action and mutual support</span
+                  >
+                  <span class="value-tag"
+                    >Transparency and Accountability: Operating with integrity
+                    in all our dealings</span
+                  >
+                  <span class="value-tag"
+                    >Social Responsibility: Contributing to community
+                    development and national progress</span
+                  >
+                  <span class="value-tag"
+                    >Continuous Improvement: Embracing lifelong learning and
+                    professional development</span
+                  >
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Membership Section -->
+    <!-- ======== MEMBERSHIP ======== -->
     <section id="membership" class="section membership-section">
       <div class="container">
-        <div class="section-header">
-          <span class="section-label">Join Us</span>
+        <div class="section-header center" data-reveal>
+          <span class="section-badge">Join Us</span>
           <h2 class="section-title">Membership Registration</h2>
-          <div class="section-line"></div>
+          <p class="section-desc">
+            Join thousands of educators united in the mission for teacher
+            welfare and professional excellence across Nigeria.
+          </p>
         </div>
 
-        <div class="membership-content">
-          <div class="registration-form-container">
-            <div class="form-intro">
-              <h3>Become a Registers Member</h3>
-              <p>
-                Join thousands of educators advocating for teacher welfare and
-                professional excellence
-              </p>
+        <div class="membership-layout">
+          <!-- Form -->
+          <div class="form-panel" data-reveal>
+            <div class="form-panel-header">
+              <h3>Register as a Member</h3>
+              <p>Complete all fields to become a registered PSTCSL member</p>
             </div>
-            <form id="membershipForm" class="membership-form">
-              <!-- Personal Information -->
-              <div class="form-section">
-                <h4 class="form-section-title">Personal Information</h4>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="fullName">Full Name *</label>
-                    <input type="text" id="fullName" name="fullName" required />
+
+            <form id="membershipForm" novalidate>
+              <!-- Personal Info -->
+              <fieldset class="form-fieldset">
+                <legend class="fieldset-legend">
+                  <span class="legend-num">01</span> Personal Information
+                </legend>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="fullName"
+                      >Full Name <span class="req">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      placeholder="Enter your full name"
+                      required
+                    />
+                    <span class="field-error"></span>
                   </div>
-                  <div class="form-group">
-                    <label for="email">Email Address *</label>
-                    <input type="email" id="email" name="email" required />
+                  <div class="field">
+                    <label for="email"
+                      >Email Address <span class="req">*</span></label
+                    >
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="your@email.com"
+                      required
+                    />
+                    <span class="field-error"></span>
                   </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="phone">Phone Number *</label>
-                    <input type="tel" id="phone" name="phone" required />
+                  <div class="field">
+                    <label for="phone"
+                      >Phone Number <span class="req">*</span></label
+                    >
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="+234 800 000 0000"
+                      required
+                    />
+                    <span class="field-error"></span>
                   </div>
-                  <div class="form-group">
-                    <label for="teachingLevel">Teaching Level *</label>
+                  <div class="field">
+                    <label for="teachingLevel"
+                      >Teaching Level <span class="req">*</span></label
+                    >
                     <select id="teachingLevel" name="teachingLevel" required>
-                      <option value="">Select Level</option>
+                      <option value="">Select level</option>
                       <option value="early-childhood">Early Childhood</option>
                       <option value="primary">Primary</option>
                       <option value="secondary">Secondary</option>
                     </select>
+                    <span class="field-error"></span>
                   </div>
                 </div>
-              </div>
+              </fieldset>
 
-              <!-- Location Information -->
-              <div class="form-section">
-                <h4 class="form-section-title">Location & School Details</h4>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="state">State *</label>
+              <!-- Location -->
+              <fieldset class="form-fieldset">
+                <legend class="fieldset-legend">
+                  <span class="legend-num">02</span> Location & School Details
+                </legend>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="state">State <span class="req">*</span></label>
                     <select id="state" name="state" required>
-                      <option value="">Select State</option>
-                      <option value="Abia">Abia</option>
-                      <option value="Adamawa">Adamawa</option>
-                      <option value="Akwa Ibom">Akwa Ibom</option>
-                      <option value="Anambra">Anambra</option>
-                      <option value="Bauchi">Bauchi</option>
-                      <option value="Bayelsa">Bayelsa</option>
-                      <option value="Benue">Benue</option>
-                      <option value="Borno">Borno</option>
-                      <option value="Cross River">Cross River</option>
-                      <option value="Delta">Delta</option>
-                      <option value="Ebonyi">Ebonyi</option>
-                      <option value="Edo">Edo</option>
-                      <option value="Ekiti">Ekiti</option>
-                      <option value="Enugu">Enugu</option>
-                      <option value="FCT">FCT</option>
-                      <option value="Gombe">Gombe</option>
-                      <option value="Imo">Imo</option>
-                      <option value="Jigawa">Jigawa</option>
-                      <option value="Kaduna">Kaduna</option>
-                      <option value="Kano">Kano</option>
-                      <option value="Katsina">Katsina</option>
-                      <option value="Kebbi">Kebbi</option>
-                      <option value="Kogi">Kogi</option>
-                      <option value="Kwara">Kwara</option>
-                      <option value="Lagos">Lagos</option>
-                      <option value="Nasarawa">Nasarawa</option>
-                      <option value="Niger">Niger</option>
-                      <option value="Ogun">Ogun</option>
-                      <option value="Ondo">Ondo</option>
-                      <option value="Osun">Osun</option>
-                      <option value="Oyo">Oyo</option>
-                      <option value="Plateau">Plateau</option>
-                      <option value="Rivers">Rivers</option>
-                      <option value="Sokoto">Sokoto</option>
-                      <option value="Taraba">Taraba</option>
-                      <option value="Yobe">Yobe</option>
-                      <option value="Zamfara">Zamfara</option>
+                      <option value="">Select state</option>
+                      <option>Abia</option>
+                      <option>Adamawa</option>
+                      <option>Akwa Ibom</option>
+                      <option>Anambra</option>
+                      <option>Bauchi</option>
+                      <option>Bayelsa</option>
+                      <option>Benue</option>
+                      <option>Borno</option>
+                      <option>Cross River</option>
+                      <option>Delta</option>
+                      <option>Ebonyi</option>
+                      <option>Edo</option>
+                      <option>Ekiti</option>
+                      <option>Enugu</option>
+                      <option>FCT</option>
+                      <option>Gombe</option>
+                      <option>Imo</option>
+                      <option>Jigawa</option>
+                      <option>Kaduna</option>
+                      <option>Kano</option>
+                      <option>Katsina</option>
+                      <option>Kebbi</option>
+                      <option>Kogi</option>
+                      <option>Kwara</option>
+                      <option>Lagos</option>
+                      <option>Nasarawa</option>
+                      <option>Niger</option>
+                      <option>Ogun</option>
+                      <option>Ondo</option>
+                      <option>Osun</option>
+                      <option>Oyo</option>
+                      <option>Plateau</option>
+                      <option>Rivers</option>
+                      <option>Sokoto</option>
+                      <option>Taraba</option>
+                      <option>Yobe</option>
+                      <option>Zamfara</option>
                     </select>
+                    <span class="field-error"></span>
                   </div>
-                  <div class="form-group">
-                    <label for="lga">Local Government Area *</label>
-                    <input type="text" id="lga" name="lga" required />
+                  <div class="field">
+                    <label for="lga"
+                      >Local Government Area <span class="req">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="lga"
+                      name="lga"
+                      placeholder="Enter your LGA"
+                      required
+                    />
+                    <span class="field-error"></span>
+                  </div>
+                  <div class="field full-width">
+                    <label for="school"
+                      >School Name <span class="req">*</span></label
+                    >
+                    <input
+                      type="text"
+                      id="school"
+                      name="school"
+                      placeholder="Name of your school"
+                      required
+                    />
+                    <span class="field-error"></span>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="school">School Name *</label>
-                  <input type="text" id="school" name="school" required />
-                </div>
-              </div>
+              </fieldset>
 
-              <!-- Professional Information -->
-              <div class="form-section">
-                <h4 class="form-section-title">Professional Credentials</h4>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="yearsExperience">Years of Experience *</label>
+              <!-- Professional -->
+              <fieldset class="form-fieldset">
+                <legend class="fieldset-legend">
+                  <span class="legend-num">03</span> Professional Credentials
+                </legend>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="yearsExperience"
+                      >Years of Experience <span class="req">*</span></label
+                    >
                     <input
                       type="number"
                       id="yearsExperience"
                       name="yearsExperience"
+                      placeholder="e.g. 5"
                       min="0"
+                      max="50"
                       required
                     />
+                    <span class="field-error"></span>
                   </div>
-                  <div class="form-group">
-                    <label for="qualification">Highest Qualification *</label>
+                  <div class="field">
+                    <label for="qualification"
+                      >Highest Qualification <span class="req">*</span></label
+                    >
                     <select id="qualification" name="qualification" required>
-                      <option value="">Select Qualification</option>
+                      <option value="">Select qualification</option>
                       <option value="NCE">NCE</option>
                       <option value="Bachelor">Bachelor's Degree</option>
                       <option value="Master">Master's Degree</option>
                       <option value="PhD">PhD</option>
                       <option value="Other">Other</option>
                     </select>
+                    <span class="field-error"></span>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label for="trcn"
-                    >Teachers Registration Council Number (TRCN) *</label
-                  >
-                  <input
-                    type="text"
-                    id="trcn"
-                    name="trcn"
-                    placeholder="Enter your TRCN number"
-                    required
-                  />
-                </div>
-              </div>
-
-              <!-- Identification Information -->
-              <div class="form-section">
-                <h4 class="form-section-title">Identification Details</h4>
-                <div class="form-group">
-                  <label for="idType">Select ID Type *</label>
-                  <select id="idType" name="idType" required>
-                    <option value="">Choose ID Type</option>
-                    <option value="nin">National Identity Number (NIN)</option>
-                    <option value="voters">Voter's Card</option>
-                    <option value="national-id">National ID Card</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="idNumber">ID Number *</label>
-                  <input
-                    type="text"
-                    id="idNumber"
-                    name="idNumber"
-                    placeholder="Enter your ID number"
-                    required
-                  />
-                </div>
-              </div>
-
-              <!-- Document Uploads -->
-              <div class="form-section">
-                <h4 class="form-section-title">Document Uploads</h4>
-
-                <!-- Passport Photograph -->
-                <div class="form-group">
-                  <label for="passportPhoto"
-                    >Passport Photograph (Optional)</label
-                  >
-                  <div class="upload-info">
-                    <small
-                      >Your passport photo will be used for your member ID
-                      card. Uploading is optional but recommended.</small
+                  <div class="field full-width">
+                    <label for="trcn"
+                      >TRCN Registration Number
+                      <span class="req">*</span></label
                     >
-                  </div>
-                  <div class="file-upload-wrapper">
                     <input
-                      type="file"
-                      id="passportPhoto"
-                      name="passportPhoto"
-                      accept="image/jpeg,image/jpg,image/png"
-                      class="file-input"
-                    />
-                    <label for="passportPhoto" class="file-label">
-                      <span class="file-icon"></span>
-                      <span class="file-text">Choose passport photo</span>
-                    </label>
-                    <div class="file-preview" id="passportPreview"></div>
-                  </div>
-                  <div class="consent-checkbox">
-                    <input
-                      type="checkbox"
-                      id="photoConsent"
-                      name="photoConsent"
-                    />
-                    <label for="photoConsent">
-                      I consent to the use of my passport photograph for
-                      membership identification purposes
-                    </label>
-                  </div>
-                </div>
-
-                <!-- School Staff ID Card -->
-                <div class="form-group">
-                  <label for="staffId">School Staff Identity Card *</label>
-                  <div class="upload-info">
-                    <small
-                      > Upload a clear photo or scan of your school staff ID
-                      card</small
-                    >
-                  </div>
-                  <div class="file-upload-wrapper">
-                    <input
-                      type="file"
-                      id="staffId"
-                      name="staffId"
-                      accept="image/jpeg,image/jpg,image/png,application/pdf"
-                      class="file-input"
+                      type="text"
+                      id="trcn"
+                      name="trcn"
+                      placeholder="Teachers Registration Council Number"
                       required
                     />
-                    <label for="staffId" class="file-label">
-                      <span class="file-icon"></span>
-                      <span class="file-text">Choose staff ID card</span>
-                    </label>
-                    <div class="file-preview" id="staffIdPreview"></div>
+                    <span class="field-error"></span>
                   </div>
                 </div>
+              </fieldset>
 
-                <!-- Selected ID Card -->
-                <div class="form-group">
-                  <label for="idCard">Upload Selected ID Card *</label>
-                  <div class="upload-info">
-                    <small
-                      > Upload the ID card type you selected above (NIN,
-                      Voter's Card, or National ID)</small
+              <!-- Identification -->
+              <fieldset class="form-fieldset">
+                <legend class="fieldset-legend">
+                  <span class="legend-num">04</span> Identification Details
+                </legend>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="idType"
+                      >ID Type <span class="req">*</span></label
                     >
+                    <select id="idType" name="idType" required>
+                      <option value="">Choose ID type</option>
+                      <option value="nin">
+                        National Identity Number (NIN)
+                      </option>
+                      <option value="voters">Voter's Card</option>
+                      <option value="national-id">National ID Card</option>
+                    </select>
+                    <span class="field-error"></span>
                   </div>
-                  <div class="file-upload-wrapper">
+                  <div class="field">
+                    <label for="idNumber"
+                      >ID Number <span class="req">*</span></label
+                    >
                     <input
-                      type="file"
-                      id="idCard"
-                      name="idCard"
-                      accept="image/jpeg,image/jpg,image/png,application/pdf"
-                      class="file-input"
+                      type="text"
+                      id="idNumber"
+                      name="idNumber"
+                      placeholder="Enter your ID number"
                       required
                     />
-                    <label for="idCard" class="file-label">
-                      <span class="file-icon"></span>
-                      <span class="file-text">Choose ID card</span>
-                    </label>
-                    <div class="file-preview" id="idCardPreview"></div>
+                    <span class="field-error"></span>
                   </div>
                 </div>
+              </fieldset>
 
-                <div class="upload-guidelines">
-                  <h5> Upload Guidelines:</h5>
-                  <ul>
-                    <li>Accepted formats: JPG, JPEG, PNG, PDF</li>
-                    <li>Maximum file size: 5MB per document</li>
-                    <li>Ensure all documents are clear and readable</li>
-                    <li>Personal information on documents should be visible</li>
-                  </ul>
+              <!-- Documents -->
+              <fieldset class="form-fieldset">
+                <legend class="fieldset-legend">
+                  <span class="legend-num">05</span> Document Uploads
+                </legend>
+                <div class="upload-group">
+                  <div class="upload-field">
+                    <label class="upload-label">
+                      Passport Photograph
+                      <span class="optional-tag">Optional</span>
+                    </label>
+                    <p class="upload-hint">
+                      Used for your member ID card. JPG/PNG, max 5MB.
+                    </p>
+                    <div class="upload-zone" id="passportZone">
+                      <input
+                        type="file"
+                        id="passportPhoto"
+                        name="passportPhoto"
+                        accept="image/jpeg,image/jpg,image/png"
+                        class="upload-input"
+                      />
+                      <label for="passportPhoto" class="upload-trigger">
+                        <div class="upload-icon">📸</div>
+                        <div class="upload-text">
+                          <strong>Click to upload</strong> or drag & drop
+                          <span>JPG, PNG up to 5MB</span>
+                        </div>
+                      </label>
+                      <div class="upload-preview" id="passportPreview"></div>
+                    </div>
+                    <div class="consent-row">
+                      <input
+                        type="checkbox"
+                        id="photoConsent"
+                        name="photoConsent"
+                      />
+                      <label for="photoConsent"
+                        >I consent to use of my photograph for membership
+                        identification</label
+                      >
+                    </div>
+                  </div>
+
+                  <div class="upload-field">
+                    <label class="upload-label">
+                      School Staff ID Card <span class="req">*</span>
+                    </label>
+                    <p class="upload-hint">
+                      Clear photo or scan of your school-issued staff ID.
+                      JPG/PNG/PDF, max 5MB.
+                    </p>
+                    <div class="upload-zone" id="staffIdZone">
+                      <input
+                        type="file"
+                        id="staffId"
+                        name="staffId"
+                        accept="image/jpeg,image/jpg,image/png,application/pdf"
+                        class="upload-input"
+                        required
+                      />
+                      <label for="staffId" class="upload-trigger">
+                        <div class="upload-icon">🪪</div>
+                        <div class="upload-text">
+                          <strong>Click to upload</strong> or drag & drop
+                          <span>JPG, PNG, PDF up to 5MB</span>
+                        </div>
+                      </label>
+                      <div class="upload-preview" id="staffIdPreview"></div>
+                    </div>
+                  </div>
+
+                  <div class="upload-field">
+                    <label class="upload-label">
+                      Government-Issued ID <span class="req">*</span>
+                    </label>
+                    <p class="upload-hint">
+                      Upload the ID type selected above (NIN slip, Voter's Card,
+                      or National ID). JPG/PNG/PDF, max 5MB.
+                    </p>
+                    <div class="upload-zone" id="idCardZone">
+                      <input
+                        type="file"
+                        id="idCard"
+                        name="idCard"
+                        accept="image/jpeg,image/jpg,image/png,application/pdf"
+                        class="upload-input"
+                        required
+                      />
+                      <label for="idCard" class="upload-trigger">
+                        <div class="upload-icon">📄</div>
+                        <div class="upload-text">
+                          <strong>Click to upload</strong> or drag & drop
+                          <span>JPG, PNG, PDF up to 5MB</span>
+                        </div>
+                      </label>
+                      <div class="upload-preview" id="idCardPreview"></div>
+                    </div>
+                  </div>
                 </div>
+              </fieldset>
+
+              <!-- Terms -->
+              <div class="terms-row">
+                <input
+                  type="checkbox"
+                  id="termsAccept"
+                  name="termsAccept"
+                  required
+                />
+                <label for="termsAccept"
+                  >I agree to the
+                  <a href="#" class="terms-link">Terms and Conditions</a> and
+                  confirm all information provided is accurate and truthful.
+                  <span class="req">*</span></label
+                >
               </div>
 
-              <!-- Terms and Conditions -->
-              <div class="form-section">
-                <div class="terms-checkbox">
-                  <input
-                    type="checkbox"
-                    id="termsAccept"
-                    name="termsAccept"
-                    required
-                  />
-                  <label for="termsAccept">
-                    I agree to the
-                    <a href="#" class="terms-link">terms and conditions</a> and
-                    confirm that all information provided is accurate *
-                  </label>
-                </div>
-              </div>
-
-              <button type="submit" class="btn-primary">
-                Submit Registration
+              <button type="submit" class="submit-btn" id="submitBtn">
+                <span class="btn-text">Submit Registration</span>
+                <span class="btn-loading" hidden>Processing…</span>
               </button>
             </form>
           </div>
 
-          <div class="members-list-container">
-            <div class="list-header">
+          <!-- Members List -->
+          <aside class="members-panel" data-reveal>
+            <div class="members-panel-header">
               <h3>Registered Members</h3>
-              <div class="member-count">
-                Total: <span id="memberCount">0</span>
-              </div>
+              <div class="member-badge" id="memberCount">0</div>
             </div>
-            <div class="members-filter">
+            <div class="members-search">
               <input
                 type="text"
                 id="searchMembers"
-                placeholder="Search by name, state, or school..."
+                placeholder="Search by name, state or school…"
               />
               <select id="filterState">
                 <option value="">All States</option>
               </select>
             </div>
-            <div id="membersList" class="members-list">
-              <div class="empty-state">
-                <p>No members registered yet. Be the first to join!</p>
+            <div class="members-list" id="membersList">
+              <div class="empty-members">
+                <div class="empty-icon">🏫</div>
+                <p>No members yet. Be the first to join!</p>
               </div>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </section>
 
-    <!-- Gallery Section -->
+    <!-- ======== GALLERY ======== -->
     <section id="gallery" class="section gallery-section">
       <div class="container">
-        <div class="section-header">
-          <span class="section-label">Visual Stories</span>
+        <div class="section-header center" data-reveal>
+          <span class="section-badge">Visual Stories</span>
           <h2 class="section-title">Gallery</h2>
-          <div class="section-line"></div>
+          <p class="section-desc">
+            Moments from our events, training sessions, advocacy campaigns, and
+            community initiatives.
+          </p>
         </div>
 
-        <div class="gallery-filters">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="events">Events</button>
-          <button class="filter-btn" data-filter="training">Training</button>
-          <button class="filter-btn" data-filter="advocacy">Advocacy</button>
-          <button class="filter-btn" data-filter="community">Community</button>
+        <div class="gallery-filters" data-reveal>
+          <button class="gfilter active" data-filter="all">All</button>
+          <button class="gfilter" data-filter="events">Events</button>
+          <button class="gfilter" data-filter="training">Training</button>
+          <button class="gfilter" data-filter="advocacy">Advocacy</button>
+          <button class="gfilter" data-filter="community">Community</button>
         </div>
 
-        <div class="gallery-grid" id="galleryGrid">
-          <div class="gallery-item" data-category="events">
-            <div class="gallery-image">
-              <img src="images/g2.jpg" alt="Annual General Meeting" />
-              <div class="gallery-overlay">
-                <div class="gallery-info">
-                  <h4>Novermber 2023 Games Compitition</h4>
-                  <p>At CHRISTABEL PRIVATE SCHOOLS Abuja,</p>
-                </div>
+        <div class="gallery-grid" id="galleryGrid" data-reveal>
+          <div class="gallery-item" data-cat="events">
+            <div class="gallery-img-wrap">
+              <img
+                src="images/g2.jpg"
+                alt="Games Competition 2023"
+                loading="lazy"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1544717305-2782549b5136?w=600&q=80'
+                "
+              />
+              <div class="gallery-info">
+                <h4>November 2023 Games Competition</h4>
+                <p>At Christabel Private Schools, Abuja</p>
+                <span class="gallery-tag">Events</span>
               </div>
             </div>
           </div>
-          <div class="gallery-grid" id="galleryGrid">
-            <div class="gallery-item" data-category="events">
-              <div class="gallery-image">
-                <img src="images/g3.jpg" alt="Annual General Meeting" />
-                <div class="gallery-overlay">
-                  <div class="gallery-info">
-                    <h4>Novermber 2023 Games Compitition</h4>
-                    <p>At CHRISTABEL PRIVATE SCHOOLS Abuja,</p>
-                  </div>
-                </div>
+          <div class="gallery-item" data-cat="events">
+            <div class="gallery-img-wrap">
+              <img
+                src="images/g3.jpg"
+                alt="Games Competition 2023"
+                loading="lazy"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80'
+                "
+              />
+              <div class="gallery-info">
+                <h4>Sports Day Activities</h4>
+                <p>At Christabel Private Schools, Abuja</p>
+                <span class="gallery-tag">Events</span>
               </div>
             </div>
-            <div class="gallery-grid" id="galleryGrid">
-              <div class="gallery-item" data-category="events">
-                <div class="gallery-image">
-                  <img src="images/g4.jpg" alt="Annual General Meeting" />
-                  <div class="gallery-overlay">
-                    <div class="gallery-info">
-                      <h4>Novermber 2023 Games Compitition</h4>
-                      <p>At CHRISTABEL PRIVATE SCHOOLS Abuja,</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="gallery-grid" id="galleryGrid">
-                <div class="gallery-item" data-category="events">
-                  <div class="gallery-image">
-                    <img src="images/g1.jpg" alt="Annual General Meeting" />
-                    <div class="gallery-overlay">
-                      <div class="gallery-info">
-                        <h4>Novermber 2023 Games Compitition</h4>
-                        <p>At CHRISTABEL PRIVATE SCHOOLS Abuja,</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-          <div class="gallery-item" data-category="training">
-            <div class="gallery-image">
+          </div>
+          <div class="gallery-item" data-cat="events">
+            <div class="gallery-img-wrap">
               <img
-                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&h=400&fit=crop"
+                src="images/g4.jpg"
+                alt="Games Competition 2023"
+                loading="lazy"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80'
+                "
+              />
+              <div class="gallery-info">
+                <h4>Award Ceremony</h4>
+                <p>At Christabel Private Schools, Abuja</p>
+                <span class="gallery-tag">Events</span>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-item" data-cat="events">
+            <div class="gallery-img-wrap">
+              <img
+                src="images/g1.jpg"
+                alt="Annual Meeting"
+                loading="lazy"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1491975474562-1f4e30bc9468?w=600&q=80'
+                "
+              />
+              <div class="gallery-info">
+                <h4>Annual General Meeting</h4>
+                <p>National executives and state delegates</p>
+                <span class="gallery-tag">Events</span>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-item" data-cat="training">
+            <div class="gallery-img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80"
                 alt="Professional Development Workshop"
+                loading="lazy"
               />
-              <div class="gallery-overlay">
-                <div class="gallery-info">
-                  <h4>Professional Development Workshop</h4>
-                  <p>Teachers engaged in digital pedagogy training sessions</p>
-                </div>
+              <div class="gallery-info">
+                <h4>Digital Pedagogy Workshop</h4>
+                <p>Nationwide professional development training</p>
+                <span class="gallery-tag">Training</span>
               </div>
             </div>
           </div>
-          <div class="gallery-item" data-category="advocacy">
-            <div class="gallery-image">
+          <div class="gallery-item" data-cat="advocacy">
+            <div class="gallery-img-wrap">
               <img
-                src="https://images.unsplash.com/photo-1573164574511-73c773193279?w=600&h=400&fit=crop"
-                alt="Policy Advocacy Meeting"
+                src="https://images.unsplash.com/photo-1573164574511-73c773193279?w=600&q=80"
+                alt="Policy Advocacy"
+                loading="lazy"
               />
-              <div class="gallery-overlay">
-                <div class="gallery-info">
-                  <h4>Policy Advocacy Meeting</h4>
-                  <p>
-                    Dialogue with state government on minimum wage
-                    implementation
-                  </p>
-                </div>
+              <div class="gallery-info">
+                <h4>Policy Advocacy Meeting</h4>
+                <p>Dialogue on minimum wage implementation</p>
+                <span class="gallery-tag">Advocacy</span>
               </div>
             </div>
           </div>
-          <div class="gallery-item" data-category="community">
-            <div class="gallery-image">
+          <div class="gallery-item" data-cat="community">
+            <div class="gallery-img-wrap">
               <img
-                src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=400&fit=crop"
+                src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80"
                 alt="Community Outreach"
+                loading="lazy"
               />
-              <div class="gallery-overlay">
-                <div class="gallery-info">
-                  <h4>Community Outreach Program</h4>
-                  <p>
-                    Members providing free educational support to rural
-                    communities
-                  </p>
-                </div>
+              <div class="gallery-info">
+                <h4>Community Outreach Program</h4>
+                <p>Free educational support for rural communities</p>
+                <span class="gallery-tag">Community</span>
               </div>
             </div>
           </div>
-         
-          <div class="gallery-item" data-category="training">
-            <div class="gallery-image">
+          <div class="gallery-item" data-cat="training">
+            <div class="gallery-img-wrap">
               <img
-                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&h=400&fit=crop"
+                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80"
                 alt="Leadership Training"
+                loading="lazy"
               />
-              <div class="gallery-overlay">
-                <div class="gallery-info">
-                  <h4>Leadership Training Program</h4>
-                  <p>
-                    Building capacity for educational leadership and management
-                  </p>
-                </div>
+              <div class="gallery-info">
+                <h4>Leadership Training Program</h4>
+                <p>Building capacity for educational leadership</p>
+                <span class="gallery-tag">Training</span>
               </div>
             </div>
           </div>
-          <div class="gallery-item" data-category="advocacy">
-            <div class="gallery-image">
+          <div class="gallery-item" data-cat="advocacy">
+            <div class="gallery-img-wrap">
               <img
                 src="images/p1.jpg"
                 alt="Press Conference"
+                loading="lazy"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80'
+                "
               />
-              <div class="gallery-overlay">
-                <div class="gallery-info">
-                  <h4>Press Conference on Teacher Rights</h4>
-                  <p>
-                    Launching campaign for comprehensive teacher welfare reform
-                  </p>
-                </div>
+              <div class="gallery-info">
+                <h4>Press Conference on Teacher Rights</h4>
+                <p>Launching comprehensive welfare reform campaign</p>
+                <span class="gallery-tag">Advocacy</span>
               </div>
             </div>
           </div>
-          <div class="gallery-item" data-category="community">
-            <div class="gallery-image">
+          <div class="gallery-item" data-cat="community">
+            <div class="gallery-img-wrap">
               <img
                 src="images/p5.jpg"
                 alt="Member Collaboration"
+                loading="lazy"
+                onerror="
+                  this.src =
+                    'https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=600&q=80'
+                "
               />
-              <div class="gallery-overlay">
-                <div class="gallery-info">
-                  <h4>Member Collaboration Session</h4>
-                  <p>
-                    Teachers sharing best practices and innovative teaching
-                    methods
-                  </p>
-                </div>
+              <div class="gallery-info">
+                <h4>Member Collaboration Session</h4>
+                <p>Sharing best practices and teaching methodologies</p>
+                <span class="gallery-tag">Community</span>
               </div>
             </div>
           </div>
@@ -716,184 +919,187 @@
       </div>
     </section>
 
-    <!-- Executives Section -->
+    <!-- ======== EXECUTIVES ======== -->
     <section id="executives" class="section executives-section">
       <div class="container">
-        <div class="section-header">
-          <span class="section-label">Leadership</span>
+        <div class="section-header center" data-reveal>
+          <span class="section-badge">Leadership</span>
           <h2 class="section-title">Our Executives</h2>
-          <div class="section-line"></div>
+          <p class="section-desc">
+            Dedicated leaders championing teacher welfare at the national,
+            state, and local government levels.
+          </p>
         </div>
 
-        <div class="executives-tabs">
-          <button class="tab-btn active" data-tab="national">
-            National Executive
+        <div class="exec-tabs" data-reveal>
+          <button class="exec-tab active" data-tab="national">
+            National Executives
           </button>
-          <button class="tab-btn" data-tab="state">State Executive</button>
-          <button class="tab-btn" data-tab="lga">LGA Executive</button>
+          <button class="exec-tab" data-tab="state">State Executives</button>
+          <button class="exec-tab" data-tab="lga">LGA Executives</button>
         </div>
 
-        <div class="executives-content">
-          <!-- National Executive -->
-          <div class="tab-content active" id="national">
-            <div class="executives-grid">
-              <div class="executive-card featured">
-                <div class="executive-image">
-                  <img src="images/ol.jpg" alt="Comrade Akhigbe Olumhense - National President" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                  <div class="image-placeholder" style="display: none;">
-                    <span>👤</span>
-                  </div>
-                </div>
-                <div class="executive-info">
-                  <h3>Comrade Akhigbe Olumhense</h3>
-                  <p class="position">National President</p>
-                  <p class="description">
-                    Leading the charge for comprehensive teacher welfare reform
-                    across Nigeria with 20+ years of educational advocacy
-                    experience.
-                  </p>
-                </div>
+        <!-- National -->
+        <div class="tab-panel active" id="tab-national" data-reveal>
+          <div class="exec-grid">
+            <div class="exec-card featured">
+              <div class="exec-photo">
+                <img
+                  src="images/ol.jpg"
+                  alt="Comrade Akhigbe Olumhense"
+                  onerror="this.parentElement.classList.add('no-photo')"
+                />
+                <div class="exec-photo-placeholder"><span>A</span></div>
               </div>
+              <div class="exec-info">
+                <div class="exec-badge">National President</div>
+                <h3>Comrade Akhigbe Olumhense</h3>
+                <p>
+                  Leading the charge for comprehensive teacher welfare reform
+                  across Nigeria with over 20 years of educational advocacy
+                  experience.
+                </p>
+              </div>
+            </div>
 
-              <div class="executive-card">
-                <div class="executive-image">
-                  <div class="image-placeholder">
-                    <span>👤</span>
-                  </div>
-                </div>
-                <div class="executive-info">
-                  <h3>Mrs. Chioma Okafor</h3>
-                  <p class="position">National Vice President</p>
-                  <p class="description">
-                    Coordinating regional advocacy and professional development
-                    initiatives.
-                  </p>
-                </div>
+            <div class="exec-card">
+              <div class="exec-photo no-photo">
+                <div class="exec-photo-placeholder"><span>C</span></div>
               </div>
-              <div class="executive-card">
-                <div class="executive-image">
-                  <div class="image-placeholder">
-                    <span>👤</span>
-                  </div>
-                </div>
-                <div class="executive-info">
-                  <h3>Mr. Ibrahim Musa</h3>
-                  <p class="position">National Secretary</p>
-                  <p class="description">
-                    Managing organizational affairs and member communication.
-                  </p>
-                </div>
+              <div class="exec-info">
+                <div class="exec-badge">National Vice President</div>
+                <h3>Mrs. Chioma Okafor</h3>
+                <p>
+                  Coordinating regional advocacy and professional development
+                  initiatives.
+                </p>
               </div>
-              <div class="executive-card">
-                <div class="executive-image">
-                  <div class="image-placeholder">
-                    <span>👤</span>
-                  </div>
-                </div>
-                <div class="executive-info">
-                  <h3>Mrs. Fatima Bello</h3>
-                  <p class="position">National Treasurer</p>
-                  <p class="description">
-                    Overseeing financial management and welfare fund
-                    administration.
-                  </p>
-                </div>
+            </div>
+
+            <div class="exec-card">
+              <div class="exec-photo no-photo">
+                <div class="exec-photo-placeholder"><span>I</span></div>
               </div>
-              <div class="executive-card">
-                <div class="executive-image">
-                  <div class="image-placeholder">
-                    <span>👤</span>
-                  </div>
-                </div>
-                <div class="executive-info">
-                  <h3>Mr. Emeka Nwosu</h3>
-                  <p class="position">National Publicity Secretary</p>
-                  <p class="description">
-                    Driving awareness campaigns and media relations.
-                  </p>
-                </div>
+              <div class="exec-info">
+                <div class="exec-badge">National Secretary</div>
+                <h3>Mr. Ibrahim Musa</h3>
+                <p>
+                  Managing organizational affairs and member communications.
+                </p>
               </div>
-              <div class="executive-card">
-                <div class="executive-image">
-                  <div class="image-placeholder">
-                    <span>👤</span>
-                  </div>
-                </div>
-                <div class="executive-info">
-                  <h3>Mrs. Blessing Eze</h3>
-                  <p class="position">National Legal Adviser</p>
-                  <p class="description">
-                    Providing legal guidance on labor rights and policy matters.
-                  </p>
-                </div>
+            </div>
+
+            <div class="exec-card">
+              <div class="exec-photo no-photo">
+                <div class="exec-photo-placeholder"><span>F</span></div>
+              </div>
+              <div class="exec-info">
+                <div class="exec-badge">National Treasurer</div>
+                <h3>Mrs. Fatima Bello</h3>
+                <p>
+                  Overseeing financial management and welfare fund
+                  administration.
+                </p>
+              </div>
+            </div>
+
+            <div class="exec-card">
+              <div class="exec-photo no-photo">
+                <div class="exec-photo-placeholder"><span>E</span></div>
+              </div>
+              <div class="exec-info">
+                <div class="exec-badge">Publicity Secretary</div>
+                <h3>Mr. Emeka Nwosu</h3>
+                <p>Driving awareness campaigns and media relations.</p>
+              </div>
+            </div>
+
+            <div class="exec-card">
+              <div class="exec-photo no-photo">
+                <div class="exec-photo-placeholder"><span>B</span></div>
+              </div>
+              <div class="exec-info">
+                <div class="exec-badge">Legal Adviser</div>
+                <h3>Mrs. Blessing Eze</h3>
+                <p>
+                  Providing legal guidance on labor rights and policy matters.
+                </p>
               </div>
             </div>
           </div>
+        </div>
 
-          <!-- State Executive -->
-          <div class="tab-content" id="state">
-            <div class="state-selector">
-              <label for="stateSelect">Select State:</label>
-              <select id="stateSelect" class="state-dropdown">
-                <option value="">Choose a state...</option>
-                <option value="lagos">Lagos State</option>
-                <option value="rivers">Rivers State</option>
-                <option value="kano">Kano State</option>
-                <option value="abuja">FCT Abuja</option>
-              </select>
-            </div>
-            <div id="stateExecutives" class="executives-grid">
-              <div class="empty-state">
-                <p>Select a state to view executive members</p>
-              </div>
+        <!-- State -->
+        <div class="tab-panel" id="tab-state">
+          <div class="state-selector-row">
+            <label for="stateSelect">Select State:</label>
+            <select id="stateSelect" class="state-dropdown">
+              <option value="">Choose a state…</option>
+              <option value="lagos">Lagos State</option>
+              <option value="rivers">Rivers State</option>
+              <option value="kano">Kano State</option>
+              <option value="abuja">FCT Abuja</option>
+            </select>
+          </div>
+          <div class="exec-grid" id="stateExecutives">
+            <div class="exec-placeholder">
+              <p>Select a state to view its executive members.</p>
             </div>
           </div>
+        </div>
 
-          <!-- LGA Executive -->
-          <div class="tab-content" id="lga">
-            <div class="state-selector">
+        <!-- LGA -->
+        <div class="tab-panel" id="tab-lga">
+          <div class="state-selector-row multi">
+            <div class="selector-field">
               <label for="lgaStateSelect">Select State:</label>
               <select id="lgaStateSelect" class="state-dropdown">
-                <option value="">Choose a state...</option>
+                <option value="">Choose a state…</option>
                 <option value="lagos">Lagos State</option>
                 <option value="rivers">Rivers State</option>
                 <option value="kano">Kano State</option>
                 <option value="abuja">FCT Abuja</option>
               </select>
+            </div>
+            <div class="selector-field">
               <label for="lgaSelect">Select LGA:</label>
               <select id="lgaSelect" class="state-dropdown">
-                <option value="">Choose an LGA...</option>
+                <option value="">Choose an LGA…</option>
               </select>
             </div>
-            <div id="lgaExecutives" class="executives-grid">
-              <div class="empty-state">
-                <p>Select a state and LGA to view executive members</p>
-              </div>
+          </div>
+          <div class="exec-grid" id="lgaExecutives">
+            <div class="exec-placeholder">
+              <p>Select a state and LGA to view executive members.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- News Section -->
+    <!-- ======== NEWS ======== -->
     <section id="news" class="section news-section">
       <div class="container">
-        <div class="section-header">
-          <span class="section-label">Latest Updates</span>
+        <div class="section-header center" data-reveal>
+          <span class="section-badge">Latest Updates</span>
           <h2 class="section-title">News & Announcements</h2>
-          <div class="section-line"></div>
+          <p class="section-desc">
+            Stay informed on our advocacy wins, events, and important updates
+            for PSTCSL members.
+          </p>
         </div>
 
-        <div class="news-grid">
-          <article class="news-card featured">
-            <div class="news-image">
+        <div class="news-grid" data-reveal>
+          <article class="news-card news-featured">
+            <div class="news-img-wrap">
               <img
-                src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=500&fit=crop"
+                src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80"
                 alt="Policy Reform"
+                loading="lazy"
               />
-              <span class="news-badge">Breaking News</span>
+              <span class="news-chip breaking">Breaking News</span>
             </div>
-            <div class="news-content">
+            <div class="news-body">
               <time class="news-date">February 10, 2026</time>
               <h3>
                 Major Victory: Minimum Wage Bill for Private School Teachers
@@ -901,94 +1107,98 @@
               <p>
                 After months of intensive advocacy, the Federal Government has
                 agreed to establish a minimum wage framework for private school
-                teachers. This landmark decision will ensure fair compensation
-                across the nation.
+                teachers — a landmark decision ensuring fair compensation
+                nationwide.
               </p>
-              <a href="#" class="read-more">Read Full Story →</a>
+              <a href="#" class="news-read-more">Read Full Story →</a>
             </div>
           </article>
 
           <article class="news-card">
-            <div class="news-image">
+            <div class="news-img-wrap">
               <img
-                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&h=400&fit=crop"
+                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80"
                 alt="Workshop"
+                loading="lazy"
               />
             </div>
-            <div class="news-content">
+            <div class="news-body">
               <time class="news-date">February 8, 2026</time>
               <h3>Professional Development Workshop Series Announced</h3>
               <p>
-                PSTCSL launches nationwide training program covering digital
+                PSTCSL launches a nationwide training program covering digital
                 pedagogy, classroom management, and educational technology.
               </p>
-              <a href="#" class="read-more">Read More →</a>
+              <a href="#" class="news-read-more">Read More →</a>
             </div>
           </article>
 
           <article class="news-card">
-            <div class="news-image">
+            <div class="news-img-wrap">
               <img
-                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop"
+                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80"
                 alt="Health Insurance"
+                loading="lazy"
               />
             </div>
-            <div class="news-content">
+            <div class="news-body">
               <time class="news-date">February 5, 2026</time>
               <h3>Health Insurance Scheme for Members in Progress</h3>
               <p>
                 Negotiations underway with major HMOs to provide comprehensive
                 health coverage for all registered members at subsidized rates.
               </p>
-              <a href="#" class="read-more">Read More →</a>
+              <a href="#" class="news-read-more">Read More →</a>
             </div>
           </article>
 
           <article class="news-card">
-            <div class="news-image">
+            <div class="news-img-wrap">
               <img
-                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&h=400&fit=crop"
-                alt="Membership"
+                src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=600&q=80"
+                alt="Membership Milestone"
+                loading="lazy"
               />
             </div>
-            <div class="news-content">
+            <div class="news-body">
               <time class="news-date">February 1, 2026</time>
               <h3>Membership Surpasses 10,000 Teachers Nationwide</h3>
               <p>
-                PSTCSL celebrates milestone achievement as membership grows
-                across all 36 states and FCT, strengthening our collective
-                voice.
+                PSTCSL celebrates this milestone as membership grows across all
+                36 states and the FCT, strengthening our collective voice.
               </p>
-              <a href="#" class="read-more">Read More →</a>
+              <a href="#" class="news-read-more">Read More →</a>
             </div>
           </article>
 
           <article class="news-card">
-            <div class="news-image">
+            <div class="news-img-wrap">
               <img
-                src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=600&h=400&fit=crop"
+                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80"
                 alt="Partnership"
+                loading="lazy"
               />
             </div>
-            <div class="news-content">
+            <div class="news-body">
               <time class="news-date">January 28, 2026</time>
               <h3>Partnership with International Education Bodies</h3>
               <p>
                 PSTCSL signs MoU with UNESCO and Commonwealth Education Trust
-                for teacher exchange programs and capacity building initiatives.
+                for teacher exchange programs and capacity-building initiatives.
               </p>
-              <a href="#" class="read-more">Read More →</a>
+              <a href="#" class="news-read-more">Read More →</a>
             </div>
           </article>
 
           <article class="news-card">
-            <div class="news-image">
+            <div class="news-img-wrap">
               <img
-                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop"
-                alt="Legal Support"
+                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80"
+                alt="Legal Aid"
+                loading="lazy"
               />
             </div>
-            <div class="news-content">
+            <div class="news-body">
               <time class="news-date">January 25, 2026</time>
               <h3>Free Legal Aid Clinic Launched for Members</h3>
               <p>
@@ -996,247 +1206,368 @@
                 for teachers facing unfair labor practices and employment
                 disputes.
               </p>
-              <a href="#" class="read-more">Read More →</a>
+              <a href="#" class="news-read-more">Read More →</a>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- ======== CONTACT ======== -->
     <section id="contact" class="section contact-section">
       <div class="container">
-        <div class="section-header">
-          <span class="section-label">Get In Touch</span>
-          <h2 class="section-title">Contact Us</h2>
-          <div class="section-line"></div>
-        </div>
+        <div class="contact-layout">
+          <div class="contact-info-panel" data-reveal>
+            <span class="section-badge">Get in Touch</span>
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-lead">
+              Have questions? Need support? Want to partner with PSTCSL? We're
+              here and eager to hear from you.
+            </p>
 
-        <div class="contact-content">
-          <div class="contact-info">
-            <div class="contact-intro">
-              <h3>Let's Connect</h3>
-              <p>
-                Have questions? Need support? Want to partner with us? We're
-                here to help and eager to hear from you.
-              </p>
-            </div>
             <div class="contact-details">
-              <div class="contact-item">
-                <div class="contact-icon"></div>
+              <a href="mailto:contact@pstcsl.org" class="contact-detail-item">
+                <div class="contact-detail-icon">📧</div>
                 <div>
-                  <h4>Email</h4>
-                  <a href="mailto:contact@pstcsl.org">contact@pstcsl.org</a>
+                  <strong>Email</strong>
+                  <span>contact@pstcsl.org</span>
                 </div>
-              </div>
-              <div class="contact-item">
-                <div class="contact-icon"></div>
+              </a>
+              <a href="tel:+2348036660387" class="contact-detail-item">
+                <div class="contact-detail-icon">📱</div>
                 <div>
-                  <h4>Phone</h4>
-                  <a href="tel:+2348036660387">+234 803 666 0387</a>
+                  <strong>Phone</strong>
+                  <span>+234 803 666 0387</span>
                 </div>
-              </div>
-              <div class="contact-item">
-                <div class="contact-icon"></div>
+              </a>
+              <a
+                href="https://wa.me/2348036660387"
+                target="_blank"
+                rel="noopener"
+                class="contact-detail-item"
+              >
+                <div class="contact-detail-icon">💬</div>
                 <div>
-                  <h4>Website</h4>
-                  <a href="http://pstcsl.org" target="_blank">pstcsl.org</a>
+                  <strong>WhatsApp</strong>
+                  <span>Chat with us directly</span>
                 </div>
-              </div>
-              <div class="contact-item">
-                <div class="contact-icon"></div>
+              </a>
+              <a
+                href="http://pstcsl.org"
+                target="_blank"
+                rel="noopener"
+                class="contact-detail-item"
+              >
+                <div class="contact-detail-icon">🌐</div>
                 <div>
-                  <h4>Location</h4>
-                  <p>Nigeria</p>
+                  <strong>Website</strong>
+                  <span>pstcsl.org</span>
+                </div>
+              </a>
+              <div class="contact-detail-item">
+                <div class="contact-detail-icon">📍</div>
+                <div>
+                  <strong>Location</strong>
+                  <span>Nigeria (Nationwide)</span>
                 </div>
               </div>
             </div>
-            <div class="social-links">
+
+            <div class="social-row">
               <h4>Follow Us</h4>
-              <div class="social-icons">
-                <a href="#" aria-label="Facebook">Facebook</a>
-                <a href="#" aria-label="Twitter">X</a>
-                <a href="#" aria-label="LinkedIn">LinkedIn</a>
-                <a href="#" aria-label="Instagram">Instagram</a>
+              <div class="social-links">
+                <a href="#" aria-label="Facebook" class="social-link">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                    />
+                  </svg>
+                </a>
+                <a href="#" aria-label="Twitter/X" class="social-link">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                    />
+                  </svg>
+                </a>
+                <a href="#" aria-label="LinkedIn" class="social-link">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                    />
+                  </svg>
+                </a>
+                <a href="#" aria-label="Instagram" class="social-link">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+                    />
+                  </svg>
+                </a>
               </div>
             </div>
           </div>
 
-          <div class="contact-form-container">
-            <form id="contactForm" class="contact-form">
-              <div class="form-group">
-                <label for="contactName">Full Name *</label>
-                <input
-                  type="text"
-                  id="contactName"
-                  name="contactName"
-                  required
-                />
+          <div class="contact-form-panel" data-reveal>
+            <form id="contactForm" novalidate>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="contactName"
+                    >Full Name <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="contactName"
+                    name="contactName"
+                    placeholder="Your full name"
+                    required
+                  />
+                </div>
+                <div class="field">
+                  <label for="contactEmail"
+                    >Email Address <span class="req">*</span></label
+                  >
+                  <input
+                    type="email"
+                    id="contactEmail"
+                    name="contactEmail"
+                    placeholder="your@email.com"
+                    required
+                  />
+                </div>
+                <div class="field">
+                  <label for="contactPhone">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="contactPhone"
+                    name="contactPhone"
+                    placeholder="+234 800 000 0000"
+                  />
+                </div>
+                <div class="field">
+                  <label for="contactSubject"
+                    >Subject <span class="req">*</span></label
+                  >
+                  <input
+                    type="text"
+                    id="contactSubject"
+                    name="contactSubject"
+                    placeholder="What is this about?"
+                    required
+                  />
+                </div>
+                <div class="field full-width">
+                  <label for="contactMessage"
+                    >Message <span class="req">*</span></label
+                  >
+                  <textarea
+                    id="contactMessage"
+                    name="contactMessage"
+                    rows="6"
+                    placeholder="How can we help you?"
+                    required
+                  ></textarea>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="contactEmail">Email Address *</label>
-                <input
-                  type="email"
-                  id="contactEmail"
-                  name="contactEmail"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="contactPhone">Phone Number</label>
-                <input type="tel" id="contactPhone" name="contactPhone" />
-              </div>
-              <div class="form-group">
-                <label for="contactSubject">Subject *</label>
-                <input
-                  type="text"
-                  id="contactSubject"
-                  name="contactSubject"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="contactMessage">Message *</label>
-                <textarea
-                  id="contactMessage"
-                  name="contactMessage"
-                  rows="6"
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" class="btn-primary">Send Message</button>
+              <button type="submit" class="submit-btn">Send Message</button>
             </form>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-section footer-brand-section">
-            <div class="footer-brand">
-              <div class="footer-logo-wrapper">
-                <img 
-                  src="images/pstcsl logo1.png" 
-                  alt="PSTCSL Logo - Private School Teachers Cooperative Society" 
-                  class="footer-logo"
-                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                >
-                <div class="logo-mark" style="display: none;">PSTCSL</div>
+    <!-- ======== FOOTER ======== -->
+    <footer class="site-footer">
+      <div class="footer-inner container">
+        <div class="footer-grid">
+          <div class="footer-brand-col">
+            <div class="footer-logo">
+              <div class="footer-emblem">
+                <svg width="40" height="40" viewBox="0 0 36 36" fill="none">
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="18"
+                    fill="rgba(255,255,255,0.15)"
+                  />
+                  <path
+                    d="M9 26 L18 10 L27 26"
+                    stroke="white"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M12 21 H24"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <circle cx="18" cy="10" r="2.5" fill="white" />
+                </svg>
               </div>
-              <div class="footer-brand-text">
-                <h3 class="footer-brand-title">PSTCSL</h3>
-                <p class="footer-brand-subtitle">Private School Teachers Cooperative Society</p>
+              <div>
+                <div class="footer-acronym">PSTCSL</div>
+                <div class="footer-fullname">
+                  Private School Teachers<br />Cooperative Society
+                </div>
               </div>
             </div>
             <p class="footer-tagline">
-              <span class="tagline-icon">🤝</span>
-              A Unified Voice for Private School Teachers in Nigeria
+              A unified voice for private school teachers in Nigeria —
+              championing welfare, rights, and educational excellence.
             </p>
-          </div>
-          
-          <div class="footer-section">
-            <h4>Quick Links</h4>
-            <ul class="footer-links">
-              <li><a href="#home"><span class="link-icon">🏠</span> Home</a></li>
-              <li><a href="#about"><span class="link-icon">ℹ️</span> About Us</a></li>
-              <li><a href="#membership"><span class="link-icon">👥</span> Membership</a></li>
-              <li><a href="#executives"><span class="link-icon">👔</span> Executives</a></li>
-            </ul>
-          </div>
-          
-          <div class="footer-section">
-            <h4>Resources</h4>
-            <ul class="footer-links">
-              <li><a href="#gallery"><span class="link-icon">📸</span> Gallery</a></li>
-              <li><a href="#news"><span class="link-icon">📰</span> News</a></li>
-              <li><a href="#contact"><span class="link-icon">📞</span> Contact</a></li>
-              <li><a href="#"><span class="link-icon">📄</span> Advocacy Documents</a></li>
-            </ul>
-          </div>
-          
-          <div class="footer-section">
-            <h4>Contact Us</h4>
-            <ul class="footer-contact">
-              <li>
-                <span class="contact-icon">📧</span>
-                <a href="mailto:contact@pstcsl.org">contact@pstcsl.org</a>
-              </li>
-              <li>
-                <span class="contact-icon">📱</span>
-                <a href="tel:+2348036660387">+234 803 666 0387</a>
-              </li>
-              <li>
-                <span class="contact-icon">🌐</span>
-                <a href="http://pstcsl.org" target="_blank" rel="noopener">pstcsl.org</a>
-              </li>
-              <li>
-                <span class="contact-icon">💬</span>
-                <a href="https://wa.me/2348036660387" target="_blank" rel="noopener">WhatsApp</a>
-              </li>
-            </ul>
-            
             <div class="footer-social">
-              <h5>Follow Us</h5>
-              <div class="social-icons">
-                <a href="#" aria-label="Facebook" class="social-icon">
-                  <span>📘</span>
-                </a>
-                <a href="#" aria-label="Twitter" class="social-icon">
-                  <span>🐦</span>
-                </a>
-                <a href="#" aria-label="LinkedIn" class="social-icon">
-                  <span>💼</span>
-                </a>
-                <a href="#" aria-label="Instagram" class="social-icon">
-                  <span>📷</span>
-                </a>
-              </div>
+              <a href="#" aria-label="Facebook" class="fsocial">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                  />
+                </svg>
+              </a>
+              <a href="#" aria-label="Twitter" class="fsocial">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                  />
+                </svg>
+              </a>
+              <a href="#" aria-label="LinkedIn" class="fsocial">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  />
+                </svg>
+              </a>
+              <a href="#" aria-label="Instagram" class="fsocial">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+                  />
+                </svg>
+              </a>
             </div>
           </div>
+
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#membership">Membership</a></li>
+              <li><a href="#gallery">Gallery</a></li>
+              <li><a href="#executives">Executives</a></li>
+              <li><a href="#news">News</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Advocacy Documents</a></li>
+              <li><a href="#">Teacher Rights Guide</a></li>
+              <li><a href="#">Training Calendar</a></li>
+              <li><a href="#">Member Benefits</a></li>
+              <li><a href="#">Media Kit</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul class="footer-contact-list">
+              <li>
+                <a href="mailto:contact@pstcsl.org">📧 contact@pstcsl.org</a>
+              </li>
+              <li><a href="tel:+2348036660387">📱 +234 803 666 0387</a></li>
+              <li>
+                <a href="https://wa.me/2348036660387" target="_blank"
+                  >💬 WhatsApp</a
+                >
+              </li>
+              <li>
+                <a href="http://pstcsl.org" target="_blank">🌐 pstcsl.org</a>
+              </li>
+              <li><span>📍 Nigeria (Nationwide)</span></li>
+            </ul>
+          </div>
         </div>
-        
-        <div class="footer-divider"></div>
-        
+
         <div class="footer-bottom">
-          <div class="footer-copyright">
-            <p>
-              &copy; 2026 <strong>Private School Teachers Cooperative Society</strong>. 
-              All rights reserved.
-            </p>
-            <p class="footer-motto">
-              Championing Teacher Welfare, Rights, and Educational Excellence
-            </p>
-          </div>
-          
-          <div class="footer-developer">
-            <p class="developer-credit">
-              <span class="developer-icon">💻</span>
-              Designed & Developed by 
-              <a 
-                href="https://wa.me/message/YCDKLO3GMEKEI1" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="developer-link"
-              >
-                <strong>Ntonarch Acumen Network</strong>
-              </a>
-            </p>
-            <a 
-              href="https://wa.me/message/YCDKLO3GMEKEI1" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="contact-developer-btn"
+          <p>
+            © 2026
+            <strong>Private School Teachers Cooperative Society (PSTCSL)</strong
+            >. All rights reserved.
+          </p>
+          <p class="footer-dev">
+            Designed & Built by
+            <a
+              href="https://wa.me/message/YCDKLO3GMEKEI1"
+              target="_blank"
+              rel="noopener"
+              >Ntonarch Acumen Network</a
             >
-              <span class="btn-icon">💬</span>
-              Contact Developer
-            </a>
-          </div>
+          </p>
         </div>
       </div>
     </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+    <!-- Back to Top -->
+    <button class="back-top" id="backTop" aria-label="Back to top">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path
+          d="M5 13L10 8L15 13"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
 
     <script src="pstcsl.js"></script>
   </body>
