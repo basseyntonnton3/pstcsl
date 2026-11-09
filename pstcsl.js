@@ -142,7 +142,7 @@ class HeroSlider {
     this.nextBtn = $("#slideNext");
     this.progressBar = $("#slideProgressBar");
     this.current = 0;
-    this.DURATION = 2000;
+    this.DURATION = 7000;
     this.timer = null;
     this.progressTimer = null;
     this.progressStart = null;
