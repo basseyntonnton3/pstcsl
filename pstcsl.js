@@ -324,20 +324,66 @@ class GalleryFilter {
   constructor() {
     this.btns = $$(".gfilter");
     this.items = $$(".gallery-item");
+    this.lightbox = $("#galleryLightbox");
+    this.lightboxImage = $("#galleryLightboxImage");
+    this.lightboxCaption = $("#galleryLightboxCaption");
+    this.activeImage = null;
     this.btns.forEach((btn) =>
       btn.addEventListener("click", () => this.filter(btn)),
     );
+    this.items.forEach((item) => {
+      const image = $("img", item);
+      if (!image) return;
+      image.tabIndex = 0;
+      image.setAttribute("role", "button");
+      image.setAttribute("aria-label", `Expand image: ${image.alt}`);
+      image.addEventListener("click", () => this.openImage(item, image));
+      image.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          this.openImage(item, image);
+        }
+      });
+    });
+    this.lightbox?.addEventListener("click", (event) => {
+      if (event.target === this.lightbox) this.lightbox.close();
+    });
+    this.lightbox?.addEventListener("close", () => {
+      this.activeImage?.focus();
+      this.activeImage = null;
+    });
   }
   filter(btn) {
     const cat = btn.dataset.filter;
     this.btns.forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
-    this.items.forEach((item) =>
+    this.items.forEach((item) => {
+      const categories = item.dataset.cat.split(/\s+/);
       item.classList.toggle(
         "hidden",
-        cat !== "all" && item.dataset.cat !== cat,
-      ),
-    );
+        cat !== "all" && !categories.includes(cat),
+      );
+    });
+  }
+  openImage(item, image) {
+    if (!this.lightbox || !this.lightboxImage || !this.lightboxCaption) return;
+    this.activeImage = image;
+    this.lightboxImage.src = image.currentSrc || image.src;
+    this.lightboxImage.alt = image.alt;
+    this.lightboxCaption.replaceChildren();
+    const heading = $("h4", item);
+    const description = $("p", item);
+    if (heading) {
+      const title = document.createElement("h2");
+      title.textContent = heading.textContent;
+      this.lightboxCaption.append(title);
+    }
+    if (description) {
+      const caption = document.createElement("p");
+      caption.textContent = description.textContent.trim();
+      this.lightboxCaption.append(caption);
+    }
+    this.lightbox.showModal();
   }
 }
 
