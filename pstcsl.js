@@ -344,6 +344,53 @@ class GalleryFilter {
 /* ================================================================
    EXECUTIVES TABS
    ================================================================ */
+const NIGERIAN_ADMINISTRATIVE_AREAS = [
+  { name: "Abia State", lgas: "Aba North|Aba South|Arochukwu|Bende|Ikwuano|Isiala Ngwa North|Isiala Ngwa South|Isiukwuato|Obingwa|Ohafia|Osisioma|Ugwunagbo|Ukwa East|Ukwa West|Umuahia North|Umuahia South|Umu Nneochi" },
+  { name: "Adamawa State", lgas: "Demsa|Fufore|Ganye|Gayuk|Gombi|Grie|Hong|Jada|Lamurde|Madagali|Maiha|Mayo-Belwa|Michika|Mubi North|Mubi South|Numana|Shelleng|Song|Toungo|Yola North|Yola South" },
+  { name: "Akwa Ibom State", lgas: "Abak|Eastern Obolo|Eket|Esit Eket|Essien Udim|Etim Ekpo|Etinan|Ibeno|Ibesikpo Asutan|Ibiono Ibom|Ika|Ikono|Ikot Abasi|Ikot Ekpene|Ini|Itu|Mbo|Mkpat Enin|Nsit Atai|Nsit Ibom|Nsit Ubium|Obot Akara|Okobo|Onna|Oron|Oruk Anam|Udung Uko|Ukanafun|Uruan|Urue-Offong/Oruko|Uyo" },
+  { name: "Anambra State", lgas: "Aguata|Awka North|Awka South|Anambra East|Anambra West|Anaocha|Ayamelum|Dunukofia|Ekwusigo|Idemili North|Idemili South|Ihiala|Njikoka|Nnewi North|Nnewi South|Ogbaru|Onitsha North|Onitsha South|Orumba North|Orumba South|Oyi" },
+  { name: "Bauchi State", lgas: "Alkaleri|Bauchi|Bogoro|Damban|Darazo|Dass|Gamawa|Ganjuwa|Giade|Itas/Gadau|Jama'are|Katagum|Kirfi|Misau|Ningi|Shira|Tafawa Balewa|Toro|Warji|Zaki" },
+  { name: "Bayelsa State", lgas: "Brass|Ekeremor|Kolokuma/Opokuma|Nembe|Ogbia|Sagbama|Southern Ijaw|Yenagoa" },
+  { name: "Benue State", lgas: "Ado|Agatu|Apa|Buruku|Gboko|Guma|Gwer East|Gwer West|Katsina-Ala|Konshisha|Kwande|Logo|Makurdi|Obi|Ogbadibo|Ohimini|Oju|Okpokwu|Otukpo|Tarka|Ukum|Ushongo|Vandeikya" },
+  { name: "Borno State", lgas: "Abadam|Askira/Uba|Bama|Bayo|Biu|Chibok|Damboa|Dikwa|Gubio|Guzamala|Gwoza|Hawul|Jere|Kaga|Kala/Balge|Konduga|Kukawa|Kwaya Kusar|Mafa|Magumeri|Maiduguri|Marte|Mobbar|Monguno|Ngala|Nganzai|Shani" },
+  { name: "Cross River State", lgas: "Abi|Akamkpa|Akpabuyo|Bakassi|Bekwarra|Biase|Boki|Calabar Municipal|Calabar South|Etung|Ikom|Obanliku|Obubra|Obudu|Odukpani|Ogoja|Yakurr|Yala" },
+  { name: "Delta State", lgas: "Aniocha North|Aniocha South|Bomadi|Burutu|Ethiope East|Ethiope West|Ika North East|Ika South|Isoko North|Isoko South|Ndokwa East|Ndokwa West|Okpe|Oshimili North|Oshimili South|Patani|Sapele|Udu|Ughelli North|Ughelli South|Ukwuani|Uvwie|Warri North|Warri South|Warri South West" },
+  { name: "Ebonyi State", lgas: "Abakaliki|Afikpo North|Afikpo South|Ebonyi|Ezza North|Ezza South|Ikwo|Ishielu|Ivo|Izzi|Ohaozara|Ohaukwu|Onicha" },
+  { name: "Edo State", lgas: "Akoko-Edo|Egor|Esan Central|Esan North-East|Esan South-East|Esan West|Etsako Central|Etsako East|Etsako West|Igueben|Ikpoba-Okha|Oredo|Orhionmwon|Ovia North-East|Ovia South-West|Owan East|Owan West|Uhunmwonde" },
+  { name: "Ekiti State", lgas: "Ado Ekiti|Efon|Ekiti East|Ekiti South-West|Ekiti West|Emure|Gbonyin|Ido/Osi|Ijero|Ikere|Ikole|Ilejemeje|Irepodun/Ifelodun|Ise/Orun|Moba|Oye" },
+  { name: "Enugu State", lgas: "Aninri|Awgu|Enugu East|Enugu North|Enugu South|Ezeagu|Igbo Etiti|Igbo Eze North|Igbo Eze South|Isi Uzo|Nkanu East|Nkanu West|Nsukka|Oji River|Udenu|Udi|Uzo Uwani" },
+  { name: "Gombe State", lgas: "Akko|Balanga|Billiri|Dukku|Funakaye|Gombe|Kaltungo|Kwami|Nafada|Shongom|Yamaltu/Deba" },
+  { name: "Imo State", lgas: "Aboh Mbaise|Ahiazu Mbaise|Ehime Mbano|Ezinihitte|Ideato North|Ideato South|Ihitte/Uboma|Ikeduru|Isiala Mbano|Isu|Mbaitoli|Ngor Okpala|Njaba|Nkwerre|Nwangele|Obowo|Oguta|Ohaji/Egbema|Okigwe|Orlu|Orsu|Oru East|Oru West|Owerri Municipal|Owerri North|Owerri West|Unuimo" },
+  { name: "Jigawa State", lgas: "Auyo|Babura|Biriniwa|Birnin Kudu|Buji|Dutse|Gagarawa|Garki|Gumel|Guri|Gwaram|Gwiwa|Hadejia|Jahun|Kafin Hausa|Kaugama|Kazaure|Kiri Kasama|Kiyawa|Maigatari|Malam Madori|Miga|Ringim|Roni|Sule Tankarkar|Taura|Yankwashi" },
+  { name: "Kaduna State", lgas: "Birnin Gwari|Chikun|Giwa|Igabi|Ikara|Jaba|Jema'a|Kachia|Kaduna North|Kaduna South|Kagarko|Kajuru|Kaura|Kauru|Kubau|Kudan|Lere|Makarfi|Sabon Gari|Sanga|Soba|Zangon Kataf|Zaria" },
+  { name: "Kano State", lgas: "Ajingi|Albasu|Bagwai|Bebeji|Bichi|Bunkure|Dala|Dambatta|Dawakin Kudu|Dawakin Tofa|Doguwa|Fagge|Gabasawa|Garko|Garun Mallam|Gaya|Gezawa|Gwale|Gwarzo|Kabo|Kano Municipal|Karaye|Kibiya|Kiru|Kumbotso|Kunchi|Kura|Madobi|Makoda|Minjibir|Nasarawa|Rano|Rimin Gado|Rogo|Shanono|Sumaila|Takai|Tarauni|Tofa|Tsanyawa|Tudun Wada|Ungogo|Warawa|Wudil" },
+  { name: "Katsina State", lgas: "Bakori|Batagarawa|Batsari|Baure|Bindawa|Charanchi|Dan Musa|Dandume|Danja|Daura|Dutsi|Dutsin-Ma|Faskari|Funtua|Ingawa|Jibia|Kafur|Kaita|Kankara|Kankia|Katsina|Kurfi|Kusada|Mai'Adua|Malumfashi|Mani|Mashi|Matazu|Musawa|Rimi|Sabuwa|Safana|Sandamu|Zango" },
+  { name: "Kebbi State", lgas: "Aleiro|Arewa Dandi|Argungu|Augie|Bagudo|Birnin Kebbi|Bunza|Dandi|Fakai|Gwandu|Jega|Kalgo|Koko/Besse|Maiyama|Ngaski|Sakaba|Shanga|Suru|Yauri|Zuru|Danko/Wasagu" },
+  { name: "Kogi State", lgas: "Adavi|Ajaokuta|Ankpa|Bassa|Dekina|Ibaji|Idah|Igalamela Odolu|Ijumu|Kabba/Bunu|Kogi|Lokoja|Mopa-Muro|Ofu|Ogori/Magongo|Okehi|Okene|Olamaboro|Omala|Yagba East|Yagba West" },
+  { name: "Kwara State", lgas: "Asa|Baruten|Edu|Ekiti|Ifelodun|Ilorin East|Ilorin South|Ilorin West|Irepodun|Isin|Kaiama|Moro|Offa|Oke Ero|Oyun|Patigi" },
+  { name: "Lagos State", lgas: "Agege|Ajeromi-Ifelodun|Alimosho|Amuwo-Odofin|Apapa|Badagry|Epe|Eti-Osa|Ibeju-Lekki|Ifako-Ijaiye|Ikeja|Ikorodu|Kosofe|Lagos Island|Lagos Mainland|Mushin|Ojo|Oshodi-Isolo|Shomolu|Surulere" },
+  { name: "Nasarawa State", lgas: "Akwanga|Awe|Doma|Karu|Keana|Keffi|Kokona|Lafia|Nasarawa|Nasarawa Egon|Obi|Toto|Wamba" },
+  { name: "Niger State", lgas: "Agaie|Agwara|Bida|Borgu|Bosso|Chanchaga|Edati|Gbako|Gurara|Katcha|Kontagora|Lapai|Lavun|Magama|Mariga|Mashegu|Mokwa|Munya|Paikoro|Rafi|Rijau|Shiroro|Suleja|Tafa|Wushishi" },
+  { name: "Ogun State", lgas: "Abeokuta North|Abeokuta South|Ado-Odo/Ota|Egbado North|Egbado South|Ewekoro|Ifo|Ijebu East|Ijebu North|Ijebu North East|Ijebu Ode|Ikenne|Imeko Afon|Ipokia|Obafemi Owode|Odogbolu|Odeda|Ogun Waterside|Remo North|Sagamu" },
+  { name: "Ondo State", lgas: "Akoko North-East|Akoko North-West|Akoko South-East|Akoko South-West|Akure North|Akure South|Ese Odo|Idanre|Ifedore|Ilaje|Ile Oluji/Okeigbo|Irele|Odigbo|Okitipupa|Ondo East|Ondo West|Ose|Owo" },
+  { name: "Osun State", lgas: "Aiyedaade|Aiyedire|Atakunmosa East|Atakunmosa West|Boluwaduro|Boripe|Ede North|Ede South|Egbedore|Ejigbo|Ife Central|Ife East|Ife North|Ife South|Ifedayo|Ifelodun|Ila|Ilesa East|Ilesa West|Irepodun|Irewole|Isokan|Iwo|Obokun|Odo Otin|Ola Oluwa|Olorunda|Oriade|Orolu|Osogbo" },
+  { name: "Oyo State", lgas: "Afijio|Akinyele|Atiba|Atisbo|Egbeda|Ibadan North|Ibadan North-East|Ibadan North-West|Ibadan South-East|Ibadan South-West|Ibarapa Central|Ibarapa East|Ibarapa North|Ido|Irepo|Iseyin|Itesiwaju|Iwajowa|Kajola|Lagelu|Ogbomosho North|Ogbomosho South|Ogo Oluwa|Olorunsogo|Oluyole|Ona Ara|Orelope|Ori Ire|Oyo East|Oyo West|Saki East|Saki West|Surulere" },
+  { name: "Plateau State", lgas: "Barkin Ladi|Bassa|Bokkos|Jos East|Jos North|Jos South|Kanam|Kanke|Langtang North|Langtang South|Mangu|Mikang|Pankshin|Qua'an Pan|Riyom|Shendam|Wase" },
+  { name: "Rivers State", lgas: "Abua/Odual|Ahoada East|Ahoada West|Akuku-Toru|Andoni|Asari-Toru|Bonny|Degema|Eleme|Emohua|Etche|Gokana|Ikwerre|Khana|Obio/Akpor|Ogba/Egbema/Ndoni|Ogu/Bolo|Okrika|Omuma|Opobo/Nkoro|Oyigbo|Port Harcourt|Tai" },
+  { name: "Sokoto State", lgas: "Binji|Bodinga|Dange Shuni|Gada|Goronyo|Gudu|Gwadabawa|Illela|Isa|Kebbe|Kware|Rabah|Sabon Birni|Shagari|Silame|Sokoto North|Sokoto South|Tambuwal|Tangaza|Tureta|Wamako|Wurno|Yabo" },
+  { name: "Taraba State", lgas: "Ardo Kola|Bali|Donga|Gashaka|Gassol|Ibi|Jalingo|Karim Lamido|Kurmi|Lau|Sardauna|Takum|Ussa|Wukari|Yorro|Zing" },
+  { name: "Yobe State", lgas: "Bade|Bursari|Damaturu|Fika|Fune|Geidam|Gujba|Gulani|Jakusko|Karasuwa|Machina|Nangere|Nguru|Potiskum|Tarmuwa|Yunusari|Yusufari" },
+  { name: "Zamfara State", lgas: "Anka|Bakura|Birnin Magaji/Kiyaw|Bukkuyum|Bungudu|Gummi|Gusau|Kaura Namoda|Maradun|Maru|Shinkafi|Talata Mafara|Tsafe|Zurmi" },
+  { name: "Federal Capital Territory (FCT)", lgas: "Abaji|Bwari|Gwagwalada|Kuje|Kwali|Municipal Area Council" },
+].map((area) => ({
+  ...area,
+  key: area.name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, ""),
+  lgas: area.lgas.split("|"),
+}));
+
 class ExecutivesTabs {
   constructor() {
     this.tabs = $$(".exec-tab");
@@ -352,7 +399,19 @@ class ExecutivesTabs {
     this.lgaState = $("#lgaStateSelect");
     this.lgaEl = $("#lgaSelect");
     this.data = this.getData();
+    this.populateStates();
     this.init();
+  }
+  populateStates() {
+    [this.stateEl, this.lgaState].forEach((select) => {
+      if (!select) return;
+      const currentValue = select.value;
+      select.replaceChildren(new Option("Choose a state…", ""));
+      NIGERIAN_ADMINISTRATIVE_AREAS.forEach((area) => {
+        select.add(new Option(area.name, area.key));
+      });
+      select.value = currentValue;
+    });
   }
   init() {
     this.tabs.forEach((t) =>
@@ -422,11 +481,7 @@ class ExecutivesTabs {
   }
   cardHTML(e) {
     return `<div class="exec-card">
-      <div class="exec-photo"><div class="exec-photo-placeholder">${e.name
-        .split(" ")
-        .map((w) => w[0])
-        .slice(0, 2)
-        .join("")}</div></div>
+      <div class="exec-photo"><img src="images/pstcsl%20logo1.png" alt="PSTCSL emblem" loading="lazy"></div>
       <div class="exec-info">
         <div class="exec-role-badge">${e.position}</div>
         <h3>${e.name}</h3>
@@ -435,125 +490,31 @@ class ExecutivesTabs {
     </div>`;
   }
   getData() {
-    return {
-      state: {
-        lagos: [
+    const state = {};
+    const lgas = {};
+    const lga = {};
+    NIGERIAN_ADMINISTRATIVE_AREAS.forEach((area) => {
+      const territory = area.name.includes("(FCT)");
+      const stateName = territory ? "FCT" : area.name.replace(/ State$/, "");
+      state[area.key] = [
+        {
+          name: `${stateName}${territory ? "" : " State"} Executive`,
+          position: territory ? "FCT Executive" : "State Executive",
+          description: `Leadership for the PSTCSL ${stateName} chapter.`,
+        },
+      ];
+      lgas[area.key] = area.lgas;
+      area.lgas.forEach((lgaName) => {
+        lga[`${area.key}::${lgaName}`] = [
           {
-            name: "Mrs. Olufunke Akinlade",
-            position: "Lagos State President",
-            description:
-              "Leading teacher advocacy across Lagos State with focus on welfare reform and professional development.",
+            name: `${lgaName} LGA Executive`,
+            position: "LGA Executive",
+            description: `Leadership for the PSTCSL ${lgaName} local government chapter in ${stateName}.`,
           },
-          {
-            name: "Mr. Tunde Bakare",
-            position: "State Secretary",
-            description:
-              "Coordinating state-level operations and member communications.",
-          },
-          {
-            name: "Mrs. Ngozi Okonkwo",
-            position: "State Treasurer",
-            description: "Managing financial operations for the Lagos chapter.",
-          },
-        ],
-        rivers: [
-          {
-            name: "Dr. Chidi Amadi",
-            position: "Rivers State President",
-            description:
-              "Championing teacher rights and professional development in Rivers State.",
-          },
-          {
-            name: "Mrs. Blessing Wike",
-            position: "State Secretary",
-            description:
-              "Organising advocacy programs and member engagement activities.",
-          },
-        ],
-        kano: [
-          {
-            name: "Malam Yusuf Ibrahim",
-            position: "Kano State President",
-            description:
-              "Promoting educational excellence and teacher welfare in Kano.",
-          },
-          {
-            name: "Mrs. Hauwa Abdullahi",
-            position: "State Secretary",
-            description:
-              "Managing state operations and policy advocacy initiatives.",
-          },
-        ],
-        abuja: [
-          {
-            name: "Dr. Sarah Okafor",
-            position: "FCT President",
-            description:
-              "Leading teacher welfare initiatives in the Federal Capital Territory.",
-          },
-          {
-            name: "Mr. Daniel Ezekiel",
-            position: "FCT Secretary",
-            description:
-              "Coordinating with federal authorities on education policy.",
-          },
-        ],
-      },
-      lgas: {
-        lagos: [
-          "Ikeja",
-          "Surulere",
-          "Alimosho",
-          "Eti-Osa",
-          "Ikorodu",
-          "Lagos Island",
-        ],
-        rivers: ["Port Harcourt", "Obio-Akpor", "Eleme", "Khana", "Bonny"],
-        kano: ["Kano Municipal", "Gwale", "Fagge", "Dala", "Nassarawa"],
-        abuja: [
-          "Municipal Area Council",
-          "Gwagwalada",
-          "Kuje",
-          "Abaji",
-          "Bwari",
-          "Kwali",
-        ],
-      },
-      lga: {
-        "lagos::Ikeja": [
-          {
-            name: "Mr. Ademola Johnson",
-            position: "Ikeja LGA Chairman",
-            description: "Local coordination of teacher welfare programs.",
-          },
-          {
-            name: "Mrs. Funmi Adeyemi",
-            position: "LGA Secretary",
-            description:
-              "Managing local chapter activities and member support.",
-          },
-        ],
-        "lagos::Surulere": [
-          {
-            name: "Mrs. Adeola Bello",
-            position: "Surulere LGA Chairman",
-            description: "Grassroots advocacy for teacher rights and fair pay.",
-          },
-        ],
-        "rivers::Port Harcourt": [
-          {
-            name: "Chief Emmanuel George",
-            position: "Port Harcourt LGA Chairman",
-            description: "Community-level teacher support and advocacy.",
-          },
-          {
-            name: "Mrs. Joy Okoro",
-            position: "LGA Secretary",
-            description: "Local operations and member engagement.",
-          },
-        ],
-      },
-    };
+        ];
+      });
+    });
+    return { state, lgas, lga };
   }
 }
 
